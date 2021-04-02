@@ -1,5 +1,6 @@
 package lk.sliit.itpmProject.business;
 
 public enum BOTypes {
-    AddStudent,AddWorkingDays,AddLecturer,AddTag;
+    AddStudent,AddWorkingDays,AddLecturer,AddLocations,AddTag;
+
 }
