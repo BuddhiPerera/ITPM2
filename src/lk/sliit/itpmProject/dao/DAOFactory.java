@@ -2,8 +2,11 @@ package lk.sliit.itpmProject.dao;
 
 
 import lk.sliit.itpmProject.dao.custom.impl.AddLecturerDAOImpl;
+import lk.sliit.itpmProject.dao.custom.impl.AddLocationsDAOImpl;
 import lk.sliit.itpmProject.dao.custom.impl.AddStudentDAOImpl;
 import lk.sliit.itpmProject.dao.custom.impl.AddSubjectDAOImpl;
+import lk.sliit.itpmProject.dao.custom.impl.AddTagDAOImpl;
+
 import lk.sliit.itpmProject.dao.custom.impl.AddWorkingDaysDAOImpl;
 
 public class DAOFactory {
@@ -28,6 +31,11 @@ public class DAOFactory {
                 return (T) new AddLecturerDAOImpl();
             case  AddSubject:
                 return (T) new AddSubjectDAOImpl();
+            case AddTag:
+                return (T) new AddTagDAOImpl();
+            case AddLocations:
+                return (T) new AddLocationsDAOImpl();
+
 
 
             default:

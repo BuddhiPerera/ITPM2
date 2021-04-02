@@ -1,17 +1,19 @@
-CREATE TABLE `WorkingDays` (
-                               `id` varchar(10) NOT NULL,
-                               `noOfDays` varchar(30) DEFAULT NULL,
-                               `sunday` boolean  DEFAULT 0,
-                               `monday` boolean  DEFAULT 0,
-                               `tuesday` boolean  DEFAULT 0,
-                               `wednesday` boolean  DEFAULT 0,
-                               `thursday` boolean  DEFAULT 0,
-                               `friday` boolean  DEFAULT 0,
-                               `saturday` boolean  DEFAULT 0,
-                               `workingTimeHours` int DEFAULT NULL,
-                               `workingTimeMinutes` int DEFAULT NULL,
-                               PRIMARY KEY (`id`)
+CREATE TABLE `WorkingDays`
+(
+    `id`                 varchar(10) NOT NULL,
+    `noOfDays`           varchar(30) DEFAULT NULL,
+    `sunday`             boolean     DEFAULT 0,
+    `monday`             boolean     DEFAULT 0,
+    `tuesday`            boolean     DEFAULT 0,
+    `wednesday`          boolean     DEFAULT 0,
+    `thursday`           boolean     DEFAULT 0,
+    `friday`             boolean     DEFAULT 0,
+    `saturday`           boolean     DEFAULT 0,
+    `workingTimeHours`   int         DEFAULT NULL,
+    `workingTimeMinutes` int         DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `AddLecturer` (
                                `id` int NOT NULL,
                                `empId` varchar(50) NOT NULL,
@@ -37,17 +39,26 @@ CREATE TABLE `AddStudentSubGroups`(
                                       PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `AddSubject` (
-                               `id` int NOT NULL,
-                               `offeredYear` varchar(50) NOT NULL,
-                               `semester 1` boolean  DEFAULT 0,
-                               `semester 2` boolean  DEFAULT 0,
-                               `NoOFLectureHrs` int(20)  NOT NULL ,
-                               `NoOfTutHrs` int(40) NOT NULL ,
-                               `NoOFlabHrs` int(40) NOT NULL ,
-                               `SubName` varchar(40) NOT NULL ,
-                               `NoOfEvlHrs` int(70) NOT NULL ,
-                               `SubCode` varchar(10) NOT NULL ,
+CREATE TABLE `AddSubject`
+(
+    `id`             int         NOT NULL,
+    `offeredYear`    varchar(50) NOT NULL,
+    `semester 1`     boolean DEFAULT 0,
+    `semester 2`     boolean DEFAULT 0,
+    `NoOFLectureHrs` int(20)     NOT NULL,
+    `NoOfTutHrs`     int(40)     NOT NULL,
+    `NoOFlabHrs`     int(40)     NOT NULL,
+    `SubName`        varchar(40) NOT NULL,
+    `NoOfEvlHrs`     int(70)     NOT NULL,
+    `SubCode`        varchar(10) NOT NULL,
 
-                               PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `AddTags`(
+                                      `id` int NOT NULL,
+                                      `tagName` varchar(20) DEFAULT NULL,
+                                      `tagCode` int  DEFAULT NULL,
+                                      `relatedTag` varchar(30) DEFAULT NULL,
+                                      PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

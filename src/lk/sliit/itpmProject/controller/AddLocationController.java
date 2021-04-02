@@ -1,16 +1,26 @@
 package lk.sliit.itpmProject.controller;
 
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import lk.sliit.itpmProject.business.BOFactory;
+import lk.sliit.itpmProject.business.BOTypes;
+import lk.sliit.itpmProject.business.custom.AddLocationsBO;
+import lk.sliit.itpmProject.dto.AddLocationsDTO;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class AddLocationController {
@@ -19,16 +29,24 @@ public class AddLocationController {
     private AnchorPane root1;
 
     @FXML
-    private ImageView iconHome;
+    private RadioButton LHallRadio;
 
     @FXML
-    private ImageView iconLecture;
+    private RadioButton LabHallRadio;
 
     @FXML
-    private ImageView iconStudent;
+    private TextField buildingNameTxt;
 
     @FXML
-    private ImageView iconTimeTable;
+    private TextField roomNameTxt;
+
+    @FXML
+    private TextField capacityTxt;
+
+    @FXML
+    private Button btnClear;
+    AddLocationsBO addLocationsBO= BOFactory.getInstance().getBO(BOTypes.AddLocations);
+
 
     @FXML
     void navigate(MouseEvent event) throws IOException {
@@ -79,5 +97,37 @@ public class AddLocationController {
     void playMouseExitAnimatio(MouseEvent event) {
 
     }
+
+    public void btnSaveOnAction(ActionEvent actionEvent) throws Exception {
+        int maxCode = 0;
+        try{
+            int lastItemCode = addLocationsBO.getLastLocationId();
+            if(lastItemCode == 0){
+                maxCode = 1;
+            }
+            else{
+                maxCode = lastItemCode + 1;
+            }
+        }catch(Exception e){
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+        String buildingName = buildingNameTxt.getText();
+        String roomName = roomNameTxt.getText();
+        Boolean lectureHall = LHallRadio.selectedProperty().getValue();
+        Boolean laboratory = LabHallRadio.selectedProperty().getValue();
+        String capacity = capacityTxt.getText();
+
+        AddLocationsDTO addLocationsDTO = new AddLocationsDTO(
+                maxCode,
+                buildingName,
+                roomName,
+                lectureHall,
+                laboratory,
+                capacity
+                );
+        addLocationsBO.saveLocation(addLocationsDTO);
+        new Alert(Alert.AlertType.INFORMATION, "Save Successfully").show();
+    }
+
 
 }
