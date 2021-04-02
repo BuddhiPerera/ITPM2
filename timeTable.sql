@@ -36,3 +36,18 @@ CREATE TABLE `AddStudentSubGroups`(
                                       `subGroupId` varchar(100)  DEFAULT NULL,
                                       PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `AddSubject` (
+                               `id` int NOT NULL,
+                               `offeredYear` varchar(50) NOT NULL,
+                               `semester 1` boolean  DEFAULT 0,
+                               `semester 2` boolean  DEFAULT 0,
+                               `NoOFLectureHrs` int(20)  NOT NULL ,
+                               `NoOfTutHrs` int(40) NOT NULL ,
+                               `NoOFlabHrs` int(40) NOT NULL ,
+                               `SubName` varchar(40) NOT NULL ,
+                               `NoOfEvlHrs` int(70) NOT NULL ,
+                               `SubCode` varchar(10) NOT NULL ,
+
+                               PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
