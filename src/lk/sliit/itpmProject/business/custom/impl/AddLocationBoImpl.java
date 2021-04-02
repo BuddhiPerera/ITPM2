@@ -24,4 +24,9 @@ public class AddLocationBoImpl implements AddLocationsBO {
 
 
     }
+
+    @Override
+    public int getLastLocationId() throws Exception {
+        return addLocationsDAO.getLastLocationID();
+    }
 }

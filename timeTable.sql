@@ -44,7 +44,7 @@ CREATE TABLE `AddStudentSubGroups`
 
 CREATE TABLE `AddLocations`
 (
-    `id`           varchar(10) NOT NULL,
+    `id`           int NOT NULL,
     `buildingName` varchar(30) DEFAULT NULL,
     `roomName`     varchar(30) DEFAULT NULL,
     `lectureHall`  boolean     DEFAULT 0,
