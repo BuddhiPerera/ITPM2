@@ -29,8 +29,6 @@ public class AppInitializer extends Application {
 
             DBConnection.getInstance().getConnection();
 
-
-
             URL resource = this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml");
             Parent root = FXMLLoader.load(resource);
             Scene mainScene = new Scene(root);
