@@ -12,6 +12,7 @@ CREATE TABLE `WorkingDays` (
                                `workingTimeMinutes` int DEFAULT NULL,
                                PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `AddLecturer` (
                                `id` int NOT NULL,
                                `empId` varchar(50) NOT NULL,
@@ -34,5 +35,13 @@ CREATE TABLE `AddStudentSubGroups`(
                                       `subGroupNo` int DEFAULT NULL,
                                       `groupId` varchar(100)  DEFAULT NULL,
                                       `subGroupId` varchar(100)  DEFAULT NULL,
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `AddTags`(
+                                      `id` int NOT NULL,
+                                      `tagName` varchar(20) DEFAULT NULL,
+                                      `tagCode` int  DEFAULT NULL,
+                                      `relatedTag` varchar(30) DEFAULT NULL,
                                       PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
