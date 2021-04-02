@@ -199,7 +199,6 @@ public class AddLecturerController implements Initializable {
 
         rankTxt.setText(tempLevel + "." + lecId);
     }
-
     @FXML
     public void btnSave_OnAction(ActionEvent event) throws Exception {
         int maxCode = 0;
