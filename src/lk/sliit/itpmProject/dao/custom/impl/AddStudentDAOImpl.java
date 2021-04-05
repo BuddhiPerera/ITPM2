@@ -5,12 +5,27 @@ import lk.sliit.itpmProject.dao.custom.AddStudentDAO;
 import lk.sliit.itpmProject.entity.AddStudent;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddStudentDAOImpl implements AddStudentDAO {
     @Override
     public List<AddStudent> findAll() throws Exception {
-        return null;
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM AddStudentSubGroups");
+        List<AddStudent> addStudentList = new ArrayList<>();
+        while(resultSet.next()){
+            addStudentList.add(new AddStudent(
+                    resultSet.getInt(1),
+                    resultSet.getInt(2),
+                    resultSet.getInt(3),
+                    resultSet.getString(4),
+                    resultSet.getInt(5),
+                    resultSet.getInt(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8)
+            ));
+        }
+        return addStudentList;
     }
 
     @Override
@@ -34,7 +49,16 @@ public class AddStudentDAOImpl implements AddStudentDAO {
 
     @Override
     public boolean update(AddStudent entity) throws Exception {
-        return false;
+        return CrudUtil.execute("UPDATE AddStudentSubGroups SET year = ?, semester = ?, programme = ?, groupNo = ?, subGroupNo = ?, groupId =?, subGroupId =? WHERE id = ?",
+                entity.getYear(),
+                entity.getSemester(),
+                entity.getProgramme(),
+                entity.getGroupNo(),
+                entity.getSubGroupNo(),
+                entity.getGroupId(),
+                entity.getSubGroupId(),
+                entity.getId()
+        );
     }
 
     @Override
