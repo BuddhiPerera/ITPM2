@@ -63,7 +63,7 @@ public class AddStudentDAOImpl implements AddStudentDAO {
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM AddStudentSubGroups WHERE id=?", s);
     }
 
     @Override

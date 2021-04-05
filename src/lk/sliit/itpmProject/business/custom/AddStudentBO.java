@@ -15,4 +15,6 @@ public interface AddStudentBO extends SuperBO {
     List<AddStudentDTO> findAllStudent() throws Exception;
 
     boolean updateStudent(AddStudentDTO addStudentDTO) throws Exception;
+
+    boolean deleteItem(int id) throws Exception;
 }

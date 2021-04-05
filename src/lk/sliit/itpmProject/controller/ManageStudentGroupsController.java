@@ -3,6 +3,7 @@ package lk.sliit.itpmProject.controller;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -150,16 +151,31 @@ public class ManageStudentGroupsController implements Initializable {
 
     @FXML
     void btnOnAction_Delete(ActionEvent event) {
-
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to delete this Detail?",
+                ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
+            try {
+                addStudentBO.deleteItem(selectedItem.getId());
+                tblStudent.getItems().remove(selectedItem);
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
+                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+            }
+        }
     }
 
     @FXML
     void btnOnAction_Update(ActionEvent event)  {
+
        int year = spinYear.getValue();
       int semester =spinSemester.getValue();
         String programme = cmbProgramme.getValue();
        int subGroupNo = spinSubGroupNo.getValue();
        int groupNo = spinGroupNo.getValue();
+
 
 
         StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
