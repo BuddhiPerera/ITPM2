@@ -67,4 +67,9 @@ public class AddStudentBOImpl implements AddStudentBO {
                 addStudentDTO.getSubGroupId()
         ));
     }
+
+    @Override
+    public boolean deleteItem(int id) throws Exception {
+        return addStudentDAO.delete(String.valueOf(id));
+    }
 }
