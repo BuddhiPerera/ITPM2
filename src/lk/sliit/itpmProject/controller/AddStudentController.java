@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -35,6 +32,7 @@ public class AddStudentController implements Initializable {
 
     @FXML
     public Button btnAddSave;
+    public Button btnGoAddTag;
 
     @FXML
     private AnchorPane root;
@@ -75,6 +73,9 @@ public class AddStudentController implements Initializable {
     @FXML
     private Spinner<Integer> semesterSpinner;
 
+    @FXML
+    private Spinner<Integer> spinStdYear;
+
 
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
 
@@ -84,18 +85,21 @@ public class AddStudentController implements Initializable {
         SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
         SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 0);
         SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 1);
+        SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
         this.subGroupNumberSpinner.setValueFactory(spinnerValueFactory2);
         this.groupNumberSpinner.setValueFactory(spinnerValueFactory1);
         this.semesterSpinner.setValueFactory(spinnerValueFactory3);
+        this.spinStdYear.setValueFactory(spinnerValueFactory4);
 
         subGroupNumberSpinner.setEditable(false);
         groupNumberSpinner.setEditable(false);
         semesterSpinner.setEditable(false);
+        spinStdYear.setEditable(false);
 
         programmeCombo.setValue("IT");
         ObservableList list1 = programmeCombo.getItems();
         list1.add("IT");
-        list1.add("CSNE");
+        list1.add("CSSE");
         list1.add("CSE");
         list1.add("IM");
         btnAddSave.setDisable(true);
@@ -153,14 +157,14 @@ public class AddStudentController implements Initializable {
 
     @FXML
     void btnGenerateId_OnAction(ActionEvent event) {
-        int year = Integer.parseInt(academicYearTxt.getText());
+        int year = spinStdYear.getValue();
         int semester = semesterSpinner.getValue();
         String programme = programmeCombo.getValue();
         int groupNo = groupNumberSpinner.getValue();
         int subGroupNo = subGroupNumberSpinner.getValue();
 
-        groupIdTxt.setText("Y" + year + "S" + semester + "." + groupNo + "(" + programme + ")");
-        subGroupIdTxt.setText("Y" + year + "S" + semester + "." + groupNo + "." + subGroupNo + " (" + programme + ")");
+        groupIdTxt.setText("Y" + year + "." +  "S" + semester + "." + programme + "." + groupNo);
+        subGroupIdTxt.setText("Y" + year + "." + "S" + semester + "." + programme + "." + groupNo + "." + subGroupNo);
         btnAddSave.setDisable(false);
     }
 
@@ -178,7 +182,7 @@ public class AddStudentController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
         }
 
-        int year = Integer.parseInt(academicYearTxt.getText());
+        int year = spinStdYear.getValue();
         int semester = semesterSpinner.getValue();
         String programme = programmeCombo.getValue();
         int groupNo = groupNumberSpinner.getValue();
@@ -207,7 +211,65 @@ public class AddStudentController implements Initializable {
     }
 
     @FXML
-    public void btnClear(ActionEvent event) {
+    public void btnClear_onAction(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
+        programmeCombo.setValue("IT");
+        groupIdTxt.setText(null);
+        subGroupIdTxt.setText(null);
+
+        SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
+        SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 0);
+        SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 1);
+        SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
+        this.subGroupNumberSpinner.setValueFactory(spinnerValueFactory2);
+        this.groupNumberSpinner.setValueFactory(spinnerValueFactory1);
+        this.semesterSpinner.setValueFactory(spinnerValueFactory3);
+        this.spinStdYear.setValueFactory(spinnerValueFactory4);
+
+        subGroupNumberSpinner.setEditable(false);
+        groupNumberSpinner.setEditable(false);
+        semesterSpinner.setEditable(false);
+        spinStdYear.setEditable(false);
+    }
+
+    @FXML
+    public void btnAddTag_onAction(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/AddTag.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/ManageStudentGroups.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
     }
 }

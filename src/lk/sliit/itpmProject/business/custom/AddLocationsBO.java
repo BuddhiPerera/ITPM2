@@ -5,4 +5,6 @@ import lk.sliit.itpmProject.dto.AddLocationsDTO;
 
 public interface AddLocationsBO extends SuperBO {
     void saveLocation (AddLocationsDTO addLocationsDTO) throws Exception;
+
+    int getLastLocationId() throws Exception;
 }

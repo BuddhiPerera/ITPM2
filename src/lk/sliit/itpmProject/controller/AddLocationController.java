@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -98,6 +99,18 @@ public class AddLocationController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws Exception {
+        int maxCode = 0;
+        try{
+            int lastItemCode = addLocationsBO.getLastLocationId();
+            if(lastItemCode == 0){
+                maxCode = 1;
+            }
+            else{
+                maxCode = lastItemCode + 1;
+            }
+        }catch(Exception e){
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
         String buildingName = buildingNameTxt.getText();
         String roomName = roomNameTxt.getText();
         Boolean lectureHall = LHallRadio.selectedProperty().getValue();
@@ -105,7 +118,7 @@ public class AddLocationController {
         String capacity = capacityTxt.getText();
 
         AddLocationsDTO addLocationsDTO = new AddLocationsDTO(
-                1,
+                maxCode,
                 buildingName,
                 roomName,
                 lectureHall,
@@ -113,7 +126,7 @@ public class AddLocationController {
                 capacity
                 );
         addLocationsBO.saveLocation(addLocationsDTO);
-
+        new Alert(Alert.AlertType.INFORMATION, "Save Successfully").show();
     }
 
 

@@ -5,6 +5,8 @@ import lk.sliit.itpmProject.dao.CrudUtil;
 import lk.sliit.itpmProject.dao.custom.AddLocationsDAO;
 import lk.sliit.itpmProject.entity.AddLocations;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class AddLocationsDAOImpl implements AddLocationsDAO {
@@ -28,7 +30,7 @@ public class AddLocationsDAOImpl implements AddLocationsDAO {
                 entity.isLectureHall(),
                 entity.isLaboratory(),
                 entity.getCapacity()
-                );
+        );
     }
 
     @Override
@@ -39,5 +41,15 @@ public class AddLocationsDAOImpl implements AddLocationsDAO {
     @Override
     public boolean delete(String s) throws Exception {
         return false;
+    }
+
+    @Override
+    public int getLastLocationID() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM AddLocations ORDER BY id DESC LIMIT 1");
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else {
+            return 0;
+        }
     }
 }

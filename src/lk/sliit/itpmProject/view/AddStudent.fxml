@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddStudentController">
+<AnchorPane fx:id="root" prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddStudentController">
 
     <children>
         <Text fill="#8338ab" layoutX="94.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #8338ab;" text="Add Student Groups">
@@ -54,12 +54,12 @@
         </Text>
         <Spinner id="spAddGroupNo" fx:id="subGroupNumberSpinner" layoutX="971.0" layoutY="374.0" prefHeight="31.0" prefWidth="209.0" />
         <Spinner id="spAddSubGroupNo" fx:id="groupNumberSpinner" layoutX="473.0" layoutY="373.0" prefHeight="31.0" prefWidth="209.0" />
-        <Button id="btnAddSave" fx:id="btnAddSave" graphicTextGap="6.0" layoutX="465.0" layoutY="601.0" mnemonicParsing="false"  onAction="#btnSave_onAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Save" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+        <Button id="btnAddSave" fx:id="btnAddSave" graphicTextGap="6.0" layoutX="465.0" layoutY="601.0" mnemonicParsing="false" onAction="#btnSave_onAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Save" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font></Button>
 
-        <Button id="btnClear" graphicTextGap="6.0" layoutX="774.0" layoutY="601.0" mnemonicParsing="false" mouseTransparent="true" onAction="#btnClear" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+        <Button id="btnClear" graphicTextGap="6.0" layoutX="774.0" layoutY="601.0" mnemonicParsing="false" onAction="#btnClear_onAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
 
             <font>
                 <Font name="System Bold" size="16.0" />
@@ -87,7 +87,6 @@
                 <Image url="@../assert/clipart1593805.png" />
             </image>
         </ImageView>
-        <JFXTextField id="txtAddYear" fx:id="academicYearTxt" layoutX="473.0" layoutY="215.0" prefHeight="31.0" prefWidth="209.0" />
         <JFXTextField id="txtAddSubId" fx:id="subGroupIdTxt" layoutX="914.0" layoutY="465.0" prefHeight="31.0" prefWidth="209.0" />
         <JFXTextField id="txtAddGroup" fx:id="groupIdTxt" layoutX="473.0" layoutY="462.0" prefHeight="31.0" prefWidth="209.0" />
         <JFXComboBox id="cmbAddProgramme" fx:id="programmeCombo" layoutX="473.0" layoutY="293.0" prefHeight="31.0" prefWidth="708.0" />
@@ -97,5 +96,16 @@
             </font>
         </Text>
         <Spinner id="spAddSem" fx:id="semesterSpinner" layoutX="970.0" layoutY="222.0" prefHeight="31.0" prefWidth="209.0" />
+      <Spinner id="spinAddYear" fx:id="spinStdYear" layoutX="473.0" layoutY="222.0" prefHeight="31.0" prefWidth="209.0" />
+      <Button fx:id="btnGoAddTag" layoutX="1003.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAddTag_onAction" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Add Tag" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnManage" layoutX="1127.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
