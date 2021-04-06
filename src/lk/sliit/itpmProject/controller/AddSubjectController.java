@@ -114,11 +114,11 @@ public class AddSubjectController implements Initializable {
 
         if(chkSemester1.selectedProperty().getValue()){
             semesterOne = true;
-            i++;
+
         }
         if(chkSemester2.selectedProperty().getValue()){
             semesterTwo = true;
-            i++;
+
         }
 
         int offeredYear = spinOfferedYear.getValue();

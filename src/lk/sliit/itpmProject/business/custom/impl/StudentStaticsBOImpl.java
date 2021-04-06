@@ -42,4 +42,14 @@ public class StudentStaticsBOImpl implements StudentStaticsBO {
     public String findLatestSubject() throws Exception {
         return  staticsDAO.findLatestSubject();
     }
+
+    @Override
+    public int findLecturerHallCount() throws Exception {
+        return  staticsDAO.findLecturerHallCount();
+    }
+
+    @Override
+    public int findLabCount() throws Exception {
+        return  staticsDAO.findLabCount();
+    }
 }
