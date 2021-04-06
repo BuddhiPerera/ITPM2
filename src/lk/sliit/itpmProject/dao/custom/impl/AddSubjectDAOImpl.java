@@ -36,12 +36,23 @@ public class AddSubjectDAOImpl implements AddSubjectDAO {
 
     @Override
     public boolean update(AddSubject entity) throws Exception {
-        return false;
+        return CrudUtil.execute("UPDATE AddSubject SET offeredYear =?, semester 1 =?, semester 2 =?, NoOFLectureHrs=?, NoOfTutHrs=?, NoOFlabHrs =?,  SubName =?, NoOfEvlHrs =?, SubCode =? WHERE id = ? ",
+                entity.getOffredYear(),
+                entity.isSemester1(),
+                entity.isSemester2(),
+                entity.getNoOfLecHrs(),
+                entity.getNoOfTutHrs(),
+                entity.getNoOflabHrs(),
+                entity.getSubName(),
+                entity.getNoOfEvlHrs(),
+                entity.getSubCode(),
+                entity.getId()
+        );
     }
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM AddSubject WHERE id=?", s);
     }
 
     @Override

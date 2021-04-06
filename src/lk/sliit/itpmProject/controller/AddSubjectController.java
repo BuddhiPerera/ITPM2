@@ -1,17 +1,29 @@
 package lk.sliit.itpmProject.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddSubjectBO;
 import lk.sliit.itpmProject.dto.AddSubjectDTO;
 
 public class AddSubjectController implements Initializable {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private ResourceBundle resources;
@@ -136,6 +148,24 @@ public class AddSubjectController implements Initializable {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/ManageSubject.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
         }
     }
 }
