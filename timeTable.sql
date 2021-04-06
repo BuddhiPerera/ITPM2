@@ -64,8 +64,8 @@ CREATE TABLE `AddSubject`
 (
                         `id`             int NOT NULL,
                         `offeredYear`    int NOT NULL,
-                        `semester 1`     boolean DEFAULT 0,
-                        `semester 2`     boolean DEFAULT 0,
+                        `semester1`     boolean DEFAULT 0,
+                        `semester2`     boolean DEFAULT 0,
                         `NoOFLectureHrs` int(20)     NOT NULL,
                         `NoOfTutHrs`     int(40)     NOT NULL,
                         `NoOFlabHrs`     int(40)     NOT NULL,
