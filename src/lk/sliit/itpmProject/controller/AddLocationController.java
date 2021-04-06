@@ -25,8 +25,11 @@ import java.io.IOException;
 
 public class AddLocationController {
 
+    public Button btnStatistics;
     @FXML
     private AnchorPane root1;
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private RadioButton LHallRadio;
@@ -128,6 +131,23 @@ public class AddLocationController {
         addLocationsBO.saveLocation(addLocationsDTO);
         new Alert(Alert.AlertType.INFORMATION, "Save Successfully").show();
     }
+    @FXML
+    void btn_OnAction_Statistics(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
 
+        root = FXMLLoader.load(this.getClass().getResource("../view/VisualizingStatistic.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
 
 }
