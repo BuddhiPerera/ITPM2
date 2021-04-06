@@ -14,5 +14,5 @@ public interface AddSubjectBO extends SuperBO {
 
     boolean deleteItem(int id) throws Exception;
 
-    void updateSubject(AddSubjectDTO addSubjectDTO);
+    boolean updateSubject(AddSubjectDTO addSubjectDTO) throws Exception;
 }

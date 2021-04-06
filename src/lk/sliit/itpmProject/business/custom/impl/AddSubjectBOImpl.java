@@ -62,7 +62,18 @@ public class AddSubjectBOImpl implements AddSubjectBO {
     }
 
     @Override
-    public void updateSubject(AddSubjectDTO addSubjectDTO) {
-
+    public boolean updateSubject(AddSubjectDTO addSubjectDTO) throws Exception {
+        return addSubjectDAO.update(new AddSubject(
+                addSubjectDTO.getId(),
+                addSubjectDTO.getOffredYear(),
+                addSubjectDTO.isSemester1(),
+                addSubjectDTO.isSemester2(),
+                addSubjectDTO.getNoOfLecHrs(),
+                addSubjectDTO.getNoOfTutHrs(),
+                addSubjectDTO.getNoOflabHrs(),
+                addSubjectDTO.getSubName(),
+                addSubjectDTO.getNoOfEvlHrs(),
+                addSubjectDTO.getSubCode()
+        ));
     }
 }

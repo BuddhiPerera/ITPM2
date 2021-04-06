@@ -77,14 +77,14 @@ public class ManageSubjectController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tblSubject.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblSubject.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("offeredYear"));
-        tblSubject.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("semester 1"));
-        tblSubject.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("semester 2"));
-        tblSubject.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("NoOFLectureHrs"));
-        tblSubject.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("NoOfTutHrs"));
-        tblSubject.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("NoOFlabHrs"));
-        tblSubject.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("SubName"));
-        tblSubject.getColumns().get(8).setCellValueFactory(new PropertyValueFactory<>("NoOfEvlHrs"));
-        tblSubject.getColumns().get(9).setCellValueFactory(new PropertyValueFactory<>("SubCode"));
+        tblSubject.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("semester1"));
+        tblSubject.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("semester2"));
+        tblSubject.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("noOfLecHrs"));
+        tblSubject.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("noOfTutHrs"));
+        tblSubject.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("noOfLabHrs"));
+        tblSubject.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("subName"));
+        tblSubject.getColumns().get(8).setCellValueFactory(new PropertyValueFactory<>("noOfEvlHrs"));
+        tblSubject.getColumns().get(9).setCellValueFactory(new PropertyValueFactory<>("subCode"));
 
         try{
             List<AddSubjectDTO> addSubjectDTOList = addSubjectBO.findAllSubjects();
@@ -119,13 +119,20 @@ public class ManageSubjectController implements Initializable {
 
                 btnDelete.setDisable(false);
 
-                int spinYear = selectedItem.getOffredYear();
+                int spinYear = selectedItem.getOfferedYear();
                 int spinLHours = selectedItem.getNoOfLecHrs();
                 int spinTHours = selectedItem.getNoOfTutHrs();
-                int spinLbHours = selectedItem.getNoOflabHrs();
+                int spinLbHours = selectedItem.getNoOfLabHrs();
                 int spinEvalHours = selectedItem.getNoOfEvlHrs();
                 txtSubjectName.setText(selectedItem.getSubName());
                 txtSubCode.setText(selectedItem.getSubCode());
+
+                if(selectedItem.isSemester1()){
+                    chSem1.setSelected(true);
+                }
+                if(selectedItem.isSemester2()){
+                    chSem2.setSelected(true);
+                }
 
                 SpinnerValueFactory<Integer> valueFactory1 =
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYear);
@@ -181,13 +188,36 @@ public class ManageSubjectController implements Initializable {
         int spinLbHours = spinLabHours.getValue();
         int spinEvalHours = spinEvaHours.getValue();
 
+        boolean sem1 = chSem1.isSelected();
+        boolean sem2 = chSem2.isSelected();
+
         SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
         try{
             addSubjectBO.updateSubject(new AddSubjectDTO(
-
+                    selectedItem.getId(),
+                    spinYear,
+                    sem1,
+                    sem2,
+                    spinLHours,
+                    spinTHours,
+                    spinLbHours,
+                    txtSubjectName.getText(),
+                    spinEvalHours,
+                    txtSubCode.getText()
             ));
-        }catch (Exception e){
 
+            selectedItem.setNoOfEvlHrs(spinEvalHours);
+            selectedItem.setNoOfLabHrs(spinLbHours);
+            selectedItem.setNoOfLecHrs(spinLHours);
+            selectedItem.setNoOfTutHrs(spinTHours);
+            selectedItem.setOfferedYear(spinYear);
+            selectedItem.setSubCode(txtSubCode.getText());
+            selectedItem.setSubName(txtSubjectName.getText());
+            tblSubject.refresh();
+            new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE,null,e);
         }
     }
 }

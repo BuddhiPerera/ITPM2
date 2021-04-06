@@ -3,26 +3,26 @@ package lk.sliit.itpmProject.util;
 public class SubjectTM {
 
     private int id;
-    private int offredYear;
+    private int offeredYear;
     boolean semester1,semester2;
-    private int NoOfLecHrs;
-    private int NoOfTutHrs;
-    private int NoOflabHrs;
+    private int noOfLecHrs;
+    private int noOfTutHrs;
+    private int noOfLabHrs;
     private String subName;
-    private int NoOfEvlHrs;
-    private String SubCode;
+    private int noOfEvlHrs;
+    private String subCode;
 
-    public SubjectTM(int id, int offredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOflabHrs, String subName, int noOfEvlHrs, String subCode) {
+    public SubjectTM(int id, int offeredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOfLabHrs, String subName, int noOfEvlHrs, String subCode) {
         this.id = id;
-        this.offredYear = offredYear;
+        this.offeredYear = offeredYear;
         this.semester1 = semester1;
         this.semester2 = semester2;
-        NoOfLecHrs = noOfLecHrs;
-        NoOfTutHrs = noOfTutHrs;
-        NoOflabHrs = noOflabHrs;
+        this.noOfLecHrs = noOfLecHrs;
+        this.noOfTutHrs = noOfTutHrs;
+        this.noOfLabHrs = noOfLabHrs;
         this.subName = subName;
-        NoOfEvlHrs = noOfEvlHrs;
-        SubCode = subCode;
+        this.noOfEvlHrs = noOfEvlHrs;
+        this.subCode = subCode;
     }
 
     public SubjectTM() {
@@ -36,12 +36,12 @@ public class SubjectTM {
         this.id = id;
     }
 
-    public int getOffredYear() {
-        return offredYear;
+    public int getOfferedYear() {
+        return offeredYear;
     }
 
-    public void setOffredYear(int offredYear) {
-        this.offredYear = offredYear;
+    public void setOfferedYear(int offeredYear) {
+        this.offeredYear = offeredYear;
     }
 
     public boolean isSemester1() {
@@ -61,27 +61,27 @@ public class SubjectTM {
     }
 
     public int getNoOfLecHrs() {
-        return NoOfLecHrs;
+        return noOfLecHrs;
     }
 
     public void setNoOfLecHrs(int noOfLecHrs) {
-        NoOfLecHrs = noOfLecHrs;
+        this.noOfLecHrs = noOfLecHrs;
     }
 
     public int getNoOfTutHrs() {
-        return NoOfTutHrs;
+        return noOfTutHrs;
     }
 
     public void setNoOfTutHrs(int noOfTutHrs) {
-        NoOfTutHrs = noOfTutHrs;
+        this.noOfTutHrs = noOfTutHrs;
     }
 
-    public int getNoOflabHrs() {
-        return NoOflabHrs;
+    public int getNoOfLabHrs() {
+        return noOfLabHrs;
     }
 
-    public void setNoOflabHrs(int noOflabHrs) {
-        NoOflabHrs = noOflabHrs;
+    public void setNoOfLabHrs(int noOfLabHrs) {
+        this.noOfLabHrs = noOfLabHrs;
     }
 
     public String getSubName() {
@@ -93,34 +93,34 @@ public class SubjectTM {
     }
 
     public int getNoOfEvlHrs() {
-        return NoOfEvlHrs;
+        return noOfEvlHrs;
     }
 
     public void setNoOfEvlHrs(int noOfEvlHrs) {
-        NoOfEvlHrs = noOfEvlHrs;
+        this.noOfEvlHrs = noOfEvlHrs;
     }
 
     public String getSubCode() {
-        return SubCode;
+        return subCode;
     }
 
     public void setSubCode(String subCode) {
-        SubCode = subCode;
+        this.subCode = subCode;
     }
 
     @Override
     public String toString() {
         return "SubjectTM{" +
                 "id=" + id +
-                ", offredYear=" + offredYear +
+                ", offeredYear=" + offeredYear +
                 ", semester1=" + semester1 +
                 ", semester2=" + semester2 +
-                ", NoOfLecHrs=" + NoOfLecHrs +
-                ", NoOfTutHrs=" + NoOfTutHrs +
-                ", NoOflabHrs=" + NoOflabHrs +
+                ", noOfLecHrs=" + noOfLecHrs +
+                ", noOfTutHrs=" + noOfTutHrs +
+                ", noOfLabHrs=" + noOfLabHrs +
                 ", subName='" + subName + '\'' +
-                ", NoOfEvlHrs=" + NoOfEvlHrs +
-                ", SubCode='" + SubCode + '\'' +
+                ", noOfEvlHrs=" + noOfEvlHrs +
+                ", subCode='" + subCode + '\'' +
                 '}';
     }
 }

@@ -86,7 +86,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <CheckBox id="MSBTN1" fx:id="chSem1" layoutX="511.0" layoutY="649.0" mnemonicParsing="false" text="1st Semester">
+      <CheckBox id="MSBTN1" fx:id="chSem1" layoutX="508.0" layoutY="649.0" mnemonicParsing="false" text="1st Semester">
          <font>
             <Font size="15.0" />
          </font>
