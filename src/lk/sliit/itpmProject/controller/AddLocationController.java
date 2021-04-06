@@ -24,8 +24,7 @@ import java.io.IOException;
 public class AddLocationController {
 
     public Button btnStatistics;
-    @FXML
-    private AnchorPane root1;
+
     @FXML
     private AnchorPane root;
 
@@ -75,7 +74,7 @@ public class AddLocationController {
 
             if (root != null) {
                 Scene subScene = new Scene(root);
-                Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+                Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
                 primaryStage.centerOnScreen();

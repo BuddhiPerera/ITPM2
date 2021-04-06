@@ -60,4 +60,9 @@ public class AddSubjectBOImpl implements AddSubjectBO {
     public boolean deleteItem(int id) throws Exception {
         return addSubjectDAO.delete(String.valueOf(id));
     }
+
+    @Override
+    public void updateSubject(AddSubjectDTO addSubjectDTO) {
+
+    }
 }

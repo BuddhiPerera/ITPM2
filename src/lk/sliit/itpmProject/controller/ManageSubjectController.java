@@ -124,7 +124,8 @@ public class ManageSubjectController implements Initializable {
                 int spinTHours = selectedItem.getNoOfTutHrs();
                 int spinLbHours = selectedItem.getNoOflabHrs();
                 int spinEvalHours = selectedItem.getNoOfEvlHrs();
-
+                txtSubjectName.setText(selectedItem.getSubName());
+                txtSubCode.setText(selectedItem.getSubCode());
 
                 SpinnerValueFactory<Integer> valueFactory1 =
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYear);
@@ -134,7 +135,17 @@ public class ManageSubjectController implements Initializable {
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinLHours);
                 spinLecHours.setValueFactory(valueFactory2);
 
+                SpinnerValueFactory<Integer> valueFactory3 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinTHours);
+                spinTuteHours.setValueFactory(valueFactory3);
 
+                SpinnerValueFactory<Integer> valueFactory4 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinLbHours);
+                spinLabHours.setValueFactory(valueFactory4);
+
+                SpinnerValueFactory<Integer> valueFactory5 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinEvalHours);
+                spinEvaHours.setValueFactory(valueFactory5);
             }
         });
     }
@@ -164,7 +175,20 @@ public class ManageSubjectController implements Initializable {
 
     @FXML
     void btnOnAction_Update(ActionEvent event) {
+        int spinYear = spinOfferedYear.getValue();
+        int spinLHours = spinLecHours.getValue();
+        int spinTHours = spinTuteHours.getValue();
+        int spinLbHours = spinLabHours.getValue();
+        int spinEvalHours = spinEvaHours.getValue();
 
+        SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
+        try{
+            addSubjectBO.updateSubject(new AddSubjectDTO(
+
+            ));
+        }catch (Exception e){
+
+        }
     }
 }
 

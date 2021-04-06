@@ -13,4 +13,6 @@ public interface AddSubjectBO extends SuperBO {
     List<AddSubjectDTO> findAllSubjects() throws Exception;
 
     boolean deleteItem(int id) throws Exception;
+
+    void updateSubject(AddSubjectDTO addSubjectDTO);
 }
