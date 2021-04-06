@@ -43,10 +43,10 @@ public class DBConnection {
             username="root";
             String password=DEPCrypt.decode(properties.getProperty("stdManagement.password"),"123");
 
-            this.password="1234";
+            this.password="dulshan";
             String db=properties.getProperty("stdManagement.db");
 
-            connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+db+"?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+db+"?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "dulshan");
 
             PreparedStatement pstm = connection.prepareStatement("SHOW TABLES");
             ResultSet resultSet = pstm.executeQuery();
