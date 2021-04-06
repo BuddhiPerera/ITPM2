@@ -234,15 +234,54 @@ public class AddLecturerController implements Initializable {
                 level,
                 rank
         );
-        addLecturerBO.saveLecturer(addLecturerDTO);
-        System.out.println("fffffffffffffffffffffffffffffffffffff");
-        //    String d = String.valueOf(lectureNameTxt.getText());
 
+        try {
+            addLecturerBO.saveLecturer(addLecturerDTO);
+            new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @FXML
     public void btnClear_OnAction(ActionEvent event) {
     }
 
+    @FXML
+    public void btnOnAction_AddSubject(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
 
+        root = FXMLLoader.load(this.getClass().getResource("../view/AddSubject.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/ManageLecturers.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
 }

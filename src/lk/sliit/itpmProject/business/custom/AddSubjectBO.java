@@ -5,4 +5,6 @@ import lk.sliit.itpmProject.dto.AddSubjectDTO;
 
 public interface AddSubjectBO extends SuperBO {
     boolean saveSubject(AddSubjectDTO addSubjectDTO) throws Exception;
+
+    int getLastItemCode() throws Exception;
 }

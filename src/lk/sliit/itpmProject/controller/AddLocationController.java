@@ -1,7 +1,5 @@
 package lk.sliit.itpmProject.controller;
 
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -150,4 +148,21 @@ public class AddLocationController {
         }
     }
 
+    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/ManageLocations.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
 }

@@ -138,7 +138,6 @@ public class ManageStudentGroupsController implements Initializable {
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYe);
                 spinYear.setValueFactory(valueFactory3);
 
-
                 cmbProgramme.setValue(selectedItem.getProgramme());
             }
         });
@@ -146,7 +145,28 @@ public class ManageStudentGroupsController implements Initializable {
 
     @FXML
     void btnOnAction_Clear(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
+        cmbProgramme.setValue(null);
+        txtGroupId.setText(null);
+        txtSubGroupId.setText(null);
+
+        SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
+        SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 0);
+        SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 0);
+        SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 4, 0);
+        this.spinGroupNo.setValueFactory(spinnerValueFactory2);
+        this.spinSubGroupNo.setValueFactory(spinnerValueFactory1);
+        this.spinSemester.setValueFactory(spinnerValueFactory3);
+        this.spinYear.setValueFactory(spinnerValueFactory4);
+
+        spinGroupNo.setEditable(false);
+        spinSubGroupNo.setEditable(false);
+        spinSemester.setEditable(false);
+        spinYear.setEditable(false);
     }
 
     @FXML
@@ -169,14 +189,11 @@ public class ManageStudentGroupsController implements Initializable {
 
     @FXML
     void btnOnAction_Update(ActionEvent event)  {
-
-       int year = spinYear.getValue();
-      int semester =spinSemester.getValue();
+        int year = spinYear.getValue();
+        int semester =spinSemester.getValue();
         String programme = cmbProgramme.getValue();
-       int subGroupNo = spinSubGroupNo.getValue();
-       int groupNo = spinGroupNo.getValue();
-
-
+        int subGroupNo = spinSubGroupNo.getValue();
+        int groupNo = spinGroupNo.getValue();
 
         StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
         try {
@@ -198,6 +215,7 @@ public class ManageStudentGroupsController implements Initializable {
             selectedItem.setProgramme(programme);
             selectedItem.setSemester(semester);
             tblStudent.refresh();
+            new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
             Logger.getLogger("").log(Level.SEVERE,null,e);

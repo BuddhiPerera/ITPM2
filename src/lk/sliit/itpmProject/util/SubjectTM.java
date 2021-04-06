@@ -1,6 +1,6 @@
-package lk.sliit.itpmProject.dto;
+package lk.sliit.itpmProject.util;
 
-public class AddSubjectDTO {
+public class SubjectTM {
 
     private int id;
     private int offredYear;
@@ -12,7 +12,7 @@ public class AddSubjectDTO {
     private int NoOfEvlHrs;
     private String SubCode;
 
-    public AddSubjectDTO(int id, int offredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOflabHrs, String subName, int noOfEvlHrs, String subCode) {
+    public SubjectTM(int id, int offredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOflabHrs, String subName, int noOfEvlHrs, String subCode) {
         this.id = id;
         this.offredYear = offredYear;
         this.semester1 = semester1;
@@ -25,7 +25,7 @@ public class AddSubjectDTO {
         SubCode = subCode;
     }
 
-    public AddSubjectDTO() {
+    public SubjectTM() {
     }
 
     public int getId() {
@@ -110,7 +110,7 @@ public class AddSubjectDTO {
 
     @Override
     public String toString() {
-        return "AddSubjectDTO{" +
+        return "SubjectTM{" +
                 "id=" + id +
                 ", offredYear=" + offredYear +
                 ", semester1=" + semester1 +
