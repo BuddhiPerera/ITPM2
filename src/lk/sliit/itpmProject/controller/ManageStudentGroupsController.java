@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -79,7 +80,12 @@ public class ManageStudentGroupsController implements Initializable {
         tblStudent.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
         tblStudent.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("subGroupId"));
 
-        SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
+
+        ObservableList list1 = cmbProgramme.getItems();
+        list1.add("IT");
+        list1.add("CSSE");
+        list1.add("CSE");
+        list1.add("IM");
 
         try{
             List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
@@ -114,8 +120,26 @@ public class ManageStudentGroupsController implements Initializable {
 
                 txtGroupId.setText(selectedItem.getGroupId());
                 txtSubGroupId.setText(selectedItem.getSubGroupId());
+                int spinSem = selectedItem.getSemester();
+                int spinGroup = selectedItem.getGroupNo();
+                int spinSubGroup = selectedItem.getSubGroupNo();
+                int spinYe = selectedItem.getYear();
 
-                spinGroupNo.setValueFactory(spinnerValueFactory1);
+                SpinnerValueFactory<Integer> valueFactory =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSem);
+                spinSemester.setValueFactory(valueFactory);
+                SpinnerValueFactory<Integer> valueFactory1 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinGroup);
+                spinGroupNo.setValueFactory(valueFactory1);
+                SpinnerValueFactory<Integer> valueFactory2 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSubGroup);
+                spinSubGroupNo.setValueFactory(valueFactory2);
+                SpinnerValueFactory<Integer> valueFactory3 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYe);
+                spinYear.setValueFactory(valueFactory3);
+
+
+                cmbProgramme.setValue(selectedItem.getProgramme());
             }
         });
     }
@@ -145,33 +169,38 @@ public class ManageStudentGroupsController implements Initializable {
 
     @FXML
     void btnOnAction_Update(ActionEvent event)  {
-       // int year = spinYear.getValue();
-      int semester =3; //  spinSemester.getValue();
-        String programme = "SE";
-     //   int subGroupNo = spinSubGroupNo.getValue();
+
+       int year = spinYear.getValue();
+      int semester =spinSemester.getValue();
+        String programme = cmbProgramme.getValue();
+       int subGroupNo = spinSubGroupNo.getValue();
+       int groupNo = spinGroupNo.getValue();
+
 
 
         StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
         try {
             addStudentBO.updateStudent(new AddStudentDTO(
                     selectedItem.getId(),
-                    3,
-                    2,
+                    year,
+                    semester,
                     programme,
-                    spinGroupNo.getValue(),
-                    45,
+                    groupNo,
+                    subGroupNo,
                     txtGroupId.getText(),
                     txtSubGroupId.getText()
                     ));
-            selectedItem.setGroupId(String.valueOf(spinGroupNo.getValue()));
+            selectedItem.setGroupId(txtGroupId.getText());
+            selectedItem.setGroupNo(groupNo);
+            selectedItem.setSubGroupNo(subGroupNo);
+            selectedItem.setSubGroupId(txtSubGroupId.getText());
+            selectedItem.setYear((year));
             selectedItem.setProgramme(programme);
             selectedItem.setSemester(semester);
             tblStudent.refresh();
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+            Logger.getLogger("").log(Level.SEVERE,null,e);
         }
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
     }
 }
