@@ -3,7 +3,7 @@ package lk.sliit.itpmProject.util;
 public class LecturerTM {
     private int id;
     private String empId;
-    private String lName;
+    private String lastName;
     private String department;
     private String faculty;
     private String center;
@@ -11,10 +11,10 @@ public class LecturerTM {
     private String level;
     private String rank;
 
-    public LecturerTM(int id, String empId, String lName, String department, String faculty, String center, String buildingNo, String level, String rank) {
+    public LecturerTM(int id, String empId, String lastName, String department, String faculty, String center, String buildingNo, String level, String rank) {
         this.id = id;
         this.empId = empId;
-        this.lName = lName;
+        this.lastName = lastName;
         this.department = department;
         this.faculty = faculty;
         this.center = center;
@@ -42,12 +42,12 @@ public class LecturerTM {
         this.empId = empId;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getDepartment() {
@@ -103,7 +103,7 @@ public class LecturerTM {
         return "LecturerTM{" +
                 "id=" + id +
                 ", empId='" + empId + '\'' +
-                ", lName='" + lName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", department='" + department + '\'' +
                 ", faculty='" + faculty + '\'' +
                 ", center='" + center + '\'' +

@@ -2,6 +2,7 @@ package lk.sliit.itpmProject.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,6 +80,11 @@ public class AddStudentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(2500), root);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
+
         SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
         SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 0);
         SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2, 1);

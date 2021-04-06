@@ -120,15 +120,21 @@ public class ManageSubjectController implements Initializable {
                 btnDelete.setDisable(false);
 
                 int spinYear = selectedItem.getOffredYear();
-                int spinLecHours = selectedItem.getNoOfLecHrs();
-                int spinTuteHours = selectedItem.getNoOfTutHrs();
-                int spinLabHours = selectedItem.getNoOflabHrs();
-                int spinEvHours = selectedItem.getNoOfEvlHrs();
+                int spinLHours = selectedItem.getNoOfLecHrs();
+                int spinTHours = selectedItem.getNoOfTutHrs();
+                int spinLbHours = selectedItem.getNoOflabHrs();
+                int spinEvalHours = selectedItem.getNoOfEvlHrs();
 
 
-                SpinnerValueFactory<Integer> valueFactory3 =
+                SpinnerValueFactory<Integer> valueFactory1 =
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYear);
-                spinOfferedYear.setValueFactory(valueFactory3);
+                spinOfferedYear.setValueFactory(valueFactory1);
+
+                SpinnerValueFactory<Integer> valueFactory2 =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinLHours);
+                spinLecHours.setValueFactory(valueFactory2);
+
+
             }
         });
     }
