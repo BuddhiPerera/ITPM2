@@ -116,7 +116,7 @@ public class AddSubjectController implements Initializable {
             semesterOne = true;
             i++;
         }
-        else{
+        if(chkSemester2.selectedProperty().getValue()){
             semesterTwo = true;
             i++;
         }
