@@ -72,8 +72,27 @@ XYChart.Series set2 = new XYChart.Series<>();
 set1.setName("LecturerRooms");
 set2.setName("Laboratories");
 
-set1.getData().add(new XYChart.Data("LecturerRooms ",32));
-set2.getData().add(new XYChart.Data("Laboratories ",22));
+        int labCount = 0;
+        try {
+            labCount = staticsBO.findLabCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(labCount);
+
+
+        int labLectureCount = 0;
+        try {
+            labLectureCount = staticsBO.findLecturerHallCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(labLectureCount);
+
+
+        set2.getData().add(new XYChart.Data("LecturerRooms ",labLectureCount));
+set1.getData().add(new XYChart.Data("Laboratories ",labCount));
 barChartX.getData().addAll(set1);
 barChartX.getData().addAll(set2);
 

@@ -16,4 +16,8 @@ public interface StudentStaticsBO extends SuperBO {
     String findLatestGroup()throws Exception;
 
     String findLatestSubject()throws Exception;
+
+    int findLecturerHallCount() throws Exception;
+
+    int findLabCount() throws Exception;
 }
