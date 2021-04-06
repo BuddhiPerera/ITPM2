@@ -1,7 +1,5 @@
 package lk.sliit.itpmProject.controller;
 
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -146,6 +144,5 @@ public class AddLocationController {
             tt.setToX(0);
             tt.play();
         }
-
     }
 }

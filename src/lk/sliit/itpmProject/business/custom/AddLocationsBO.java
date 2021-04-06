@@ -11,4 +11,8 @@ public interface AddLocationsBO extends SuperBO {
     int getLastLocationId() throws Exception;
 
     List<AddLocationsDTO> findAllLocations() throws Exception;
+
+    boolean deleteItem(int id) throws Exception;
+
+    boolean updateLocation(AddLocationsDTO addLocationsDTO) throws Exception;
 }

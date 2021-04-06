@@ -48,9 +48,24 @@ public class AddLocationBoImpl implements AddLocationsBO {
                 a.isLaboratory(),
                 a.getCapacity()
             ));
-
         }
-
         return addLocationsDTOList;
+    }
+
+    @Override
+    public boolean deleteItem(int id) throws Exception {
+        return addLocationsDAO.delete(String.valueOf(id));
+    }
+
+    @Override
+    public boolean updateLocation(AddLocationsDTO addLocationsDTO) throws Exception {
+        return addLocationsDAO.update(new AddLocations(
+                addLocationsDTO.getId(),
+                addLocationsDTO.getBuildingName(),
+                addLocationsDTO.getRoomName(),
+                addLocationsDTO.isLectureHall(),
+                addLocationsDTO.isLaboratory(),
+                addLocationsDTO.getCapacity()
+        ));
     }
 }

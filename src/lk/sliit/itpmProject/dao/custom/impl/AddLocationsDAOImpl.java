@@ -48,12 +48,19 @@ public class AddLocationsDAOImpl implements AddLocationsDAO {
 
     @Override
     public boolean update(AddLocations entity) throws Exception {
-        return false;
+        return CrudUtil.execute("UPDATE AddLocations SET buildingName = ?, roomName =?, lectureHall=?, laboratory=?, Capacity=? WHERE id = ?",
+                entity.getBuildingName(),
+                entity.getRoomName(),
+                entity.isLectureHall(),
+                entity.isLaboratory(),
+                entity.getCapacity(),
+                entity.getId()
+        );
     }
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM AddLocations WHERE id=?", s);
     }
 
     @Override
