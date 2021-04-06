@@ -31,15 +31,15 @@
             <TableColumn prefWidth="179.0" text="Sub Group ID" />
         </columns>
       </TableView>
-      <Button id="btnUpdate" fx:id="btnUpdate" graphicTextGap="6.0" layoutX="363.0" layoutY="360.0" mnemonicParsing="false"  onAction="#btnOnAction_Update" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Update" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Button id="btnUpdate" fx:id="btnUpdate" graphicTextGap="6.0" layoutX="363.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnOnAction_Update" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Update" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button id="btnDelete" fx:id="btnDelete" graphicTextGap="6.0" layoutX="538.0" layoutY="360.0" mnemonicParsing="false"  onAction="#btnOnAction_Delete" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Delete" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Button id="btnDelete" fx:id="btnDelete" graphicTextGap="6.0" layoutX="538.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnOnAction_Delete" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Delete" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button id="btnClear" fx:id="btnClear" graphicTextGap="6.0" layoutX="708.0" layoutY="360.0" mnemonicParsing="false"  onAction="#btnOnAction_Clear" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #649292;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Button id="btnClear" fx:id="btnClear" graphicTextGap="6.0" layoutX="708.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnOnAction_Clear" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #649292;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
