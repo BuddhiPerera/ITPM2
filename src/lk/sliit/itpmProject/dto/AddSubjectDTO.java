@@ -3,7 +3,7 @@ package lk.sliit.itpmProject.dto;
 public class AddSubjectDTO {
 
     private int id;
-    private String offredYear;
+    private int offredYear;
     boolean semester1,semester2;
     private int NoOfLecHrs;
     private int NoOfTutHrs;
@@ -12,7 +12,7 @@ public class AddSubjectDTO {
     private int NoOfEvlHrs;
     private String SubCode;
 
-    public AddSubjectDTO(int id, String offredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOflabHrs, String subName, int noOfEvlHrs, String subCode) {
+    public AddSubjectDTO(int id, int offredYear, boolean semester1, boolean semester2, int noOfLecHrs, int noOfTutHrs, int noOflabHrs, String subName, int noOfEvlHrs, String subCode) {
         this.id = id;
         this.offredYear = offredYear;
         this.semester1 = semester1;
@@ -36,11 +36,11 @@ public class AddSubjectDTO {
         this.id = id;
     }
 
-    public String getOffredYear() {
+    public int getOffredYear() {
         return offredYear;
     }
 
-    public void setOffredYear(String offredYear) {
+    public void setOffredYear(int offredYear) {
         this.offredYear = offredYear;
     }
 
@@ -112,7 +112,7 @@ public class AddSubjectDTO {
     public String toString() {
         return "AddSubjectDTO{" +
                 "id=" + id +
-                ", offredYear='" + offredYear + '\'' +
+                ", offredYear=" + offredYear +
                 ", semester1=" + semester1 +
                 ", semester2=" + semester2 +
                 ", NoOfLecHrs=" + NoOfLecHrs +

@@ -62,8 +62,8 @@ CREATE TABLE `AddLocations`
 
 CREATE TABLE `AddSubject`
 (
-                        `id`             int         NOT NULL,
-                        `offeredYear`    varchar(50) NOT NULL,
+                        `id`             int NOT NULL,
+                        `offeredYear`    int NOT NULL,
                         `semester 1`     boolean DEFAULT 0,
                         `semester 2`     boolean DEFAULT 0,
                         `NoOFLectureHrs` int(20)     NOT NULL,

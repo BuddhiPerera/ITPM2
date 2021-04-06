@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 public class AddTagController implements Initializable {
 
     @FXML
-    private AnchorPane root1;
+    private AnchorPane root;
 
     @FXML
     private TextField txtAddTag;
@@ -45,8 +45,10 @@ public class AddTagController implements Initializable {
     private JFXComboBox<String> cmbAddTag;
 
     private final AddTagBO addTagBO = BOFactory.getInstance().getBO(BOTypes.AddTag);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         cmbAddTag.setValue("Lecture");
         ObservableList list = cmbAddTag.getItems();
         list.add("Lecture");
@@ -81,7 +83,7 @@ public class AddTagController implements Initializable {
 
             if (root != null) {
                 Scene subScene = new Scene(root);
-                Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+                Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
                 primaryStage.centerOnScreen();
@@ -134,5 +136,34 @@ public class AddTagController implements Initializable {
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/ManageTag.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnOnAction_Clear(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        txtAddTag.setText(null);
+        txtAddTagCode.setText(null);
+        cmbAddTag.setValue(null);
     }
 }

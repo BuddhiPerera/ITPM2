@@ -25,4 +25,9 @@ public class AddSubjectBOImpl implements AddSubjectBO {
                 addSubjectDTO.getSubCode()
         ));
     }
+
+    @Override
+    public int getLastItemCode() throws Exception {
+        return addSubjectDAO.getLastSubjectId();
+    }
 }
