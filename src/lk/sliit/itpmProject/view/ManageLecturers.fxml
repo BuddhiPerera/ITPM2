@@ -19,17 +19,17 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TableView fx:id="tblLecturer" layoutX="313.0" layoutY="161.0" prefHeight="248.0" prefWidth="705.0">
+      <TableView fx:id="tblLecturer" layoutX="313.0" layoutY="161.0" prefHeight="248.0" prefWidth="788.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="83.0" text="EMP.ID" />
-            <TableColumn prefWidth="86.0" text="Faculty " />
-            <TableColumn prefWidth="87.0" text="Level" />
-            <TableColumn prefWidth="75.0" text="Department" />
-            <TableColumn prefWidth="75.0" text="Center" />
-            <TableColumn prefWidth="75.0" text="Building" />
-            <TableColumn prefWidth="75.0" text="Rank" />
+          <TableColumn prefWidth="57.0" text="ID" />
+          <TableColumn prefWidth="93.0" text="Name" />
+            <TableColumn prefWidth="84.0" text="EMP.ID" />
+            <TableColumn prefWidth="85.0" text="Faculty " />
+            <TableColumn prefWidth="75.0" text="Level" />
+            <TableColumn prefWidth="102.0" text="Department" />
+            <TableColumn prefWidth="81.0" text="Center" />
+            <TableColumn prefWidth="97.0" text="Building" />
+            <TableColumn prefWidth="83.0" text="Rank" />
         </columns>
       </TableView>
       <Button id="MLUpdate" fx:id="btnUpdate" layoutX="1118.0" layoutY="169.0" mnemonicParsing="false" onAction="#btnOnAction_Update" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Update" textFill="WHITE">

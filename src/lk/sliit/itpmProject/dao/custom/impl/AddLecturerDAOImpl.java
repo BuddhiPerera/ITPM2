@@ -27,7 +27,6 @@ public class AddLecturerDAOImpl implements AddLecturerDAO {
 
                     ) );
         }
-
         return addLecturerList;
     }
 
@@ -53,12 +52,22 @@ public class AddLecturerDAOImpl implements AddLecturerDAO {
 
     @Override
     public boolean update(AddLecturer entity) throws Exception {
-        return false;
+        return CrudUtil.execute("UPDATE AddLecturer SET empId = ?, lName = ?, department =?, faculty =?, center =?, buildingNO = ?, `level` =?, `rank` =? WHERE id = ?",
+                entity.getEmpId(),
+                entity.getlName(),
+                entity.getDepartment(),
+                entity.getFaculty(),
+                entity.getCenter(),
+                entity.getBuildingNo(),
+                entity.getLevel(),
+                entity.getRank(),
+                entity.getId()
+                );
     }
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM AddLecturer WHERE id=?", s);
     }
 
     @Override

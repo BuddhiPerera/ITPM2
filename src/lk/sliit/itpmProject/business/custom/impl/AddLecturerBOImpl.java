@@ -53,7 +53,26 @@ public class AddLecturerBOImpl implements AddLecturerBO {
             
         }
         return addLecturerDTOList;
+    }
 
+    @Override
+    public boolean updateLecturer(AddLecturerDTO addLecturerDTO) throws Exception {
+        return addLecturerDAO.update(new AddLecturer(
+                addLecturerDTO.getId(),
+                addLecturerDTO.getEmpId(),
+                addLecturerDTO.getlName(),
+                addLecturerDTO.getDepartment(),
+                addLecturerDTO.getFaculty(),
+                addLecturerDTO.getCenter(),
+                addLecturerDTO.getBuildingNo(),
+                addLecturerDTO.getLevel(),
+                addLecturerDTO.getRank()
+        ));
+    }
+
+    @Override
+    public boolean deleteItem(int id) throws Exception {
+        return addLecturerDAO.delete(String.valueOf(id));
     }
 
 }
