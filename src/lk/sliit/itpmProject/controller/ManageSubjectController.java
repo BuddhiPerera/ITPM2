@@ -1,6 +1,7 @@
 package lk.sliit.itpmProject.controller;
 
 import com.jfoenix.controls.JFXComboBox;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -86,10 +87,10 @@ public class ManageSubjectController implements Initializable {
         tblSubject.getColumns().get(8).setCellValueFactory(new PropertyValueFactory<>("noOfEvlHrs"));
         tblSubject.getColumns().get(9).setCellValueFactory(new PropertyValueFactory<>("subCode"));
 
-        try{
+        try {
             List<AddSubjectDTO> addSubjectDTOList = addSubjectBO.findAllSubjects();
             ObservableList<SubjectTM> subjectTMS = tblSubject.getItems();
-            for (AddSubjectDTO addSubjectDTO:addSubjectDTOList
+            for (AddSubjectDTO addSubjectDTO : addSubjectDTOList
             ) {
                 subjectTMS.add(new SubjectTM(
                         addSubjectDTO.getId(),
@@ -104,14 +105,14 @@ public class ManageSubjectController implements Initializable {
                         addSubjectDTO.getSubCode()
                 ));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
 
         tblSubject.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SubjectTM>() {
             @Override
             public void changed(ObservableValue<? extends SubjectTM> observable, SubjectTM oldValue, SubjectTM newValue) {
-               SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
+                SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
                 if (selectedItem == null) {
                     btnDelete.setDisable(true);
                     return;
@@ -127,11 +128,15 @@ public class ManageSubjectController implements Initializable {
                 txtSubjectName.setText(selectedItem.getSubName());
                 txtSubCode.setText(selectedItem.getSubCode());
 
-                if(selectedItem.isSemester1()){
+                if (selectedItem.isSemester1()) {
                     chSem1.setSelected(true);
+                }else {
+                    chSem1.setSelected(false);
                 }
-                if(selectedItem.isSemester2()){
+                if (selectedItem.isSemester2()) {
                     chSem2.setSelected(true);
+                }else {
+                    chSem2.setSelected(false);
                 }
 
                 SpinnerValueFactory<Integer> valueFactory1 =
@@ -139,19 +144,19 @@ public class ManageSubjectController implements Initializable {
                 spinOfferedYear.setValueFactory(valueFactory1);
 
                 SpinnerValueFactory<Integer> valueFactory2 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinLHours);
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLHours);
                 spinLecHours.setValueFactory(valueFactory2);
 
                 SpinnerValueFactory<Integer> valueFactory3 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinTHours);
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinTHours);
                 spinTuteHours.setValueFactory(valueFactory3);
 
                 SpinnerValueFactory<Integer> valueFactory4 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinLbHours);
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLbHours);
                 spinLabHours.setValueFactory(valueFactory4);
 
                 SpinnerValueFactory<Integer> valueFactory5 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1,30,spinEvalHours);
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinEvalHours);
                 spinEvaHours.setValueFactory(valueFactory5);
             }
         });
@@ -174,8 +179,8 @@ public class ManageSubjectController implements Initializable {
                 addSubjectBO.deleteItem(selectedItem.getId());
                 tblSubject.getItems().remove(selectedItem);
             } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+                new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null, e);
             }
         }
     }
@@ -192,7 +197,7 @@ public class ManageSubjectController implements Initializable {
         boolean sem2 = chSem2.isSelected();
 
         SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
-        try{
+        try {
             addSubjectBO.updateSubject(new AddSubjectDTO(
                     selectedItem.getId(),
                     spinYear,
@@ -211,13 +216,15 @@ public class ManageSubjectController implements Initializable {
             selectedItem.setNoOfLecHrs(spinLHours);
             selectedItem.setNoOfTutHrs(spinTHours);
             selectedItem.setOfferedYear(spinYear);
+            selectedItem.setSemester1(sem1);
+            selectedItem.setSemester2(sem2);
             selectedItem.setSubCode(txtSubCode.getText());
             selectedItem.setSubName(txtSubjectName.getText());
             tblSubject.refresh();
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
     }
 }
