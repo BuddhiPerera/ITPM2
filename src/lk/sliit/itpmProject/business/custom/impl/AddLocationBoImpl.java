@@ -7,6 +7,9 @@ import lk.sliit.itpmProject.dao.custom.AddLocationsDAO;
 import lk.sliit.itpmProject.dto.AddLocationsDTO;
 import lk.sliit.itpmProject.entity.AddLocations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddLocationBoImpl implements AddLocationsBO {
     private final AddLocationsDAO addLocationsDAO = DAOFactory.getInstance().getDAO(DAOTypes.AddLocations);
 
@@ -28,5 +31,26 @@ public class AddLocationBoImpl implements AddLocationsBO {
     @Override
     public int getLastLocationId() throws Exception {
         return addLocationsDAO.getLastLocationID();
+    }
+
+    @Override
+    public List<AddLocationsDTO> findAllLocations() throws Exception {
+        List<AddLocations> addLocationsList = addLocationsDAO.findAll();
+        List<AddLocationsDTO> addLocationsDTOList = new ArrayList<>();
+        for (AddLocations a:addLocationsList
+        )
+              {
+            addLocationsDTOList.add(new AddLocationsDTO(
+                a.getId(),
+                a.getBuildingName(),
+                a.getRoomName(),
+                a.isLectureHall(),
+                a.isLaboratory(),
+                a.getCapacity()
+            ));
+
+        }
+
+        return addLocationsDTOList;
     }
 }
