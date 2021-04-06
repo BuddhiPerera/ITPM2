@@ -1,5 +1,6 @@
 package lk.sliit.itpmProject.business;
 
+import lk.sliit.itpmProject.business.custom.StudentStaticsBO;
 import lk.sliit.itpmProject.business.custom.impl.*;
 
 public class BOFactory {
@@ -28,6 +29,8 @@ public class BOFactory {
                 return (T) new AddTagBOImpl();
             case AddLocations:
                 return (T) new AddLocationBoImpl();
+            case  StudentStatics:
+                return (T) new StudentStaticsBOImpl();
 
             default:
                 return null;

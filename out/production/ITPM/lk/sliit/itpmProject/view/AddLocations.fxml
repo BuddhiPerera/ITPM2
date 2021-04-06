@@ -9,7 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root1" prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddLocationController">
+
+<AnchorPane fx:id="root" prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddLocationController">
+
    <children>
       <Text fill="#8338ab" fontSmoothingType="LCD" layoutX="94.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Locations" wrappingWidth="290.13671875">
          <font>
@@ -82,7 +84,11 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+
+      <Button fx:id="btnStatistics" layoutX="1096.0" layoutY="97.0" mnemonicParsing="false" onAction="#btn_OnAction_Statistics" prefHeight="31.0" prefWidth="79.0" text="Button"/>
+
       <Button fx:id="btnManage" layoutX="950.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #CBC3E3;" text="Manage" textFill="WHITE">
+
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

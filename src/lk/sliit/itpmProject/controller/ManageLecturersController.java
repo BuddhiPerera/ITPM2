@@ -72,7 +72,7 @@ public class ManageLecturersController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tblLecturer.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblLecturer.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("empId"));
-        tblLecturer.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lName"));
+        tblLecturer.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tblLecturer.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("department"));
         tblLecturer.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("faculty"));
         tblLecturer.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("center"));
@@ -158,7 +158,7 @@ public class ManageLecturersController implements Initializable {
                 cmbLevel.setValue(selectedItem.getLevel());
                 cmbDepartment.setValue(selectedItem.getDepartment());
                 txtLemid.setText(selectedItem.getEmpId());
-                txtLname.setText(selectedItem.getlName());
+                txtLname.setText(selectedItem.getLastName());
                 txtRank.setText(selectedItem.getRank());
             }
         });
@@ -213,7 +213,7 @@ public class ManageLecturersController implements Initializable {
             ));
             
             selectedItem.setEmpId(txtLemid.getText());
-            selectedItem.setlName(txtLname.getText());
+            selectedItem.setLastName(txtLname.getText());
             selectedItem.setRank(txtRank.getText());
             selectedItem.setBuildingNo(building);
             selectedItem.setFaculty(faculty);
