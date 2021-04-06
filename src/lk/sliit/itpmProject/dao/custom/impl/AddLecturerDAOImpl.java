@@ -5,12 +5,30 @@ import lk.sliit.itpmProject.dao.custom.AddLecturerDAO;
 import lk.sliit.itpmProject.entity.AddLecturer;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddLecturerDAOImpl implements AddLecturerDAO {
     @Override
     public List<AddLecturer> findAll() throws Exception {
-        return null;
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM AddLecturer");
+        List<AddLecturer> addLecturerList = new ArrayList<>();
+        while (resultSet.next()){
+            addLecturerList.add(new AddLecturer(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getString(9)
+
+                    ) );
+        }
+
+        return addLecturerList;
     }
 
     @Override
