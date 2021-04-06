@@ -97,12 +97,12 @@
         </Text>
         <Spinner id="spAddSem" fx:id="semesterSpinner" layoutX="970.0" layoutY="222.0" prefHeight="31.0" prefWidth="209.0" />
       <Spinner id="spinAddYear" fx:id="spinStdYear" layoutX="473.0" layoutY="222.0" prefHeight="31.0" prefWidth="209.0" />
-      <Button fx:id="btnGoAddTag" layoutX="1003.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAddTag_onAction" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Add Tag" textFill="WHITE">
+      <Button fx:id="btnGoAddTag" layoutX="1144.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnAddTag_onAction" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Add Tag" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnManage" layoutX="1127.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+      <Button fx:id="btnManage" layoutX="1089.0" layoutY="602.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

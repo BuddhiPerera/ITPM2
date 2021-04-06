@@ -98,5 +98,10 @@
       <JFXTextField fx:id="rankTxt" layoutX="505.0" layoutY="588.0" prefHeight="31.0" prefWidth="253.0" />
       <JFXTextField fx:id="empIdTxt" layoutX="505.0" layoutY="205.0" prefHeight="31.0" prefWidth="253.0" />
       <JFXTextField fx:id="nameTxt" layoutX="505.0" layoutY="136.0" prefHeight="31.0" prefWidth="253.0" />
+      <Button id="MLClear" fx:id="btnAddSubject" layoutX="1098.0" layoutY="76.0" mnemonicParsing="false" onAction="#btnOnAction_AddSubject" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Add Subject" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

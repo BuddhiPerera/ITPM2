@@ -4,6 +4,7 @@ import lk.sliit.itpmProject.dao.CrudUtil;
 import lk.sliit.itpmProject.dao.custom.AddSubjectDAO;
 import lk.sliit.itpmProject.entity.AddSubject;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class AddSubjectDAOImpl implements AddSubjectDAO {
@@ -41,5 +42,16 @@ public class AddSubjectDAOImpl implements AddSubjectDAO {
     @Override
     public boolean delete(String s) throws Exception {
         return false;
+    }
+
+    @Override
+    public int getLastSubjectId() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM AddSubject ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+        else {
+            return 0;
+        }
     }
 }

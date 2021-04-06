@@ -244,5 +244,22 @@ public class AddLecturerController implements Initializable {
     public void btnClear_OnAction(ActionEvent event) {
     }
 
+    @FXML
+    public void btnOnAction_AddSubject(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
 
+        root = FXMLLoader.load(this.getClass().getResource("../view/AddSubject.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
 }
