@@ -7,12 +7,25 @@ import lk.sliit.itpmProject.entity.AddLocations;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddLocationsDAOImpl implements AddLocationsDAO {
     @Override
     public List<AddLocations> findAll() throws Exception {
-        return null;
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM AddLocations");
+        List<AddLocations> addLocationsList = new ArrayList<>();
+        while (resultSet.next()){
+            addLocationsList.add(new AddLocations(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getBoolean(4),
+                    resultSet.getBoolean(5),
+                    resultSet.getString(6)
+                    ));
+        }
+        return addLocationsList;
     }
 
     @Override

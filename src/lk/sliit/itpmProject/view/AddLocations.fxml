@@ -82,5 +82,10 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Button fx:id="btnManage" layoutX="950.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #CBC3E3;" text="Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
