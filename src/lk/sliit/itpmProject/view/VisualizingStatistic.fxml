@@ -33,12 +33,12 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <BarChart fx:id="barChartX" layoutX="191.0" layoutY="261.0" prefHeight="330.0" prefWidth="559.0">
+      <BarChart fx:id="barChartX" layoutX="191.0" layoutY="255.0" prefHeight="336.0" prefWidth="559.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" fx:id="x" />
+          <CategoryAxis prefHeight="29.0" prefWidth="464.0" side="BOTTOM" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="y" side="BOTTOM" />
+          <NumberAxis fx:id="y" prefHeight="289.0" prefWidth="65.0" side="LEFT" />
         </yAxis>
       </BarChart>
       <Text layoutX="880.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Latest Lecturer">
