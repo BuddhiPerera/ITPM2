@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLocationsBO;
@@ -24,6 +25,7 @@ import lk.sliit.itpmProject.util.StudentTM;
 
 public class ManageLocationsController implements Initializable {
 
+    public AnchorPane root1;
     @FXML
     private ResourceBundle resources;
 
@@ -102,7 +104,13 @@ public class ManageLocationsController implements Initializable {
                 txtBuildingName.setText(selectedItem.getBuildingName());
                 txtRoomName.setText(selectedItem.getRoomName());
                 LabHallRadio.selectedProperty().getValue();
-                LHallRadio.selectedProperty().getValue();
+
+                if(selectedItem.isLectureHall()){
+                    LHallRadio.setSelected(true);
+                }else {
+                    LabHallRadio.setSelected(true);
+                }
+
 
             }
         });
