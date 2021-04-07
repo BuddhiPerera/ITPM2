@@ -22,6 +22,7 @@ import lk.sliit.itpmProject.dto.AddWorkingDaysAndHoursDTO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddWorkingDaysAndHoursController implements Initializable {
@@ -163,6 +164,17 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            mondayCB.setSelected(false);
+            tuesdayCB.setSelected(false);
+            wednesdayCB.setSelected(false);
+            thursdayCB.setSelected(false);
+            fridayCB.setSelected(false);
+            saturdayCB.setSelected(false);
+            sundayCB.setSelected(false);
+
+        }
     }
 
 
@@ -224,7 +236,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                 );
                 try {
                     workingDaysAndHoursBO.saveWorkingDaysAndHours(andHoursDTO);
-                    new Alert(Alert.AlertType.ERROR, "User Added Successfully").show();
+                    new Alert(Alert.AlertType.INFORMATION, "WorkingDays Added Successfully").show();
                     btnSave.setText("Update");
                 } catch (Exception e) {
 
@@ -243,7 +255,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                         saturday,
                         hours,
                         minutes));
-                new Alert(Alert.AlertType.ERROR, "User Updated Successfully").show();
+                new Alert(Alert.AlertType.INFORMATION, "WorkingDays Updated Successfully").show();
             }
         }
     }
