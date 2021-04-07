@@ -123,11 +123,14 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                 case "iconStudent":
                     root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
                     break;
+                case "iconLocation":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    break;
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
                     break;
-                case "iconLocation":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                case "iconTimeTable":
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }

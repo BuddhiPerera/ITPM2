@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,9 +16,7 @@ import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLocationsBO;
 import lk.sliit.itpmProject.dto.AddLocationsDTO;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+
 import java.io.IOException;
 
 public class AddLocationController {
@@ -45,6 +43,7 @@ public class AddLocationController {
 
     @FXML
     private Button btnClear;
+
     AddLocationsBO addLocationsBO= BOFactory.getInstance().getBO(BOTypes.AddLocations);
 
 
@@ -163,5 +162,18 @@ public class AddLocationController {
             tt.setToX(0);
             tt.play();
         }
+    }
+
+    public void btnOnAction_Clear(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        buildingNameTxt.setText("");
+        capacityTxt.setText("");
+        roomNameTxt.setText("");
+        LHallRadio.selectedProperty().setValue(false);
+        LabHallRadio.selectedProperty().setValue(false);
     }
 }

@@ -75,7 +75,7 @@
          <Font size="20.0" />
       </font>
    </Text>
-   <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="568.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../assert/timetable.png" />
       </image>
