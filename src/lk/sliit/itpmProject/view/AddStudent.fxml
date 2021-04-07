@@ -72,19 +72,14 @@
             <image>
                 <Image url="@../assert/lecture-1-300x300.png" />
             </image></ImageView>
-        <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="546.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="414.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/timetable.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="iconMap" fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="685.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="553.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/google-maps-location-icon-14.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="39.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../assert/clipart1593805.png" />
             </image>
         </ImageView>
         <JFXTextField id="txtAddSubId" fx:id="subGroupIdTxt" layoutX="914.0" layoutY="465.0" prefHeight="31.0" prefWidth="209.0" />

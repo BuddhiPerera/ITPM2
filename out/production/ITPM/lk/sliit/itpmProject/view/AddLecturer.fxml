@@ -58,20 +58,20 @@
          </font>
       </Text>
 
-      <Button id="ADLGenaralRank" layoutX="775.0" layoutY="599.0" mnemonicParsing="false" onAction="#ADLGenrateRank_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #268104;" text="Genarate Rank" textFill="#e8e8e8">
+      <Button id="ADLGenaralRank" fx:id="btnGenerate" layoutX="850.0" layoutY="599.0" mnemonicParsing="false" onAction="#ADLGenrateRank_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #268104;" text="Genarate Rank" textFill="#e8e8e8">
 
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button id="ADLClear" fx:id="btnClear" layoutX="690.0" layoutY="651.0" mnemonicParsing="false" onAction="#btnClear_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="#e8e8e8">
+      <Button id="ADLClear" fx:id="btnClear" layoutX="581.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnClear_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="#e8e8e8">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button id="ADLSave" fx:id="btnSave" layoutX="519.0" layoutY="651.0" mnemonicParsing="false" onAction="#btnSave_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Save" textFill="#e8e8e8">
+      <Button id="ADLSave" fx:id="btnSave" layoutX="362.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnSave_OnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Save" textFill="#e8e8e8">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="118.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="118.0" layoutY="111.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
 
          <image>
             <Image url="@../assert/home-icon.png" />
@@ -98,12 +98,12 @@
       <JFXTextField fx:id="rankTxt" layoutX="505.0" layoutY="588.0" prefHeight="31.0" prefWidth="253.0" />
       <JFXTextField fx:id="empIdTxt" layoutX="505.0" layoutY="205.0" prefHeight="31.0" prefWidth="253.0" />
       <JFXTextField fx:id="nameTxt" layoutX="505.0" layoutY="136.0" prefHeight="31.0" prefWidth="253.0" />
-      <Button id="MLClear" fx:id="btnAddSubject" layoutX="1098.0" layoutY="76.0" mnemonicParsing="false" onAction="#btnOnAction_AddSubject" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Add Subject" textFill="WHITE">
+      <Button id="MLClear" fx:id="btnAddSubject" layoutX="1095.0" layoutY="49.0" mnemonicParsing="false" onAction="#btnOnAction_AddSubject" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Add Subject" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
-      <Button id="MLClear" fx:id="btnManage" layoutX="901.0" layoutY="651.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+      <Button id="MLClear" fx:id="btnManage" layoutX="850.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
