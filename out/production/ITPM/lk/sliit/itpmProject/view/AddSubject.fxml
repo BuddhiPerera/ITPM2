@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddSubjectController">
+<AnchorPane fx:id="root" prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.AddSubjectController">
 
    <children>
       <Text fill="#8338ab" layoutX="130.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Subject">
@@ -74,25 +74,25 @@
       <Spinner id="AdSNOTH" fx:id="spinNoOfTuteHours" layoutX="523.0" layoutY="315.0" />
       <Spinner id="AdSNOLH" fx:id="spinNoOfLabHours" layoutX="1063.0" layoutY="314.0" />
       <Spinner id="AdSNOEH" fx:id="spinNoOfEvHours" layoutX="1063.0" layoutY="398.0" />
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="113.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/home-icon.png" />
          </image></ImageView>
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="256.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/lecture-1-300x300.png" />
          </image></ImageView>
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="388.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/clipart1593805.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="527.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/timetable.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="664.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="664.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/google-maps-location-icon-14.jpg" />
          </image>
@@ -107,5 +107,10 @@
             <Font name="System Bold" size="16.0" />
          </font></Button>
       <Spinner id="AdSNOLH" fx:id="spinOfferedYear" layoutX="523.0" layoutY="171.0" />
+      <Button fx:id="btnManage" layoutX="1082.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

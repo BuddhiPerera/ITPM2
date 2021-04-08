@@ -104,4 +104,24 @@ public class StudentStaticsDAOImpl  implements StudentStaticsDAO {
         }
         return "No Data";
     }
+
+    @Override
+    public int findLecturerHallCount() throws Exception {
+        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE LectureHall = true");
+        if (rs.next()) {
+            int i = rs.getInt("val");
+            return i;
+        }
+        return 0;
+    }
+
+    @Override
+    public int findLabCount() throws Exception {
+        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE Laboratory = true");
+        if (rs.next()) {
+            int i = rs.getInt("val");
+            return i;
+        }
+        return 0;
+    }
 }

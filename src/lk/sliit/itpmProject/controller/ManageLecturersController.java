@@ -1,6 +1,8 @@
 package lk.sliit.itpmProject.controller;
 
 import com.jfoenix.controls.JFXComboBox;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -8,14 +10,23 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLecturerBO;
@@ -23,6 +34,9 @@ import lk.sliit.itpmProject.dto.AddLecturerDTO;
 import lk.sliit.itpmProject.util.LecturerTM;
 
 public class ManageLecturersController implements Initializable {
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private ResourceBundle resources;
@@ -166,7 +180,19 @@ public class ManageLecturersController implements Initializable {
 
     @FXML
     void btnOnAction_Clear(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
+        txtLname.setText("");
+        txtLemid.setText("");
+        txtRank.setText("");
+        cmbDepartment.setValue(null);
+        cmbFaculty.setValue(null);
+        cmbCenter.setValue(null);
+        cmbBuilding.setValue(null);
+        cmbLevel.setValue(null);
     }
 
     @FXML
@@ -229,5 +255,53 @@ public class ManageLecturersController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
             Logger.getLogger("").log(Level.SEVERE,null,e);
         }
+    }
+
+    public void navigate(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getSource() instanceof ImageView) {
+            ImageView icon = (ImageView) mouseEvent.getSource();
+
+            Parent root = null;
+
+            FXMLLoader fxmlLoader = null;
+            switch (icon.getId()) {
+                case "iconHome":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    break;
+                case "iconStudent":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    break;
+                case "iconLocation":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    break;
+                case "iconLecture":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    break;
+                case "iconTimeTable":
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    root = fxmlLoader.load();
+                    break;
+            }
+
+            if (root != null) {
+                Scene subScene = new Scene(root);
+                Stage primaryStage = (Stage) this.root.getScene().getWindow();
+
+                primaryStage.setScene(subScene);
+                primaryStage.centerOnScreen();
+
+                TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+                tt.setFromX(-subScene.getWidth());
+                tt.setToX(0);
+                tt.play();
+
+            }
+        }
+    }
+
+    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
+    }
+
+    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
     }
 }

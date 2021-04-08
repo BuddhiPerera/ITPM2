@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -246,6 +247,19 @@ public class AddLecturerController implements Initializable {
 
     @FXML
     public void btnClear_OnAction(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to clear?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        empIdTxt.setText("");
+        nameTxt.setText("");
+        rankTxt.setText("");
+        departmentCombo.setValue(null);
+        facultyCombo.setValue(null);
+        centerCombo.setValue(null);
+        buildingCombo.setValue(null);
+        levelCombo.setValue(null);
     }
 
     @FXML

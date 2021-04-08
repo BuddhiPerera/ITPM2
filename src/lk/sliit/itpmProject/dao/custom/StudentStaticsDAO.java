@@ -18,4 +18,8 @@ public interface StudentStaticsDAO extends CrudDAO<AddStudent, String> {
     String findLatestGroup()throws Exception;
 
     String findLatestSubject()throws Exception;
+
+    int findLecturerHallCount() throws Exception;
+
+    int findLabCount() throws Exception;
 }

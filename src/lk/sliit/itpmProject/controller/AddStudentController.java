@@ -120,7 +120,7 @@ public class AddStudentController implements Initializable {
                 case "iconHome":
                     root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
                     break;
-                case "iconMap":
+                case "iconLocation":
                     root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":

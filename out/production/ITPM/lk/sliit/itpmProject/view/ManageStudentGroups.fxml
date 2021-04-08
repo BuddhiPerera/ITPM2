@@ -77,25 +77,25 @@
       </Text>
       <Spinner id="spGroupNo" fx:id="spinGroupNo" layoutX="526.0" layoutY="651.0" />
       <Spinner id="spSubGroupNo" fx:id="spinSubGroupNo" layoutX="988.0" layoutY="654.0" prefHeight="31.0" prefWidth="191.0" />
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="137.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/home-icon.png" />
             </image></ImageView>
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="272.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/lecture-1-300x300.png" />
             </image></ImageView>
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="405.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/clipart1593805.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="543.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/timetable.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="676.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="80.0" layoutY="676.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assert/google-maps-location-icon-14.jpg" />
             </image>
