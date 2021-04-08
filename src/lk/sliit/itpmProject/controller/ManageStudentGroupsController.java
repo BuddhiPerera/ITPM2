@@ -235,9 +235,9 @@ public class ManageStudentGroupsController implements Initializable {
         }
     }
 
-    public void navigate(MouseEvent mouseEvent) throws IOException {
-        if (mouseEvent.getSource() instanceof ImageView) {
-            ImageView icon = (ImageView) mouseEvent.getSource();
+    public void navigate(MouseEvent event) throws IOException {
+        if (event.getSource() instanceof ImageView) {
+            ImageView icon = (ImageView) event.getSource();
 
             Parent root = null;
 
@@ -246,18 +246,18 @@ public class ManageStudentGroupsController implements Initializable {
                 case "iconHome":
                     root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
                     break;
-                case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
-                    break;
-                case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
-                    break;
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    break;
+                case "iconStudent":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
                     break;
                 case "iconTimeTable":
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
+                    break;
+                case "iconLocation":
+                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
                     break;
             }
 
