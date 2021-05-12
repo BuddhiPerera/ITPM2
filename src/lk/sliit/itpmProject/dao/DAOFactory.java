@@ -30,6 +30,8 @@ public class DAOFactory {
                 return (T) new AddTagDAOImpl();
             case AddLocations:
                 return (T) new AddLocationsDAOImpl();
+            case  AddSessions:
+                return (T) new SessionManageDAOImpl();
             case  StudentStatics:
                 return (T) new StudentStaticsDAOImpl();
 

@@ -14,68 +14,133 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    public static String username;
-    public static String db;
-    public static  String password;
-    public static String host;
-    public static String port;
+    private static Connection connection;
+    private static DBConnection dBconnection;
 
 
-    private static lk.sliit.itpmProject.db.DBConnection dbConnection;
-    private Connection connection;
-
-    private DBConnection() {
+    private DBConnection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fff?createDatabaseIfNotExist=true&allowMultiQueries=true","root","1234");
+            PreparedStatement show_tables = connection.prepareStatement("SHOW TABLES");
+            ResultSet execute = show_tables.executeQuery();
+            if(!execute.next()){
+                PreparedStatement createTable =
+                        connection.prepareStatement("CREATE TABLE `WorkingDays`\n" +
+                                "(\n" +
+                                "    `id`                 varchar(10) NOT NULL,\n" +
+                                "    `noOfDays`           varchar(30) DEFAULT NULL,\n" +
+                                "    `sunday`             boolean     DEFAULT 0,\n" +
+                                "    `monday`             boolean     DEFAULT 0,\n" +
+                                "    `tuesday`            boolean     DEFAULT 0,\n" +
+                                "    `wednesday`          boolean     DEFAULT 0,\n" +
+                                "    `thursday`           boolean     DEFAULT 0,\n" +
+                                "    `friday`             boolean     DEFAULT 0,\n" +
+                                "    `saturday`           boolean     DEFAULT 0,\n" +
+                                "    `workingTimeHours`   int         DEFAULT NULL,\n" +
+                                "    `workingTimeMinutes` int         DEFAULT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `AddLecturer`\n" +
+                                "(\n" +
+                                "    `id`         int          NOT NULL,\n" +
+                                "    `empId`      varchar(50)  NOT NULL,\n" +
+                                "    `lName`      varchar(50)  NOT NULL,\n" +
+                                "    `department` varchar(60)  NOT NULL,\n" +
+                                "    `faculty`    varchar(40)  NOT NULL,\n" +
+                                "    `center`     varchar(40)  NOT NULL,\n" +
+                                "    `buildingNO` varchar(20)  NOT NULL,\n" +
+                                "    `level`      varchar(70)  NOT NULL,\n" +
+                                "    `rank`       varchar(100) NOT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "CREATE TABLE `AddStudentSubGroups`\n" +
+                                "(\n" +
+                                "    `id`         int NOT NULL,\n" +
+                                "    `year`       int          DEFAULT NULL,\n" +
+                                "    `semester`   int          DEFAULT 1,\n" +
+                                "    `programme`  varchar(20)  DEFAULT NULL,\n" +
+                                "    `groupNo`    int          DEFAULT NULL,\n" +
+                                "    `subGroupNo` int          DEFAULT NULL,\n" +
+                                "    `groupId`    varchar(100) DEFAULT NULL,\n" +
+                                "    `subGroupId` varchar(100) DEFAULT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `AddTags`\n" +
+                                "(\n" +
+                                "    `id`         int NOT NULL,\n" +
+                                "    `tagName`    varchar(20) DEFAULT NULL,\n" +
+                                "    `tagCode`    int         DEFAULT NULL,\n" +
+                                "    `relatedTag` varchar(30) DEFAULT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `AddLocations`\n" +
+                                "(\n" +
+                                "    `id`           int NOT NULL,\n" +
+                                "    `buildingName` varchar(30) DEFAULT NULL,\n" +
+                                "    `roomName`     varchar(30) DEFAULT NULL,\n" +
+                                "    `lectureHall`  boolean     DEFAULT 0,\n" +
+                                "    `laboratory`   boolean     DEFAULT 0,\n" +
+                                "    `Capacity`     char(10)    DEFAULT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `AddSubject`\n" +
+                                "(\n" +
+                                "    `id`             int         NOT NULL,\n" +
+                                "    `offeredYear`    int         NOT NULL,\n" +
+                                "    `semester1`      boolean DEFAULT 0,\n" +
+                                "    `semester2`      boolean DEFAULT 0,\n" +
+                                "    `NoOFLectureHrs` int(20)     NOT NULL,\n" +
+                                "    `NoOfTutHrs`     int(40)     NOT NULL,\n" +
+                                "    `NoOFlabHrs`     int(40)     NOT NULL,\n" +
+                                "    `SubName`        varchar(40) NOT NULL,\n" +
+                                "    `NoOfEvlHrs`     int(70)     NOT NULL,\n" +
+                                "    `SubCode`        varchar(10) NOT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `AddSession`\n" +
+                                "(\n" +
+                                "    `id`               int         NOT NULL,\n" +
+                                "    `SelectLecturer`   varchar(70) NOT NULL,\n" +
+                                "    `SelectTag`        varchar(40) NOT NULL,\n" +
+                                "    `SelectedLecturer` varchar(70) NOT NULL,\n" +
+                                "    `SelectGroup`      int(20)     NOT NULL,\n" +
+                                "    `NoOFStudent`      int(200)    NOT NULL,\n" +
+                                "    `SelectSubject`    varchar(40) NOT NULL,\n" +
+                                "    `DurationHrs`      int(40)     NOT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                "\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;");
 
-            Properties properties = new Properties();
-            File file = new File("resources/application.properties");
-            FileInputStream fis = new FileInputStream(file);
-            properties.load(fis);
-            fis.close();
+                createTable.execute();
 
-            String ip=properties.getProperty("stdManagement.ip");
-            host="localhost";
-            String port=properties.getProperty("stdManagement.port");
-            this.port = "3306";
-
-            String user= DEPCrypt.decode(properties.getProperty("stdManagement.user"),"123");
-            username="root";
-            String password=DEPCrypt.decode(properties.getProperty("stdManagement.password"),"123");
-
-            this.password="12345";
-            String db=properties.getProperty("stdManagement.db");
-
-            connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+db+"?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "12345");
-
-            PreparedStatement pstm = connection.prepareStatement("SHOW TABLES");
-            ResultSet resultSet = pstm.executeQuery();
-            if (!resultSet.next()){
-                File dbScriptFile = new File("timeTable.sql");
-                if(!dbScriptFile.exists()){
-                    new Alert(Alert.AlertType.INFORMATION,"Cannot Find backup File");
-                    throw  new RuntimeException("Unable to find file");
-                }
-                StringBuilder sb = new StringBuilder();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(dbScriptFile)));
-                bufferedReader.lines().forEach(s -> sb.append(s));
-                bufferedReader.close();
-                System.out.println(sb.toString());
-                String sql = "";
-                pstm = connection.prepareStatement(sb.toString());
-                pstm.execute();
             }
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+    }
+    public static DBConnection getInstance(){
+        return (dBconnection==null)?(dBconnection=new DBConnection()):dBconnection;
     }
 
-    public static lk.sliit.itpmProject.db.DBConnection getInstance() {
-        return (dbConnection == null) ? (dbConnection = new lk.sliit.itpmProject.db.DBConnection()) : dbConnection;
-    }
+    public Connection getConnection(){return connection;}
 
-    public Connection getConnection() {
-        return connection;
-    }
 
 }

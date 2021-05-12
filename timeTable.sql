@@ -86,15 +86,16 @@ CREATE TABLE `AddSubject`
 
 CREATE TABLE `AddSession`
 (
-    'id' int NOT NULL,
+    `id`               int         NOT NULL,
     `SelectLecturer`   varchar(70) NOT NULL,
     `SelectTag`        varchar(40) NOT NULL,
-    `SelectedLecturer` varchar(70) NOT NULL ,
-    `SelectGroup`      int(20)     NOT NULL ,
+    `SelectedLecturer` varchar(70) NOT NULL,
+    `SelectGroup`      int(20)     NOT NULL,
     `NoOFStudent`      int(200)    NOT NULL,
     `SelectSubject`    varchar(40) NOT NULL,
     `DurationHrs`      int(40)     NOT NULL,
-    PRIMARY KEY ('id')
+    PRIMARY KEY (`id`)
 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
 

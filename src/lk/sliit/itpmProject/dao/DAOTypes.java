@@ -1,6 +1,6 @@
 package lk.sliit.itpmProject.dao;
 
 public enum DAOTypes {
-    AddWorkingDaysDAO,AddStudent,AddLecturer,AddLocations,AddTag,AddSubject,StudentStatics
+    AddSessions,AddWorkingDaysDAO,AddStudent,AddLecturer,AddLocations,AddTag,AddSubject,StudentStatics
 
 }
