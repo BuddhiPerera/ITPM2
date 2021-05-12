@@ -15,4 +15,6 @@ public interface AddLecturerBO extends SuperBO {
     boolean updateLecturer(AddLecturerDTO addLecturerDTO) throws Exception;
 
     boolean deleteItem(int id) throws Exception;
+
+    List<AddLecturerDTO> findAllLecturersName() throws Exception;
 }

@@ -26,6 +26,10 @@ public class AddLecturerDTO {
         this.rank = rank;
     }
 
+    public AddLecturerDTO(String lName) {
+        this.lName = lName;
+    }
+
     public int getId() {
         return id;
     }

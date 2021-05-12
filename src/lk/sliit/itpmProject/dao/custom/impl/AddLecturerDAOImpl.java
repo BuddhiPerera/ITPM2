@@ -80,4 +80,17 @@ public class AddLecturerDAOImpl implements AddLecturerDAO {
             return 0;
         }
     }
+
+    @Override
+    public List<AddLecturer> findAllNames() throws Exception {
+
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM AddLecturer");
+        List<AddLecturer> addLecturerList = new ArrayList<>();
+        while (resultSet.next()){
+            addLecturerList.add(new AddLecturer(
+                    resultSet.getString(3)
+            ) );
+        }
+        return addLecturerList;
+    }
 }

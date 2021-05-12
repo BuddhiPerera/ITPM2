@@ -80,4 +80,9 @@
          <Image url="@../assert/timetable.png" />
       </image>
    </ImageView>
+   <Button id="btnSave" fx:id="btnSessions" graphicTextGap="6.0" layoutX="1098.0" layoutY="64.0" onAction="#btnSession_OnAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Sessions" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
 </AnchorPane>

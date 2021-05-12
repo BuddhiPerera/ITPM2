@@ -22,10 +22,12 @@ import lk.sliit.itpmProject.dto.AddWorkingDaysAndHoursDTO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddWorkingDaysAndHoursController implements Initializable {
+    public Button btnSessions;
     @FXML
     private Button btnSave;
 
@@ -166,7 +168,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
+
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
             mondayCB.setSelected(false);
@@ -176,6 +178,12 @@ public class AddWorkingDaysAndHoursController implements Initializable {
             fridayCB.setSelected(false);
             saturdayCB.setSelected(false);
             sundayCB.setSelected(false);
+            SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5);
+            SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 8);
+            SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 30);
+            this.noOfWorkSpinner.setValueFactory(spinnerValueFactory1);
+            this.hoursSpinner.setValueFactory(spinnerValueFactory2);
+            this.minutesSpinner.setValueFactory(spinnerValueFactory3);
 
         }
     }
@@ -260,6 +268,38 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                         minutes));
                 new Alert(Alert.AlertType.INFORMATION, "WorkingDays Updated Successfully").show();
             }
+        }
+
+        mondayCB.setSelected(false);
+        tuesdayCB.setSelected(false);
+        wednesdayCB.setSelected(false);
+        thursdayCB.setSelected(false);
+        fridayCB.setSelected(false);
+        saturdayCB.setSelected(false);
+        sundayCB.setSelected(false);
+        SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5);
+        SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 8);
+        SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 30);
+        this.noOfWorkSpinner.setValueFactory(spinnerValueFactory1);
+        this.hoursSpinner.setValueFactory(spinnerValueFactory2);
+        this.minutesSpinner.setValueFactory(spinnerValueFactory3);
+    }
+
+    public void btnSession_OnAction(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../view/Sessions.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
         }
     }
 }

@@ -75,4 +75,18 @@ public class AddLecturerBOImpl implements AddLecturerBO {
         return addLecturerDAO.delete(String.valueOf(id));
     }
 
+    @Override
+    public List<AddLecturerDTO> findAllLecturersName() throws Exception {
+        List<AddLecturer> addLecturerList = addLecturerDAO.findAllNames();
+        List<AddLecturerDTO> addLecturerDTOList = new ArrayList<>();
+        for (AddLecturer a:addLecturerList
+        ) {
+            addLecturerDTOList.add(new AddLecturerDTO(
+                    a.getlName()
+            ));
+
+        }
+        return addLecturerDTOList;
+    }
+
 }
