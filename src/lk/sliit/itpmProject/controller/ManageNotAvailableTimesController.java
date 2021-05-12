@@ -17,6 +17,7 @@ import javafx.util.Duration;
 
 public class ManageNotAvailableTimesController {
 
+
     @FXML
     private ResourceBundle resources;
 
@@ -24,7 +25,7 @@ public class ManageNotAvailableTimesController {
     private URL location;
 
     @FXML
-    private AnchorPane root;
+    private AnchorPane root1;
 
     @FXML
     private ImageView iconHome;
@@ -69,7 +70,7 @@ public class ManageNotAvailableTimesController {
 
             if (root != null) {
                 Scene subScene = new Scene(root);
-                Stage primaryStage = (Stage) this.root.getScene().getWindow();
+                Stage primaryStage = (Stage) this.root1.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
                 primaryStage.centerOnScreen();

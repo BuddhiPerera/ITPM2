@@ -98,7 +98,7 @@ public class AddLecturerController implements Initializable {
 
         ObservableList List3 = facultyCombo.getItems();
         List3.add("Computing Faculty");
-        List3.add("Bussiness Faculty");
+        List3.add("Business Faculty");
         List3.add("Engineering Faculty");
         List3.add("Architecture Faculty");
         List3.add("Faculty of Humanities and Science");

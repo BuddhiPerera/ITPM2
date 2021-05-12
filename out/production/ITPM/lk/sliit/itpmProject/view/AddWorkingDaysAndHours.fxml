@@ -20,7 +20,7 @@
       <font>
          <Font name="System Bold" size="18.0" />
       </font></Button>
-    <Button id="btnClear" fx:id="btnClear" graphicTextGap="6.0" layoutX="763.0" layoutY="530.0" mnemonicParsing="false" mouseTransparent="true" onAction="#btnClear_OnAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+    <Button id="btnClear" fx:id="btnClear" graphicTextGap="6.0" layoutX="763.0" layoutY="530.0" mnemonicParsing="false" onAction="#btnClear_OnAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #980606;" text="Clear" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
       <font>
          <Font name="System Bold" size="17.0" />
       </font></Button>
@@ -80,4 +80,9 @@
          <Image url="@../assert/timetable.png" />
       </image>
    </ImageView>
+   <Button id="btnSave" fx:id="btnSessions" graphicTextGap="6.0" layoutX="1098.0" layoutY="64.0" onAction="#btnSession_OnAction" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #064E98;" text="Sessions" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
 </AnchorPane>
