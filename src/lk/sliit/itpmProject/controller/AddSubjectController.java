@@ -2,6 +2,7 @@ package lk.sliit.itpmProject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.animation.TranslateTransition;
@@ -94,7 +95,25 @@ public class AddSubjectController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            txtSubName.clear();
+            txtSubCode.clear();
+            chkSemester1.setSelected(false);
+            SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
+            this.spinOfferedYear.setValueFactory(spinnerValueFactory1);
+            SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+            this.spinNoOfHours.setValueFactory(spinnerValueFactory2);
+            SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+            this.spinNoOfTuteHours.setValueFactory(spinnerValueFactory3);
+            SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+            this.spinNoOfLabHours.setValueFactory(spinnerValueFactory4);
+            SpinnerValueFactory<Integer> spinnerValueFactory5 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+            this.spinNoOfEvHours.setValueFactory(spinnerValueFactory5);
+
+
+
+        }
     }
 
     @FXML

@@ -5,10 +5,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +20,13 @@ import javafx.util.Duration;
 
 public class AddsessionController {
 
+    public TextField cmb_selected_lecture;
+    public ChoiceBox cmb_select_tag;
+    public ChoiceBox cmb_select_lecture;
+    public ChoiceBox cmb_select_group;
+    public ChoiceBox cmb_select_subject;
+    public TextField cmb_No_of_Student;
+    public TextField cmb_select_duration_hrs;
     @FXML
     private AnchorPane root;
 
@@ -97,5 +107,17 @@ public class AddsessionController {
     @FXML
     void initialize() {
 
+    }
+
+    public void btn_NEXT_ONACTION(ActionEvent event) {
+    }
+
+    public void btn_onaction_clear(ActionEvent event) {
+    }
+
+    public void btn_onaction_submit(ActionEvent event) {
+    }
+
+    public void btn_onaction_back(ActionEvent event) {
     }
 }

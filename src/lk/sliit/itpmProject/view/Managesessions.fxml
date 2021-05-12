@@ -35,7 +35,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></TextField>
-      <Button id="btnaddsessionMS" layoutX="1110.0" layoutY="84.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="167.0" style="-fx-background-color: #2874A6;" text="Add Session" textFill="WHITE">
+      <Button id="btnaddsessionMS" layoutX="1110.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnOnAction_AddSession" prefHeight="53.0" prefWidth="167.0" style="-fx-background-color: #2874A6;" text="Add Session" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

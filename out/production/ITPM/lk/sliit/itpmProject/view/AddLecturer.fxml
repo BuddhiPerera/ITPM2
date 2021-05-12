@@ -108,5 +108,10 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
+      <Button id="MLClear" fx:id="btnsession" layoutX="850.0" layoutY="727.0" mnemonicParsing="false" onAction="#btnOnAction_Session" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #21bfbf;" text="Session" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
