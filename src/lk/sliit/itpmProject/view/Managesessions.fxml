@@ -20,7 +20,7 @@
       </Text>
       <TextField layoutX="229.0" layoutY="120.0" prefHeight="27.0" prefWidth="182.0" />
       <ChoiceBox layoutX="479.0" layoutY="120.0" prefHeight="27.0" prefWidth="190.0" />
-      <TableView layoutX="253.0" layoutY="260.0" prefHeight="288.0" prefWidth="799.0">
+      <TableView fx:id="tblManageSessions" layoutX="253.0" layoutY="260.0" prefHeight="288.0" prefWidth="799.0">
         <columns>
           <TableColumn prefWidth="75.0" text="ID" />
           <TableColumn prefWidth="175.0" text="Lecturer 1" />
@@ -47,7 +47,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btnupdateMS" layoutX="1119.0" layoutY="311.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Update" textFill="WHITE">
+      <Button id="btnupdateMS" layoutX="1119.0" layoutY="311.0" mnemonicParsing="false" onAction="#sessionUpdate" onMouseClicked="#clickedUpdate" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

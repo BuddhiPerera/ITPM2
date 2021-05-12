@@ -24,16 +24,17 @@ import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.*;
+import lk.sliit.itpmProject.demoData.AddSessionDemo;
 import lk.sliit.itpmProject.dto.*;
-import lk.sliit.itpmProject.util.TagsTM;
+import lk.sliit.itpmProject.util.LecturerTM;
 
 public class AddsessionController implements Initializable {
 
     public TextField cmb_selected_lecture;
-    public ChoiceBox cmb_select_tag;
-    public ChoiceBox cmb_select_lecture;
-    public ChoiceBox cmb_select_group;
-    public ChoiceBox cmb_select_subject;
+    public ChoiceBox<String> cmb_select_tag;
+    public ChoiceBox<String> cmb_select_lecture;
+    public ChoiceBox<String> cmb_select_group;
+    public ChoiceBox<String> cmb_select_subject;
     public TextField cmb_No_of_Student;
     public TextField cmb_select_duration_hrs;
     @FXML
@@ -68,11 +69,10 @@ public class AddsessionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         try{
             List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
-
-            ObservableList lecturerTMS = cmb_select_lecture.getItems();
-            cmb_select_lecture.setValue("Select Name");
+            ObservableList<String> lecturerTMS = cmb_select_lecture.getItems();
             for (AddLecturerDTO addLecturerDtO: addLecturerDTOList) {
                 lecturerTMS.add(addLecturerDtO.getlName());
             }
@@ -83,7 +83,7 @@ public class AddsessionController implements Initializable {
             List<AddSubjectDTO> addSubjectDTOList = addSubjectBO.findAllSubjects();
             ObservableList<String> subject = cmb_select_subject.getItems();
             for (AddSubjectDTO addSubjectDTO : addSubjectDTOList){
-                subject.add(addSubjectDTO.getSubName());
+                subject.add(addSubjectDTO.getSubCode());
             }
         }catch(Exception e){
 
@@ -101,15 +101,23 @@ public class AddsessionController implements Initializable {
 
         try{
             List<AddTagDTO> addTagDTOList = addTagBO.findAllTags();
-            ObservableList tag = cmb_select_tag.getItems();
+            ObservableList<String> tag = cmb_select_tag.getItems();
             for (AddTagDTO addTagDTO: addTagDTOList) {
                 tag.add(addTagDTO.getTagName());
             }
         }catch (Exception e){
 
         }
+        cmb_selected_lecture.setText(AddSessionDemo.selectedLecturer);
+        cmb_No_of_Student.setText(String.valueOf(AddSessionDemo.student));
+        cmb_select_duration_hrs.setText(String.valueOf(AddSessionDemo.durationHrs));
+        cmb_select_lecture.setValue(AddSessionDemo.selectLecturer);
+        cmb_select_tag.setValue(AddSessionDemo.selectTag);
+        cmb_select_subject.setValue(AddSessionDemo.subjectId);
+        cmb_select_group.setValue(AddSessionDemo.selectGroup);
 
     }
+
     public void btn_onaction_submit(ActionEvent event) {
         int maxID = 0;
         try{
@@ -126,10 +134,10 @@ public class AddsessionController implements Initializable {
 
         int No_of_Student = Integer.parseInt(cmb_No_of_Student.getText());
         String lectureTxt = cmb_selected_lecture.getText();
-        String select_lecture = (String) cmb_select_lecture.getValue();
-        String select_tag = (String) cmb_select_tag.getValue();
-        String select_group = (String) cmb_select_group.getValue();
-        String select_Subject = (String) cmb_select_subject.getValue();
+        String select_lecture = cmb_select_lecture.getValue();
+        String select_tag = cmb_select_tag.getValue();
+        String select_group = cmb_select_group.getValue();
+        String select_Subject = cmb_select_subject.getValue();
         int select_duration_hrs = Integer.parseInt(cmb_select_duration_hrs.getText());
 
         AddSessionDTO addSessionDTO = new AddSessionDTO(
@@ -227,6 +235,7 @@ public class AddsessionController implements Initializable {
 
     public void btn_onaction_back(ActionEvent event) {
     }
+
 
 
 }

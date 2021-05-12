@@ -3,14 +3,18 @@ package lk.sliit.itpmProject.business.custom.impl;
 import lk.sliit.itpmProject.business.custom.SessionManageBO;
 import lk.sliit.itpmProject.dao.DAOFactory;
 import lk.sliit.itpmProject.dao.DAOTypes;
-import lk.sliit.itpmProject.dao.custom.AddLecturerDAO;
+import lk.sliit.itpmProject.dao.custom.QueryDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
 import lk.sliit.itpmProject.dto.AddSessionDTO;
-import lk.sliit.itpmProject.entity.AddLecturer;
+import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 import lk.sliit.itpmProject.entity.AddSession;
+import lk.sliit.itpmProject.entity.AddTag;
+import lk.sliit.itpmProject.entity.CustomEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionManageBOImpl  implements SessionManageBO {
-
+    private QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOTypes.QUERY);
     private final SessionManageDAO sessionManageDAO  = DAOFactory.getInstance().getDAO(DAOTypes.AddSessions);
 
     @Override
@@ -31,4 +35,41 @@ public class SessionManageBOImpl  implements SessionManageBO {
                 addSessionDTO.getDurationHrs()
         ));
     }
+
+    @Override
+    public List<LoadSessionDataDTO> loadSessionTable() throws Exception {
+        List<CustomEntity> all = queryDAO.getInfo();
+        List<LoadSessionDataDTO> dtos = new ArrayList<>();
+        for (CustomEntity customEntity : all) {
+            dtos.add(new LoadSessionDataDTO(
+                    customEntity.getId(),
+                    customEntity.getLectureOne(),
+                    customEntity.getLectureTwo(),
+                    customEntity.getSubjectCode(),
+                    customEntity.getSubjectName(),
+                    customEntity.getGroupId(),
+                    customEntity.getTagName()
+            ));
+        }
+        return dtos;
+    }
+
+    @Override
+    public AddSessionDTO findAllSessions(String id) throws Exception {
+        AddSession addSessionDTO = sessionManageDAO.find(id);
+        AddSessionDTO addSessionDTO1 = new AddSessionDTO();
+
+        addSessionDTO1.setId(addSessionDTO.getId());
+        addSessionDTO1.setSelectLecture(addSessionDTO.getSelectLecture());
+        addSessionDTO1.setSelectTag(addSessionDTO.getSelectTag());
+        addSessionDTO1.setSelectedLecturer(addSessionDTO.getSelectedLecturer());
+        addSessionDTO1.setSelectGroup(addSessionDTO.getSelectGroup());
+        addSessionDTO1.setNoOfStudent(addSessionDTO.getNoOfStudent());
+        addSessionDTO1.setSelectSubject(addSessionDTO.getSelectSubject());
+        addSessionDTO1.setDurationHrs(addSessionDTO.getDurationHrs());
+
+        return addSessionDTO1;
+    }
+
+
 }

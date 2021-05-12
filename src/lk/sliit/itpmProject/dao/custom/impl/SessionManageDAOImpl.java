@@ -5,6 +5,7 @@ import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
 import lk.sliit.itpmProject.entity.AddSession;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionManageDAOImpl implements SessionManageDAO {
@@ -26,6 +27,19 @@ public class SessionManageDAOImpl implements SessionManageDAO {
 
     @Override
     public AddSession find(String s) throws Exception {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM addsession WHERE id=?", s);
+
+        if (rst.next()) {
+            return new AddSession(
+                    rst.getInt(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getInt(6),
+                    rst.getString(7),
+                    rst.getInt(8));
+        }
         return null;
     }
 

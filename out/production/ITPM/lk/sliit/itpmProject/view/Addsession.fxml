@@ -29,7 +29,6 @@
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <ChoiceBox id="selectlecturersAS" fx:id="cmb_select_lecture" layoutX="230.0" layoutY="96.0" prefHeight="31.0" prefWidth="194.0" />
                         <Text layoutX="461.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Tag">
                            <font>
                               <Font size="20.0" />
@@ -41,8 +40,7 @@
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <TextField id="selectedlecturersAS" fx:id="cmb_selected_lecture" layoutX="230.0" layoutY="217.0"
-                                   prefHeight="31.0" prefWidth="580.0"/>
+                        <TextField id="selectedlecturersAS" fx:id="cmb_selected_lecture" layoutX="230.0" layoutY="217.0" prefHeight="31.0" prefWidth="580.0" />
                         <Button id="btnnextAS" layoutX="230.0" layoutY="312.0" mnemonicParsing="false" onAction="#btn_NEXT_ONACTION" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Next" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="17.0" />
@@ -61,6 +59,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Button>
+                        <ChoiceBox fx:id="cmb_select_lecture" layoutX="218.0" layoutY="96.0" prefHeight="31.0" prefWidth="206.0" />
                      </children>
                   </AnchorPane>
             </content>
