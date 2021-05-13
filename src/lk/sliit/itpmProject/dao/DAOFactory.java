@@ -1,7 +1,6 @@
 package lk.sliit.itpmProject.dao;
 
 
-import lk.sliit.itpmProject.business.custom.impl.StudentStaticsBOImpl;
 import lk.sliit.itpmProject.dao.custom.impl.*;
 
 public class DAOFactory {
@@ -37,7 +36,8 @@ public class DAOFactory {
             case  StudentStatics:
                 return (T) new StudentStaticsDAOImpl();
 
-
+            case SessionManageNaLec:
+                return (T) new SessionManageNALecDAOImpl();
             default:
                 return null;
         }

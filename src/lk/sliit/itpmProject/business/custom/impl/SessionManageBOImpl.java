@@ -5,17 +5,22 @@ import lk.sliit.itpmProject.dao.DAOFactory;
 import lk.sliit.itpmProject.dao.DAOTypes;
 import lk.sliit.itpmProject.dao.custom.QueryDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
+import lk.sliit.itpmProject.dao.custom.SessionManageNALecDAO;
 import lk.sliit.itpmProject.dto.AddSessionDTO;
+import lk.sliit.itpmProject.dto.AddSessionNALectureDTO;
 import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 import lk.sliit.itpmProject.entity.AddSession;
 import lk.sliit.itpmProject.entity.AddTag;
 import lk.sliit.itpmProject.entity.CustomEntity;
+import lk.sliit.itpmProject.entity.SessionManageNALec;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SessionManageBOImpl  implements SessionManageBO {
     private QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOTypes.QUERY);
     private final SessionManageDAO sessionManageDAO  = DAOFactory.getInstance().getDAO(DAOTypes.AddSessions);
+    private final SessionManageNALecDAO sessionManageNALecDAO  = DAOFactory.getInstance().getDAO(DAOTypes.SessionManageNaLec);
 
     @Override
     public int getLastItemCode() throws Exception {
@@ -69,6 +74,23 @@ public class SessionManageBOImpl  implements SessionManageBO {
         addSessionDTO1.setDurationHrs(addSessionDTO.getDurationHrs());
 
         return addSessionDTO1;
+    }
+
+    @Override
+    public int getLastNotAvbLectures() throws Exception {
+        return sessionManageDAO.getLastNotAvbLectures();
+    }
+
+    @Override
+    public void saveNASessionLec(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception {
+        sessionManageNALecDAO.save(new SessionManageNALec(
+                addSessionNALectureDTO.getMaxCode(),
+                addSessionNALectureDTO.getLectureComboValue(),
+                addSessionNALectureDTO.getNaTimeLectureGroupValue1(),
+                addSessionNALectureDTO.getNaTimeLectureGroupValue(),
+                addSessionNALectureDTO.getNaTimeLectureSessionIdTxtValue(),
+                addSessionNALectureDTO.getNaTimeLectureTxtText()
+        ));
     }
 
 

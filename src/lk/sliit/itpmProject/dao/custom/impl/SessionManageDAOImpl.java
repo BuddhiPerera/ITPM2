@@ -58,6 +58,17 @@ public class SessionManageDAOImpl implements SessionManageDAO {
     }
 
     @Override
+    public int getLastNotAvbLectures() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM NotAvbSessionLec ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+
+    @Override
     public boolean update(AddSession entity) throws Exception {
         return false;
     }

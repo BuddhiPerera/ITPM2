@@ -99,3 +99,16 @@ CREATE TABLE `AddSession`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
+CREATE TABLE `NotAvbSessionLec`
+(
+    `id`              int          NOT NULL,
+    `SelectLecturer`  varchar(70)  NOT NULL,
+    `SelectGroup`     varchar(250) NOT NULL,
+    `SelectSubGroup`  varchar(200) NOT NULL,
+    `SelectSessionId` varchar(405) NOT NULL,
+    `selectTime` varchar(405) NOT NULL,
+    PRIMARY KEY (`id`)
+
+) ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+

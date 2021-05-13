@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,8 +21,8 @@ import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLecturerBO;
 import lk.sliit.itpmProject.business.custom.AddStudentBO;
-import lk.sliit.itpmProject.dto.AddLecturerDTO;
-import lk.sliit.itpmProject.dto.AddStudentDTO;
+import lk.sliit.itpmProject.business.custom.SessionManageBO;
+import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.util.StudentTM;
 
 import java.io.IOException;
@@ -40,15 +41,16 @@ public class SessionsController implements Initializable {
     @FXML
     public JFXButton btnViewTeacher;
     @FXML
-    public JFXComboBox NaTimeLectureSessionIdTxt;
+    public JFXComboBox  NaTimeLectureSessionIdTxt;
     @FXML
-    public JFXComboBox NaTimeLectureSubGroupTxt;
+    public JFXComboBox  NaTimeLectureSubGroupTxt;
     @FXML
-    public JFXComboBox NaTimeLectureGroup;
+    public JFXComboBox  NaTimeLectureGroup;
     @FXML
     public JFXButton btnClearTeacher;
     public AnchorPane root1;
 
+    private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
     public void navigate(MouseEvent mouseEvent) throws IOException {
@@ -100,6 +102,42 @@ public class SessionsController implements Initializable {
     }
 
     public void btnSubmitTeacherOnAction(ActionEvent actionEvent) {
+
+        int maxCode = 0;
+        try {
+            int lastItemCode = sessionManageBO.getLastNotAvbLectures();
+            if (lastItemCode == 0) {
+                maxCode = 1;
+            } else {
+                maxCode = lastItemCode + 1;
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
+        }
+        String v= String.valueOf((NaTimeLectureSubGroupTxt.getValue()));
+        String lectureComboValue = NaTimeLectureCombo.getValue();
+        String naTimeLectureGroupValue1 = String.valueOf(NaTimeLectureGroup.getValue());
+        String naTimeLectureGroupValue = String.valueOf(v);
+        String naTimeLectureSessionIdTxtValue = String.valueOf(NaTimeLectureSessionIdTxt.getValue());
+        String naTimeLectureTxtText = NaTimeLectureTxt.getText();
+
+
+        AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
+                maxCode,
+                lectureComboValue,
+                naTimeLectureGroupValue1,
+                naTimeLectureGroupValue,
+                naTimeLectureSessionIdTxtValue,
+                naTimeLectureTxtText
+        );
+        try {
+
+            sessionManageBO.saveNASessionLec(addSessionNALectureDTO);
+            new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void viewTeacherOnAction(ActionEvent actionEvent) throws IOException {
@@ -138,11 +176,22 @@ public class SessionsController implements Initializable {
 
         try{
             List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
-            ObservableList<String> studentTMS = NaTimeLectureGroup.getItems();
-            ObservableList<Integer> studentTMS2 = NaTimeLectureSubGroupTxt.getItems();
+            ObservableList studentTMS = NaTimeLectureGroup.getItems();
+            ObservableList studentTMS2 = NaTimeLectureSubGroupTxt.getItems();
             for (AddStudentDTO addStudentDTO:addStudentDTOList) {
                 studentTMS.add(addStudentDTO.getGroupId());
                 studentTMS2.add(addStudentDTO.getSubGroupNo());
+            }
+        }catch(Exception e){
+
+        }
+
+        try{
+            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
+            ObservableList studentTMS2 = NaTimeLectureSessionIdTxt.getItems();
+            for (LoadSessionDataDTO addSessionDTO:addStudentDTOList) {
+
+                studentTMS2.add(Integer.valueOf(addSessionDTO.getId()));
             }
         }catch(Exception e){
 
