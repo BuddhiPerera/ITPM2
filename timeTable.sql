@@ -90,7 +90,7 @@ CREATE TABLE `AddSession`
     `SelectLecturer`   varchar(70) NOT NULL,
     `SelectTag`        varchar(40) NOT NULL,
     `SelectedLecturer` varchar(70) NOT NULL,
-    `SelectGroup`      int(20)     NOT NULL,
+    `SelectGroup`      varchar(50)     NOT NULL,
     `NoOFStudent`      int(200)    NOT NULL,
     `SelectSubject`    varchar(40) NOT NULL,
     `DurationHrs`      int(40)     NOT NULL,
