@@ -4,6 +4,7 @@ import lk.sliit.itpmProject.business.SuperBO;
 import lk.sliit.itpmProject.dto.AddSessionDTO;
 import lk.sliit.itpmProject.dto.AddSessionNALectureDTO;
 import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
+import lk.sliit.itpmProject.dto.ManageNotAvbTimeDTO;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface SessionManageBO extends SuperBO {
     int getLastNotAvbLectures() throws Exception;
 
     void saveNASessionLec(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
+
+    List<ManageNotAvbTimeDTO> findAllData() throws Exception;
 }

@@ -6,9 +6,7 @@ import lk.sliit.itpmProject.dao.DAOTypes;
 import lk.sliit.itpmProject.dao.custom.QueryDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageNALecDAO;
-import lk.sliit.itpmProject.dto.AddSessionDTO;
-import lk.sliit.itpmProject.dto.AddSessionNALectureDTO;
-import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
+import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.entity.AddSession;
 import lk.sliit.itpmProject.entity.AddTag;
 import lk.sliit.itpmProject.entity.CustomEntity;
@@ -91,6 +89,24 @@ public class SessionManageBOImpl  implements SessionManageBO {
                 addSessionNALectureDTO.getNaTimeLectureSessionIdTxtValue(),
                 addSessionNALectureDTO.getNaTimeLectureTxtText()
         ));
+    }
+
+    @Override
+    public List<ManageNotAvbTimeDTO> findAllData() throws Exception {
+        List<SessionManageNALec> sessionManageNALecs = sessionManageNALecDAO.findAll();
+        List<ManageNotAvbTimeDTO> addTagDTOList = new ArrayList<>();
+        for (SessionManageNALec sessionManageNALec:sessionManageNALecs
+        ) {
+            addTagDTOList.add(new ManageNotAvbTimeDTO(
+                    sessionManageNALec.getMaxCode(),
+                    sessionManageNALec.getLectureComboValue(),
+                    sessionManageNALec.getNaTimeLectureGroupValue1(),
+                    sessionManageNALec.getNaTimeLectureGroupValue(),
+                    sessionManageNALec.getNaTimeLectureSessionIdTxtValue(),
+                    sessionManageNALec.getNaTimeLectureTxtText()
+            ));
+        }
+        return addTagDTOList;
     }
 
 

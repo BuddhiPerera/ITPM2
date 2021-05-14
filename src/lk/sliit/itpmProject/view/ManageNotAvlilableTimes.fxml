@@ -16,26 +16,27 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TableView layoutX="271.0" layoutY="216.0" prefHeight="369.0" prefWidth="802.0">
+      <TableView fx:id="tblNotAvbTimes" layoutX="271.0" layoutY="216.0" prefHeight="369.0" prefWidth="802.0">
         <columns>
           <TableColumn prefWidth="90.0" text="ID" />
           <TableColumn prefWidth="167.0" text="Duration" />
             <TableColumn prefWidth="175.0" text="Lecture" />
-            <TableColumn prefWidth="172.0" text="Group ID" />
-            <TableColumn prefWidth="178.0" text="Sub-Group ID" />
+            <TableColumn prefWidth="114.0" text="Group ID" />
+            <TableColumn prefWidth="108.0" text="Sub-Group ID" />
+            <TableColumn prefWidth="128.0" text="SessionId" />
         </columns>
       </TableView>
-      <JFXButton layoutX="1101.0" layoutY="278.0" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Refresh" textFill="WHITE">
+      <JFXButton layoutX="1101.0" layoutY="278.0" onAction="#btnRefresh" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Refresh" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1101.0" layoutY="424.0" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Back" textFill="WHITE">
+      <JFXButton layoutX="1101.0" layoutY="424.0" onAction="#btnBackw" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1101.0" layoutY="346.0" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #980606;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="1101.0" layoutY="346.0" onAction="#btnDelete" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #980606;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
