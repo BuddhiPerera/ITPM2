@@ -70,7 +70,8 @@ public class SessionManageDAOImpl implements SessionManageDAO {
 
     @Override
     public boolean update(AddSession entity) throws Exception {
-        return false;
+        return CrudUtil.execute("UPDATE addsession SET lecture1=?, SelectTag=?, lecture2=? ,SelectGroup=?,NoOFStudent=?,SelectSubject=?,DurationHrs=? WHERE id=?", entity.getSelectLecture(), entity.getSelectTag(), entity.getSelectedLecturer()
+                , entity.getSelectGroup(),entity.getNoOfStudent(),entity.getSelectSubject(),entity.getDurationHrs(),entity.getId());
     }
 
     @Override

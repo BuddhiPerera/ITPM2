@@ -87,7 +87,7 @@ public class ManagesessionsController implements Initializable {
                 sessionTMS.add(new SessionTM(
                         loadSessionDataDTO.getId(),
                         loadSessionDataDTO.getLectureOne(),
-                        "",
+                        loadSessionDataDTO.getLectureTwo(),
                         loadSessionDataDTO.getSubjectCode(),
                         loadSessionDataDTO.getSubjectName(),
                         loadSessionDataDTO.getGroupId(),

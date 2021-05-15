@@ -109,5 +109,19 @@ public class SessionManageBOImpl  implements SessionManageBO {
         return addTagDTOList;
     }
 
+    @Override
+    public void updateSession(AddSessionDTO addSessionDTO) throws Exception {
+        sessionManageDAO.update(new AddSession(
+                addSessionDTO.getId(),
+                addSessionDTO.getSelectLecture(),
+                addSessionDTO.getSelectTag(),
+                addSessionDTO.getSelectedLecturer(),
+                addSessionDTO.getSelectGroup(),
+                addSessionDTO.getNoOfStudent(),
+                addSessionDTO.getSelectSubject(),
+                addSessionDTO.getDurationHrs()
+        ));
+    }
+
 
 }

@@ -23,4 +23,6 @@ public interface SessionManageBO extends SuperBO {
     void saveNASessionLec(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
 
     List<ManageNotAvbTimeDTO> findAllData() throws Exception;
+
+    void updateSession(AddSessionDTO addSessionDTO2) throws Exception;
 }

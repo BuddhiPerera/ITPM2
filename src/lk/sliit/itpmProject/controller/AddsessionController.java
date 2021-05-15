@@ -124,24 +124,34 @@ public class AddsessionController implements Initializable {
     }
 
     public void btn_onaction_submit(ActionEvent event) throws Exception {
+        AddSessionDTO addSessionDTO;
+        int lastItemCode = sessionManageBO.getLastItemCode();
+        if(lastItemCode != 0) {
+
+            int menuDTO1 = 0;
+            try {
+                addSessionDTO = sessionManageBO.findAllSessions(String.valueOf(AddSessionDemo.id));
+                menuDTO1 = addSessionDTO.getId();
+
+            } catch (NullPointerException d) {
+                int maxId = (lastItemCode);
+                if (AddSessionDemo.id == (maxId)) {
+                    AddSessionDemo.id = ((maxId));
+                } else {
+                    maxId++;
+                    AddSessionDemo.id= ((maxId));
+                }
+            }
+
+        } else  {
+            AddSessionDemo.id =1;
+        }
+
+
 
         if (Pattern.matches("\\d+", cmb_select_duration_hrs.getText())) {
             if (Pattern.matches("\\d+", cmb_No_of_Student.getText())) {
-                int maxID = 0;
-                int last = sessionManageBO.getLastItemCode();
-                if(AddSessionDemo.id == 0 || last == 0){
 
-
-                try {
-                    int lastItemCode = sessionManageBO.getLastItemCode();
-                    if (lastItemCode == 0) {
-                        maxID = 1;
-                    } else {
-                        maxID = lastItemCode + 1;
-                    }
-                } catch (Exception e) {
-                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
-                }
                 }
                 int No_of_Student = Integer.parseInt(cmb_No_of_Student.getText());
                 String select_tag = cmb_select_tag.getValue();
@@ -166,8 +176,8 @@ public class AddsessionController implements Initializable {
                     }
                 }
 
-                AddSessionDTO addSessionDTO = new AddSessionDTO(
-                        maxID,
+                AddSessionDTO addSessionDTO2 = new AddSessionDTO(
+                        AddSessionDemo.id,
                         lec1,
                         select_tag,
                         lec2,
@@ -178,8 +188,16 @@ public class AddsessionController implements Initializable {
                 );
 
                 try {
-                    sessionManageBO.saveSession(addSessionDTO);
-                    new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+                    try {
+                        addSessionDTO = (sessionManageBO.findAllSessions(String.valueOf(AddSessionDemo.id)));
+                        System.out.println("4444444444444444444444");
+                        sessionManageBO.updateSession(addSessionDTO2);
+                        new Alert(Alert.AlertType.INFORMATION, "Update Successfully").show();
+                    }catch (Exception s){
+                        sessionManageBO.saveSession(addSessionDTO2);
+                        new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+                    }
+
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -195,11 +213,8 @@ public class AddsessionController implements Initializable {
             } else {
                 new Alert(Alert.AlertType.ERROR, "Please Enter Number to the Student").show();
             }
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Please Enter Number to the Duration Hrs").show();
-        }
         AddSessionDemo.id = 0;
-    }
+        }
 
 
     public void selectLectureMouseClick(ActionEvent actionEvent) {
