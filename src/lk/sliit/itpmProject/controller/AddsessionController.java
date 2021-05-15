@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,11 +34,12 @@ public class AddsessionController implements Initializable {
 
     public TextField cmb_selected_lecture;
     public ChoiceBox<String> cmb_select_tag;
-    public ChoiceBox<String> cmb_select_lecture;
+    public JFXComboBox<String> cmb_select_lecture;
     public ChoiceBox<String> cmb_select_group;
     public ChoiceBox<String> cmb_select_subject;
     public TextField cmb_No_of_Student;
     public TextField cmb_select_duration_hrs;
+
     @FXML
     private AnchorPane root;
 
@@ -66,46 +69,48 @@ public class AddsessionController implements Initializable {
     private final AddSubjectBO addSubjectBO = BOFactory.getInstance().getBO(BOTypes.AddSubject);
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
 
+    String value1 = "";
+    String value2 = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        try{
+        try {
             List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
             ObservableList<String> lecturerTMS = cmb_select_lecture.getItems();
-            for (AddLecturerDTO addLecturerDtO: addLecturerDTOList) {
+            for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
                 lecturerTMS.add(addLecturerDtO.getlName());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
 
-        try{
+        try {
             List<AddSubjectDTO> addSubjectDTOList = addSubjectBO.findAllSubjects();
             ObservableList<String> subject = cmb_select_subject.getItems();
-            for (AddSubjectDTO addSubjectDTO : addSubjectDTOList){
+            for (AddSubjectDTO addSubjectDTO : addSubjectDTOList) {
                 subject.add(addSubjectDTO.getSubCode());
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
 
-        try{
+        try {
             List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
             ObservableList<String> studentTMS = cmb_select_group.getItems();
-            for (AddStudentDTO addStudentDTO:addStudentDTOList) {
+            for (AddStudentDTO addStudentDTO : addStudentDTOList) {
                 studentTMS.add(addStudentDTO.getSubGroupId());
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
 
-        try{
+        try {
             List<AddTagDTO> addTagDTOList = addTagBO.findAllTags();
             ObservableList<String> tag = cmb_select_tag.getItems();
-            for (AddTagDTO addTagDTO: addTagDTOList) {
+            for (AddTagDTO addTagDTO : addTagDTOList) {
                 tag.add(addTagDTO.getTagName());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         cmb_selected_lecture.setText(AddSessionDemo.selectedLecturer);
@@ -118,53 +123,99 @@ public class AddsessionController implements Initializable {
 
     }
 
-    public void btn_onaction_submit(ActionEvent event) {
-        int maxID = 0;
-        try{
-            int lastItemCode = sessionManageBO.getLastItemCode();
-            if(lastItemCode == 0){
-                maxID = 1;
+    public void btn_onaction_submit(ActionEvent event) throws Exception {
+
+        if (Pattern.matches("\\d+", cmb_select_duration_hrs.getText())) {
+            if (Pattern.matches("\\d+", cmb_No_of_Student.getText())) {
+                int maxID = 0;
+                int last = sessionManageBO.getLastItemCode();
+                if(AddSessionDemo.id == 0 || last == 0){
+
+
+                try {
+                    int lastItemCode = sessionManageBO.getLastItemCode();
+                    if (lastItemCode == 0) {
+                        maxID = 1;
+                    } else {
+                        maxID = lastItemCode + 1;
+                    }
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
+                }
+                int No_of_Student = Integer.parseInt(cmb_No_of_Student.getText());
+                String select_tag = cmb_select_tag.getValue();
+                String select_group = cmb_select_group.getValue();
+                String select_Subject = cmb_select_subject.getValue();
+                int select_duration_hrs = Integer.parseInt(cmb_select_duration_hrs.getText());
+
+
+                String lec1 = cmb_selected_lecture.getText();
+                System.out.println(lec1);
+
+                String lec2 = "";
+                String yo[] = lec1.split(" ");
+                int count = 0;
+
+                for (int i = 0; i < yo.length; i++) {
+                    if (i == 0) {
+                        lec1 = yo[i];
+                    }
+                    if (i == 1) {
+                        lec2 = yo[i];
+                    }
+                }
+
+                AddSessionDTO addSessionDTO = new AddSessionDTO(
+                        maxID,
+                        lec1,
+                        select_tag,
+                        lec2,
+                        select_group,
+                        No_of_Student,
+                        select_Subject,
+                        select_duration_hrs
+                );
+
+                try {
+                    sessionManageBO.saveSession(addSessionDTO);
+                    new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+                cmb_No_of_Student.setText("");
+                cmb_select_duration_hrs.setText("");
+                cmb_select_tag.setValue(null);
+                cmb_select_group.setValue(null);
+                cmb_select_subject.setValue(null);
+                cmb_selected_lecture.setText("");
+                value1 = "";
+                value2 = "";
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Please Enter Number to the Student").show();
             }
-            else{
-                maxID = lastItemCode + 1;
-            }
-        }catch(Exception e){
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please Enter Number to the Duration Hrs").show();
         }
+        AddSessionDemo.id = 0;
+    }
 
-        int No_of_Student = Integer.parseInt(cmb_No_of_Student.getText());
-        String lectureTxt = cmb_selected_lecture.getText();
-        String select_lecture = cmb_select_lecture.getValue();
-        String select_tag = cmb_select_tag.getValue();
-        String select_group = cmb_select_group.getValue();
-        String select_Subject = cmb_select_subject.getValue();
-        int select_duration_hrs = Integer.parseInt(cmb_select_duration_hrs.getText());
 
-        AddSessionDTO addSessionDTO = new AddSessionDTO(
-                maxID,
-                select_lecture,
-                select_tag,
-                lectureTxt,
-                select_group,
-                No_of_Student,
-                select_Subject,
-                select_duration_hrs
-        );
+    public void selectLectureMouseClick(ActionEvent actionEvent) {
 
-        try {
-            sessionManageBO.saveSession(addSessionDTO);
-            new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+        if (value1.equals("")) {
+            String lectureTxt = cmb_select_lecture.getValue();
+            cmb_selected_lecture.setText(lectureTxt);
+            value1 = lectureTxt;
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } else if ((!value1.equals("")) && (value2.equals(""))) {
+            String lectureTxt = cmb_select_lecture.getValue();
+            cmb_selected_lecture.setText(value1 + " " + lectureTxt);
+            value2 = lectureTxt;
+        } else if (!value2.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Max 2").show();
         }
-        cmb_selected_lecture.setText("");
-        cmb_No_of_Student.setText("");
-        cmb_select_duration_hrs.setText("");
-        cmb_select_lecture.setValue(null);
-        cmb_select_tag.setValue(null);
-        cmb_select_group.setValue(null);
-        cmb_select_subject.setValue(null);
 
     }
 
@@ -227,6 +278,7 @@ public class AddsessionController implements Initializable {
     }
 
     public void btn_NEXT_ONACTION(ActionEvent event) {
+
     }
 
     public void btn_onaction_clear(ActionEvent event) {
@@ -235,7 +287,6 @@ public class AddsessionController implements Initializable {
 
     public void btn_onaction_back(ActionEvent event) {
     }
-
 
 
 }

@@ -13,10 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -179,33 +181,39 @@ public class ManagesessionsController implements Initializable {
     public void clickedUpdate(MouseEvent mouseEvent) throws Exception {
         Parent root = null;
         SessionTM selectedOrder = tblManageSessions.getSelectionModel().getSelectedItem();
-        AddSessionDTO addSessionDTO = sessionManageBO.findAllSessions(selectedOrder.getId());
-        AddSessionDemo.id = addSessionDTO.getId();
-        AddSessionDemo.selectLecturer = addSessionDTO.getSelectLecture();
-        AddSessionDemo.selectTag = addSessionDTO.getSelectTag();
-        AddSessionDemo.selectedLecturer = addSessionDTO.getSelectedLecturer();
-        AddSessionDemo.selectGroup = addSessionDTO.getSelectGroup();
-        AddSessionDemo.student = addSessionDTO.getNoOfStudent();
-        AddSessionDemo.subjectId = addSessionDTO.getSelectSubject();
-        AddSessionDemo.durationHrs = addSessionDTO.getDurationHrs();
+        if (selectedOrder != null) {
+            AddSessionDTO addSessionDTO = sessionManageBO.findAllSessions(selectedOrder.getId());
+            AddSessionDemo.id = addSessionDTO.getId();
+            AddSessionDemo.selectLecturer = addSessionDTO.getSelectLecture();
+            AddSessionDemo.selectTag = addSessionDTO.getSelectTag();
+            AddSessionDemo.selectedLecturer = addSessionDTO.getSelectedLecturer();
+            AddSessionDemo.selectGroup = addSessionDTO.getSelectGroup();
+            AddSessionDemo.student = addSessionDTO.getNoOfStudent();
+            AddSessionDemo.subjectId = addSessionDTO.getSelectSubject();
+            AddSessionDemo.durationHrs = addSessionDTO.getDurationHrs();
 
 
-        if (mouseEvent.getClickCount() == 1) {
+            if (mouseEvent.getClickCount() == 1) {
 
-            root = FXMLLoader.load(this.getClass().getResource("../view/Addsession.fxml"));
-            Scene subScene = new Scene(root);
-            Stage primaryStage = (Stage) this.root.getScene().getWindow();
-            primaryStage.setScene(subScene);
-            primaryStage.centerOnScreen();
-            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
-            tt.setFromX(-subScene.getWidth());
-            tt.setToX(0);
-            tt.play();
-            primaryStage.show();
+                root = FXMLLoader.load(this.getClass().getResource("../view/Addsession.fxml"));
+                Scene subScene = new Scene(root);
+                Stage primaryStage = (Stage) this.root.getScene().getWindow();
+                primaryStage.setScene(subScene);
+                primaryStage.centerOnScreen();
+                TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+                tt.setFromX(-subScene.getWidth());
+                tt.setToX(0);
+                tt.play();
+                primaryStage.show();
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please Select a Row").show();
         }
     }
 
     public void sessionUpdate(ActionEvent actionEvent) {
     }
+
+
 }
 

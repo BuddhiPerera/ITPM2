@@ -12,7 +12,7 @@ public class QueryDAOImpl implements QueryDAO {
 
     @Override
     public List<CustomEntity> getInfo() throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT a.id,a.selectedLecturer, a.selectedLecturer,a.SelectSubject AS subjectCode," +
+        ResultSet rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                 "s.SubName,a.SelectGroup,a.SelectTag " +
                 "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject");
         List<CustomEntity> al = new ArrayList<>();

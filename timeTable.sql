@@ -30,8 +30,6 @@ CREATE TABLE `AddLecturer`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-
-
 CREATE TABLE `AddStudentSubGroups`
 (
     `id`         int NOT NULL,
@@ -87,10 +85,10 @@ CREATE TABLE `AddSubject`
 CREATE TABLE `AddSession`
 (
     `id`               int         NOT NULL,
-    `SelectLecturer`   varchar(70) NOT NULL,
+    `lecture1`   varchar(70) NOT NULL,
     `SelectTag`        varchar(40) NOT NULL,
-    `SelectedLecturer` varchar(70) NOT NULL,
-    `SelectGroup`      varchar(50)     NOT NULL,
+    `lecture2` varchar(70) NOT NULL,
+    `SelectGroup`      varchar(50) NOT NULL,
     `NoOFStudent`      int(200)    NOT NULL,
     `SelectSubject`    varchar(40) NOT NULL,
     `DurationHrs`      int(40)     NOT NULL,
@@ -106,7 +104,7 @@ CREATE TABLE `NotAvbSessionLec`
     `SelectGroup`     varchar(250) NOT NULL,
     `SelectSubGroup`  varchar(200) NOT NULL,
     `SelectSessionId` varchar(405) NOT NULL,
-    `selectTime` varchar(405) NOT NULL,
+    `selectTime`      varchar(405) NOT NULL,
     PRIMARY KEY (`id`)
 
 ) ENGINE = InnoDB
