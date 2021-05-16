@@ -1,6 +1,9 @@
 package lk.sliit.itpmProject.util;
 
+import javafx.scene.control.CheckBox;
+
 public class SessionTM {
+
     String id;
     String lectureOne;
     String lectureTwo;
@@ -8,8 +11,19 @@ public class SessionTM {
     String subjectName;
     String groupId;
     String tagName;
-
+    CheckBox checkBox;
     public SessionTM() {
+    }
+
+    public SessionTM(CheckBox checkBox, String id, String lectureOne, String lectureTwo, String subjectCode, String subjectName, String groupId, String tagName) {
+        this.checkBox = checkBox;
+        this.id = id;
+        this.lectureOne = lectureOne;
+        this.lectureTwo = lectureTwo;
+        this.subjectCode = subjectCode;
+        this.subjectName = subjectName;
+        this.groupId = groupId;
+        this.tagName = tagName;
     }
 
     public SessionTM(String id, String lectureOne, String lectureTwo, String subjectCode, String subjectName, String groupId, String tagName) {
@@ -20,6 +34,14 @@ public class SessionTM {
         this.subjectName = subjectName;
         this.groupId = groupId;
         this.tagName = tagName;
+    }
+
+    public CheckBox getCheckBox() {
+        return checkBox;
+    }
+
+    public void setCheckBox(CheckBox checkBox) {
+        this.checkBox = checkBox;
     }
 
     public String getId() {
@@ -81,7 +103,8 @@ public class SessionTM {
     @Override
     public String toString() {
         return "SessionTM{" +
-                "id='" + id + '\'' +
+                "checkBox=" + checkBox +
+                ", id='" + id + '\'' +
                 ", lectureOne='" + lectureOne + '\'' +
                 ", lectureTwo='" + lectureTwo + '\'' +
                 ", subjectCode='" + subjectCode + '\'' +
