@@ -174,13 +174,14 @@ public class SessionsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        tblConsecutive.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
-        tblConsecutive.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
-        tblConsecutive.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
-        tblConsecutive.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
-        tblConsecutive.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
-        tblConsecutive.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("groupId"));
-        tblConsecutive.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("tagName"));
+        tblConsecutive.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+        tblConsecutive.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblConsecutive.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
+        tblConsecutive.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
+        tblConsecutive.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        tblConsecutive.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        tblConsecutive.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
+        tblConsecutive.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
 
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();

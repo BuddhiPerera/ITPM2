@@ -28,12 +28,13 @@
                      <children>
                         <TableView fx:id="tblConsecutive" layoutX="17.0" layoutY="37.0" prefHeight="386.0" prefWidth="1022.0" style="-fx-text-alignment: center">
                           <columns>
-                            <TableColumn prefWidth="85.0" text="ID" />
-                              <TableColumn prefWidth="137.0" text="Lecture 1" />
-                              <TableColumn prefWidth="140.0" text="Lecture 2" />
-                              <TableColumn prefWidth="147.0" text="Subject Code" />
-                              <TableColumn prefWidth="135.0" text="Subject" />
-                              <TableColumn prefWidth="119.0" text="Group ID" />
+                            <TableColumn prefWidth="85.0" />
+                              <TableColumn prefWidth="137.0" text="ID" />
+                              <TableColumn prefWidth="140.0" text="Lecture 1" />
+                              <TableColumn prefWidth="147.0" text="Lectuer 2" />
+                              <TableColumn prefWidth="135.0" text="Subject Code" />
+                              <TableColumn prefWidth="119.0" text="Subject" />
+                              <TableColumn prefWidth="85.0" text="Group ID" />
                               <TableColumn prefWidth="85.0" text="Tag" />
                           </columns>
                         </TableView>

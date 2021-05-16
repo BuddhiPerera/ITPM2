@@ -1,6 +1,9 @@
 package lk.sliit.itpmProject.dto;
 
+import javafx.scene.control.CheckBox;
+
 public class LoadSessionDataDTO {
+    CheckBox checkBox;
     String id;
     String lectureOne;
     String lectureTwo;
@@ -13,6 +16,17 @@ public class LoadSessionDataDTO {
     }
 
     public LoadSessionDataDTO(String id, String lectureOne, String lectureTwo, String subjectCode, String subjectName, String groupId, String tagName) {
+        this.id = id;
+        this.lectureOne = lectureOne;
+        this.lectureTwo = lectureTwo;
+        this.subjectCode = subjectCode;
+        this.subjectName = subjectName;
+        this.groupId = groupId;
+        this.tagName = tagName;
+    }
+
+    public LoadSessionDataDTO(CheckBox checkBox, String id, String lectureOne, String lectureTwo, String subjectCode, String subjectName, String groupId, String tagName) {
+        this.checkBox = checkBox;
         this.id = id;
         this.lectureOne = lectureOne;
         this.lectureTwo = lectureTwo;
@@ -78,10 +92,19 @@ public class LoadSessionDataDTO {
         this.tagName = tagName;
     }
 
+    public CheckBox getCheckBox() {
+        return checkBox;
+    }
+
+    public void setCheckBox(CheckBox checkBox) {
+        this.checkBox = checkBox;
+    }
+
     @Override
     public String toString() {
         return "LoadSessionDataDTO{" +
-                "id='" + id + '\'' +
+                "checkBox=" + checkBox +
+                ", id='" + id + '\'' +
                 ", lectureOne='" + lectureOne + '\'' +
                 ", lectureTwo='" + lectureTwo + '\'' +
                 ", subjectCode='" + subjectCode + '\'' +
