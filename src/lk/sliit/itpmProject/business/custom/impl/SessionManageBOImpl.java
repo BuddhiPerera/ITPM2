@@ -3,14 +3,12 @@ package lk.sliit.itpmProject.business.custom.impl;
 import lk.sliit.itpmProject.business.custom.SessionManageBO;
 import lk.sliit.itpmProject.dao.DAOFactory;
 import lk.sliit.itpmProject.dao.DAOTypes;
+import lk.sliit.itpmProject.dao.custom.ConsecutiveSessionsDAO;
 import lk.sliit.itpmProject.dao.custom.QueryDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageNALecDAO;
 import lk.sliit.itpmProject.dto.*;
-import lk.sliit.itpmProject.entity.AddSession;
-import lk.sliit.itpmProject.entity.AddTag;
-import lk.sliit.itpmProject.entity.CustomEntity;
-import lk.sliit.itpmProject.entity.SessionManageNALec;
+import lk.sliit.itpmProject.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,8 @@ public class SessionManageBOImpl  implements SessionManageBO {
     private QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOTypes.QUERY);
     private final SessionManageDAO sessionManageDAO  = DAOFactory.getInstance().getDAO(DAOTypes.AddSessions);
     private final SessionManageNALecDAO sessionManageNALecDAO  = DAOFactory.getInstance().getDAO(DAOTypes.SessionManageNaLec);
+    private final ConsecutiveSessionsDAO consecutiveSessionsDAO  = DAOFactory.getInstance().getDAO(DAOTypes.ConsecutiveSessions);
+
 
     @Override
     public int getLastItemCode() throws Exception {
@@ -123,5 +123,24 @@ public class SessionManageBOImpl  implements SessionManageBO {
         ));
     }
 
+    @Override
+    public void saveNATimeAlocations(List<LoadSessionDataDTO> addSessionDTOs) throws Exception {
+
+        List<ConsecutiveSessions> consecutiveSessions = new ArrayList<>();
+        for (LoadSessionDataDTO customEntity : addSessionDTOs) {
+           consecutiveSessions.add(
+                   new ConsecutiveSessions(
+                   customEntity.getId(),
+                   customEntity.getLectureOne(),
+                   customEntity.getLectureTwo(),
+                   customEntity.getSubjectCode(),
+                   customEntity.getSubjectName(),
+                   customEntity.getGroupId(),
+                   customEntity.getTagName()
+           ));
+        }
+        consecutiveSessionsDAO.addconsecutiveSessions(consecutiveSessions);
+
+    }
 
 }

@@ -25,4 +25,6 @@ public interface SessionManageBO extends SuperBO {
     List<ManageNotAvbTimeDTO> findAllData() throws Exception;
 
     void updateSession(AddSessionDTO addSessionDTO2) throws Exception;
+
+    void saveNATimeAlocations(List<LoadSessionDataDTO> dtos) throws Exception;
 }

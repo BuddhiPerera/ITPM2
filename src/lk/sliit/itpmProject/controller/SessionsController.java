@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ import org.drools.template.parser.BooleanCell;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -126,6 +128,32 @@ public class SessionsController implements Initializable {
 
         }
     }
+
+    public void btnAddSessionOnAction(ActionEvent actionEvent) throws Exception {
+
+        try {
+            List<LoadSessionDataDTO> dtos = new ArrayList<>();
+            ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
+            for (SessionTM customEntity : sessionTMS) {
+             if(customEntity.getCheckBox().isSelected()){
+                 dtos.add(new LoadSessionDataDTO(
+                         customEntity.getId(),
+                         customEntity.getLectureOne(),
+                         customEntity.getLectureTwo(),
+                         customEntity.getSubjectCode(),
+                         customEntity.getSubjectName(),
+                         customEntity.getGroupId(),
+                         customEntity.getTagName()
+                 ));
+             }
+            }
+            sessionManageBO.saveNATimeAlocations(dtos);
+            new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+    }
+
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
@@ -237,6 +265,5 @@ public class SessionsController implements Initializable {
             tt.play();
         }
     }
-
 
 }
