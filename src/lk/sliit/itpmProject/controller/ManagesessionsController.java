@@ -206,7 +206,7 @@ public class ManagesessionsController implements Initializable {
                 tt.play();
                 primaryStage.show();
             }
-        }else {
+        } else {
             new Alert(Alert.AlertType.ERROR, "Please Select a Row").show();
         }
     }
