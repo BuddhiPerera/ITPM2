@@ -26,6 +26,7 @@ public class QueryDAOImpl implements QueryDAO {
                     rst.getString(6),
                     rst.getString(7)));
         }
+        System.out.println("Hello" + al);
         return al;
     }
 }
