@@ -21,9 +21,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
-import lk.sliit.itpmProject.business.custom.AddLecturerBO;
-import lk.sliit.itpmProject.business.custom.AddStudentBO;
-import lk.sliit.itpmProject.business.custom.SessionManageBO;
+import lk.sliit.itpmProject.business.custom.*;
+import lk.sliit.itpmProject.demoData.AddSessionDemo;
 import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.util.SessionTM;
 import lk.sliit.itpmProject.util.StudentTM;
@@ -35,6 +34,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SessionsController implements Initializable {
+
     @FXML
     public JFXTextField NaTimeLectureTxt;
     @FXML
@@ -189,7 +189,7 @@ public class SessionsController implements Initializable {
                 sessionTMS.add(new SessionTM(
                         loadSessionDataDTO.getId(),
                         loadSessionDataDTO.getLectureOne(),
-                        "",
+                        loadSessionDataDTO.getLectureTwo(),
                         loadSessionDataDTO.getSubjectCode(),
                         loadSessionDataDTO.getSubjectName(),
                         loadSessionDataDTO.getGroupId(),
