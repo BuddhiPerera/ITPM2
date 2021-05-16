@@ -110,3 +110,17 @@ CREATE TABLE `NotAvbSessionLec`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
+-- auto-generated definition
+create table consecutive
+(
+    id          int          not null,
+    rowId       int          not null,
+    lectureOne  varchar(250) not null,
+    lectureTwo  varchar(250) not null,
+    subjectCode varchar(200) not null,
+    subject     varchar(405) not null,
+    groupId     varchar(405) not null,
+    tag         varchar(200) not null,
+    primary key (id, rowId)
+);
+

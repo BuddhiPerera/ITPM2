@@ -137,6 +137,20 @@ public class DBConnection {
                                 "\n" +
                                 ") ENGINE = InnoDB\n" +
                                 "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "-- auto-generated definition\n" +
+                                "create table consecutive\n" +
+                                "(\n" +
+                                "    id          int          not null,\n" +
+                                "    rowId       int          not null,\n" +
+                                "    lectureOne  varchar(250) not null,\n" +
+                                "    lectureTwo  varchar(250) not null,\n" +
+                                "    subjectCode varchar(200) not null,\n" +
+                                "    subject     varchar(405) not null,\n" +
+                                "    groupId     varchar(405) not null,\n" +
+                                "    tag         varchar(200) not null,\n" +
+                                "    primary key (id, rowId)\n" +
+                                ");\n" +
                                 "\n");
 
                 createTable.execute();
