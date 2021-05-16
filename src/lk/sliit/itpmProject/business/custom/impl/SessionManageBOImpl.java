@@ -143,4 +143,23 @@ public class SessionManageBOImpl  implements SessionManageBO {
 
     }
 
+    @Override
+    public List<LoadSessionDataDTO> loadSessionTableSearch(int i,String val) throws Exception {
+        List<CustomEntity> all = queryDAO.getInfoSelect( i,val);
+        List<LoadSessionDataDTO> dtos = new ArrayList<>();
+        for (CustomEntity customEntity : all) {
+            dtos.add(new LoadSessionDataDTO(
+                    customEntity.getId(),
+                    customEntity.getLectureOne(),
+                    customEntity.getLectureTwo(),
+                    customEntity.getSubjectCode(),
+                    customEntity.getSubjectName(),
+                    customEntity.getGroupId(),
+                    customEntity.getTagName()
+            ));
+        }
+        return dtos;
+    }
+
+
 }

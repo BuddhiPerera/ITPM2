@@ -27,4 +27,6 @@ public interface SessionManageBO extends SuperBO {
     void updateSession(AddSessionDTO addSessionDTO2) throws Exception;
 
     void saveNATimeAlocations(List<LoadSessionDataDTO> dtos) throws Exception;
+
+    List<LoadSessionDataDTO> loadSessionTableSearch(int i, String val) throws Exception;
 }

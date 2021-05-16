@@ -14,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,6 +37,8 @@ import lk.sliit.itpmProject.util.SessionTM;
 public class ManagesessionsController implements Initializable {
 
     public TableView<SessionTM> tblManageSessions;
+    public TextField txtManageSessions;
+    public ChoiceBox manageSessionsOnAction;
 
     @FXML
     private AnchorPane root;
@@ -82,7 +86,6 @@ public class ManagesessionsController implements Initializable {
 
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
-            System.out.println(loadSessionDataDTOList);
             ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
             for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
                 sessionTMS.add(new SessionTM(
@@ -97,6 +100,79 @@ public class ManagesessionsController implements Initializable {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+
+        ObservableList list1 = manageSessionsOnAction.getItems();
+        list1.add("Lecture 1");
+        list1.add("Lecture 2");
+        list1.add("Subject Code");
+        list1.add("Subject Name");
+        list1.add("Group");
+
+    }
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        tblManageSessions.getItems().clear();
+        try {
+            List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
+            ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
+            for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
+                sessionTMS.add(new SessionTM(
+                        loadSessionDataDTO.getId(),
+                        loadSessionDataDTO.getLectureOne(),
+                        loadSessionDataDTO.getLectureTwo(),
+                        loadSessionDataDTO.getSubjectCode(),
+                        loadSessionDataDTO.getSubjectName(),
+                        loadSessionDataDTO.getGroupId(),
+                        loadSessionDataDTO.getTagName()
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void btnSearchOnAction(ActionEvent mouseEvent) throws Exception {
+        String category ="";
+        category = (String) manageSessionsOnAction.getValue();
+        String val =   txtManageSessions.getText();
+        int i =-1;
+        if(category == null){
+            i= -1;
+        }
+        else if(category.equals("Lecture 1")){
+            i=0;
+        }else if (category.equals("Lecture 2")){
+            i=1;
+        }else if (category.equals("Subject Code")){
+            i=2;
+        }else if (category.equals("Subject Name")){
+            i=3;
+        }else if (category.equals("Group")){
+            i=4;
+        }
+        if(val.equals("") || i == -1){
+            new Alert(Alert.AlertType.ERROR, "Please Add Search Data").show();
+        }else {
+
+            tblManageSessions.getItems().clear();
+            try {
+
+                List<LoadSessionDataDTO> loadSessionDataDTOList2 = sessionManageBO.loadSessionTableSearch(i, val);
+
+                ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
+                for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList2) {
+                    sessionTMS.add(new SessionTM(
+                            loadSessionDataDTO.getId(),
+                            loadSessionDataDTO.getLectureOne(),
+                            loadSessionDataDTO.getLectureTwo(),
+                            loadSessionDataDTO.getSubjectCode(),
+                            loadSessionDataDTO.getSubjectName(),
+                            loadSessionDataDTO.getGroupId(),
+                            loadSessionDataDTO.getTagName()
+                    ));
+                }
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Something Something Went Wrong").show();
+            }
         }
     }
 
