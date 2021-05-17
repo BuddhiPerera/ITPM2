@@ -29,7 +29,7 @@ public class AppInitializer extends Application {
 
             DBConnection.getInstance().getConnection();
 
-            URL resource = this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml");
+            URL resource = this.getClass().getResource("/lk/sliit/itpmProject/view/Managesessions.fxml");
             Parent root = FXMLLoader.load(resource);
             Scene mainScene = new Scene(root);
             primaryStage.setScene(mainScene);

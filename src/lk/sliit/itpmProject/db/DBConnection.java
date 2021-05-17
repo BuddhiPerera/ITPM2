@@ -58,8 +58,6 @@ public class DBConnection {
                                 ") ENGINE = InnoDB\n" +
                                 "  DEFAULT CHARSET = latin1;\n" +
                                 "\n" +
-                                "\n" +
-                                "\n" +
                                 "CREATE TABLE `AddStudentSubGroups`\n" +
                                 "(\n" +
                                 "    `id`         int NOT NULL,\n" +
@@ -115,17 +113,45 @@ public class DBConnection {
                                 "CREATE TABLE `AddSession`\n" +
                                 "(\n" +
                                 "    `id`               int         NOT NULL,\n" +
-                                "    `SelectLecturer`   varchar(70) NOT NULL,\n" +
+                                "    `lecture1`   varchar(70) NOT NULL,\n" +
                                 "    `SelectTag`        varchar(40) NOT NULL,\n" +
-                                "    `SelectedLecturer` varchar(70) NOT NULL,\n" +
-                                "    `SelectGroup`      int(20)     NOT NULL,\n" +
+                                "    `lecture2` varchar(70) NOT NULL,\n" +
+                                "    `SelectGroup`      varchar(50) NOT NULL,\n" +
                                 "    `NoOFStudent`      int(200)    NOT NULL,\n" +
                                 "    `SelectSubject`    varchar(40) NOT NULL,\n" +
                                 "    `DurationHrs`      int(40)     NOT NULL,\n" +
                                 "    PRIMARY KEY (`id`)\n" +
                                 "\n" +
                                 ") ENGINE = InnoDB\n" +
-                                "  DEFAULT CHARSET = latin1;");
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "CREATE TABLE `NotAvbSessionLec`\n" +
+                                "(\n" +
+                                "    `id`              int          NOT NULL,\n" +
+                                "    `SelectLecturer`  varchar(70)  NOT NULL,\n" +
+                                "    `SelectGroup`     varchar(250) NOT NULL,\n" +
+                                "    `SelectSubGroup`  varchar(200) NOT NULL,\n" +
+                                "    `SelectSessionId` varchar(405) NOT NULL,\n" +
+                                "    `selectTime`      varchar(405) NOT NULL,\n" +
+                                "    PRIMARY KEY (`id`)\n" +
+                                "\n" +
+                                ") ENGINE = InnoDB\n" +
+                                "  DEFAULT CHARSET = latin1;\n" +
+                                "\n" +
+                                "-- auto-generated definition\n" +
+                                "create table consecutive\n" +
+                                "(\n" +
+                                "    id          int          not null,\n" +
+                                "    rowId       int          not null,\n" +
+                                "    lectureOne  varchar(250) not null,\n" +
+                                "    lectureTwo  varchar(250) not null,\n" +
+                                "    subjectCode varchar(200) not null,\n" +
+                                "    subject     varchar(405) not null,\n" +
+                                "    groupId     varchar(405) not null,\n" +
+                                "    tag         varchar(200) not null,\n" +
+                                "    primary key (id, rowId)\n" +
+                                ");\n" +
+                                "\n");
 
                 createTable.execute();
 

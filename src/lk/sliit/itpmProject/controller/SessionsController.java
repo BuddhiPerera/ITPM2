@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
@@ -26,9 +29,11 @@ import lk.sliit.itpmProject.demoData.AddSessionDemo;
 import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.util.SessionTM;
 import lk.sliit.itpmProject.util.StudentTM;
+import org.drools.template.parser.BooleanCell;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -57,6 +62,97 @@ public class SessionsController implements Initializable {
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
     public TableView<SessionTM> tblConsecutive;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        tblConsecutive.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+        tblConsecutive.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblConsecutive.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
+        tblConsecutive.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
+        tblConsecutive.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        tblConsecutive.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        tblConsecutive.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
+        tblConsecutive.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
+
+
+        try {
+            List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
+            ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
+            for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
+                sessionTMS.add(new SessionTM(
+                        new CheckBox(),
+                        loadSessionDataDTO.getId(),
+                        loadSessionDataDTO.getLectureOne(),
+                        loadSessionDataDTO.getLectureTwo(),
+                        loadSessionDataDTO.getSubjectCode(),
+                        loadSessionDataDTO.getSubjectName(),
+                        loadSessionDataDTO.getGroupId(),
+                        loadSessionDataDTO.getTagName()
+                ));
+            }
+        } catch (Exception e) {
+
+        }
+        try {
+            List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
+
+            ObservableList<String> lecturerTMS = NaTimeLectureCombo.getItems();
+            NaTimeLectureCombo.setValue("Select Name");
+            for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
+                lecturerTMS.add(addLecturerDtO.getlName());
+            }
+        } catch (Exception e) {
+        }
+
+        try {
+            List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
+            ObservableList studentTMS = NaTimeLectureGroup.getItems();
+            ObservableList studentTMS2 = NaTimeLectureSubGroupTxt.getItems();
+            for (AddStudentDTO addStudentDTO : addStudentDTOList) {
+                studentTMS.add(addStudentDTO.getGroupId());
+                studentTMS2.add(addStudentDTO.getSubGroupNo());
+            }
+        } catch (Exception e) {
+
+        }
+
+        try {
+            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
+            ObservableList studentTMS2 = NaTimeLectureSessionIdTxt.getItems();
+            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
+
+                studentTMS2.add(Integer.valueOf(addSessionDTO.getId()));
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void btnAddSessionOnAction(ActionEvent actionEvent) throws Exception {
+
+        try {
+            List<LoadSessionDataDTO> dtos = new ArrayList<>();
+            ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
+            for (SessionTM customEntity : sessionTMS) {
+             if(customEntity.getCheckBox().isSelected()){
+                 dtos.add(new LoadSessionDataDTO(
+                         customEntity.getId(),
+                         customEntity.getLectureOne(),
+                         customEntity.getLectureTwo(),
+                         customEntity.getSubjectCode(),
+                         customEntity.getSubjectName(),
+                         customEntity.getGroupId(),
+                         customEntity.getTagName()
+                 ));
+             }
+            }
+            sessionManageBO.saveNATimeAlocations(dtos);
+            new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+    }
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -170,68 +266,4 @@ public class SessionsController implements Initializable {
         }
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        tblConsecutive.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("checkBox"));
-        tblConsecutive.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("id"));
-        tblConsecutive.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
-        tblConsecutive.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
-        tblConsecutive.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
-        tblConsecutive.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
-        tblConsecutive.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
-        tblConsecutive.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
-
-        try {
-            List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
-            ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
-            for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
-                sessionTMS.add(new SessionTM(
-                        loadSessionDataDTO.getId(),
-                        loadSessionDataDTO.getLectureOne(),
-                        loadSessionDataDTO.getLectureTwo(),
-                        loadSessionDataDTO.getSubjectCode(),
-                        loadSessionDataDTO.getSubjectName(),
-                        loadSessionDataDTO.getGroupId(),
-                        loadSessionDataDTO.getTagName()
-                ));
-            }
-        } catch (Exception e) {
-
-        }
-        try {
-            List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
-
-            ObservableList<String> lecturerTMS = NaTimeLectureCombo.getItems();
-            NaTimeLectureCombo.setValue("Select Name");
-            for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
-                lecturerTMS.add(addLecturerDtO.getlName());
-            }
-        } catch (Exception e) {
-        }
-
-        try {
-            List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
-            ObservableList studentTMS = NaTimeLectureGroup.getItems();
-            ObservableList studentTMS2 = NaTimeLectureSubGroupTxt.getItems();
-            for (AddStudentDTO addStudentDTO : addStudentDTOList) {
-                studentTMS.add(addStudentDTO.getGroupId());
-                studentTMS2.add(addStudentDTO.getSubGroupNo());
-            }
-        } catch (Exception e) {
-
-        }
-
-        try {
-            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
-            ObservableList studentTMS2 = NaTimeLectureSessionIdTxt.getItems();
-            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
-
-                studentTMS2.add(Integer.valueOf(addSessionDTO.getId()));
-            }
-        } catch (Exception e) {
-
-        }
-    }
 }

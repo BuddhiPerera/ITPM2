@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -18,8 +19,8 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TextField layoutX="229.0" layoutY="120.0" prefHeight="27.0" prefWidth="182.0" />
-      <ChoiceBox layoutX="479.0" layoutY="120.0" prefHeight="27.0" prefWidth="190.0" />
+      <TextField fx:id="txtManageSessions" layoutX="229.0" layoutY="120.0" prefHeight="27.0" prefWidth="182.0" />
+      <ChoiceBox fx:id="manageSessionsOnAction" layoutX="479.0" layoutY="120.0" prefHeight="27.0" prefWidth="190.0" />
       <TableView fx:id="tblManageSessions" layoutX="253.0" layoutY="260.0" prefHeight="288.0" prefWidth="799.0">
         <columns>
           <TableColumn prefWidth="75.0" text="ID" />
@@ -31,15 +32,11 @@
             <TableColumn prefWidth="75.0" text="Tag" />
         </columns>
       </TableView>
-      <TextField id="btnsearchMS" layoutX="732.0" layoutY="118.0" prefHeight="32.0" prefWidth="167.0" style="-fx-background-color: #82bbe8;">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></TextField>
       <Button id="btnaddsessionMS" layoutX="1110.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnOnAction_AddSession" prefHeight="53.0" prefWidth="167.0" style="-fx-background-color: #2874A6;" text="Add Session" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btnrefreshMS" layoutX="1121.0" layoutY="175.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #808104;" text="Refresh" textFill="WHITE">
+      <Button id="btnrefreshMS" layoutX="1121.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnRefreshOnAction" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #808104;" text="Refresh" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
@@ -55,7 +52,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Text fill="#fff9f9" layoutX="786.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ba" text="Search">
+      <Text fill="#fff9f9" layoutX="786.0" layoutY="145.0" onDragDetected="#btnSearchOnAction" strokeWidth="0.0" styleClass="ba" text="Search">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -83,5 +80,11 @@
                <Image url="@../assert/google-maps-location-icon-14.jpg" />
            </image>
        </ImageView>
+      <Button layoutX="754.0" layoutY="120.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="39.0" prefWidth="159.0" style="-fx-background-color: green;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="485.0" layoutY="125.0" text="category" />
    </children>
 </AnchorPane>

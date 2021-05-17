@@ -24,6 +24,8 @@ public class AddSession implements SuperEntity{
         this.durationHrs = durationHrs;
     }
 
+
+
     public int getId() {
         return id;
     }
