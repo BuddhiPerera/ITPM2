@@ -8,7 +8,6 @@ import lk.sliit.itpmProject.dao.custom.SessionManageDAO;
 import lk.sliit.itpmProject.dao.custom.SessionManageNALecDAO;
 import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.entity.AddSession;
-import lk.sliit.itpmProject.entity.AddTag;
 import lk.sliit.itpmProject.entity.CustomEntity;
 import lk.sliit.itpmProject.entity.SessionManageNALec;
 
@@ -123,5 +122,27 @@ public class SessionManageBOImpl  implements SessionManageBO {
         ));
     }
 
+    @Override
+    public boolean deleteItem(String id) throws Exception {
+        return sessionManageDAO.delete(id);
+    }
 
+    @Override
+    public List<AddSessionDTO> findAllSessions() throws Exception {
+        List<AddSession> addSessionList = sessionManageDAO.findAll();
+        List<AddSessionDTO> addSessionDTOList = new ArrayList<>();
+        for(AddSession addSession:addSessionList){
+            addSessionDTOList.add(new AddSessionDTO(
+                    addSession.getId(),
+                    addSession.getSelectLecture(),
+                    addSession.getSelectTag(),
+                    addSession.getSelectedLecturer(),
+                    addSession.getSelectGroup(),
+                    addSession.getNoOfStudent(),
+                    addSession.getSelectSubject(),
+                    addSession.getDurationHrs()
+            ));
+        }
+        return addSessionDTOList;
+    }
 }

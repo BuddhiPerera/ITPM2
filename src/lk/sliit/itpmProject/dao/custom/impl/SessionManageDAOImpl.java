@@ -76,6 +76,6 @@ public class SessionManageDAOImpl implements SessionManageDAO {
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM addsession WHERE id = ?", s);
     }
 }

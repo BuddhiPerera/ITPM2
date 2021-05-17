@@ -89,8 +89,13 @@
             <Font name="System Bold" size="17.0" />
          </font></Button>
 
-      <Button fx:id="btnManage" layoutX="732.0" layoutY="595.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="38.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+      <Button fx:id="btnManage" layoutX="732.0" layoutY="595.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="38.0" prefWidth="173.0" style="-fx-background-color: #649292;" text="Manage Locations" textFill="WHITE">
 
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnManageSessionRooms" layoutX="923.0" layoutY="595.0" mnemonicParsing="false" onAction="#btnOnAction_ManageSessionRooms" prefHeight="38.0" prefWidth="216.0" style="-fx-background-color: #649292;" text="Manage Session Rooms" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

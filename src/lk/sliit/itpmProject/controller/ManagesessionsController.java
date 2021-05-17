@@ -3,7 +3,10 @@ package lk.sliit.itpmProject.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
@@ -14,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -216,5 +220,21 @@ public class ManagesessionsController implements Initializable {
     }
 
 
+    public void btnOnAction_Delete(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to delete this Detail?",
+                ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if(buttonType.get() == ButtonType.YES){
+            SessionTM selectedItem = tblManageSessions.getSelectionModel().getSelectedItem();
+            try{
+                sessionManageBO.deleteItem(selectedItem.getId());
+                tblManageSessions.getItems().remove(selectedItem);
+            }catch(Exception e){
+                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
+                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+            }
+        }
+    }
 }
 

@@ -25,4 +25,8 @@ public interface SessionManageBO extends SuperBO {
     List<ManageNotAvbTimeDTO> findAllData() throws Exception;
 
     void updateSession(AddSessionDTO addSessionDTO2) throws Exception;
+
+    boolean deleteItem(String id) throws Exception;
+
+    List<AddSessionDTO> findAllSessions() throws Exception;
 }

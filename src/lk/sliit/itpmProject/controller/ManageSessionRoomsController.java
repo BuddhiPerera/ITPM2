@@ -2,29 +2,46 @@ package lk.sliit.itpmProject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.sliit.itpmProject.business.BOFactory;
+import lk.sliit.itpmProject.business.BOTypes;
+import lk.sliit.itpmProject.business.custom.AddLocationsBO;
+import lk.sliit.itpmProject.business.custom.SessionManageBO;
+import lk.sliit.itpmProject.dto.AddLocationsDTO;
+import lk.sliit.itpmProject.dto.AddSessionDTO;
+import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 
-public class ManageSessionRoomsController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+public class ManageSessionRoomsController implements Initializable {
 
     @FXML
     private AnchorPane root;
+
+    @FXML
+    private TextArea txtSelectedSession;
+
+    @FXML
+    private Button btnSubmit;
+
+    @FXML
+    private Button btnClear;
 
     @FXML
     private ImageView iconHome;
@@ -40,6 +57,15 @@ public class ManageSessionRoomsController {
 
     @FXML
     private ImageView iconLocation;
+
+    @FXML
+    private JFXComboBox<String> cmbSelectSession;
+
+    @FXML
+    private JFXComboBox<String> cmbSelectRoom;
+
+    private final AddLocationsBO addLocationBO = BOFactory.getInstance().getBO(BOTypes.AddLocations);
+    private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -95,6 +121,38 @@ public class ManageSessionRoomsController {
 
     @FXML
     void initialize() {
+
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try{
+            List<AddLocationsDTO> addLocationsDTOList = addLocationBO.findAllLocations();
+            ObservableList<String> observableListRooms = cmbSelectRoom.getItems();
+            for(AddLocationsDTO addLocationsDTO: addLocationsDTOList){
+                observableListRooms.add(addLocationsDTO.getRoomName());
+            }
+        }catch(Exception e){
+
+        }
+
+        try{
+            List<AddSessionDTO> loadSessionDataDTOList = sessionManageBO.findAllSessions();
+            ObservableList<String> observableListSessions = cmbSelectSession.getItems();
+            for(AddSessionDTO addSessionDTO: loadSessionDataDTOList){
+                observableListSessions.add(addSessionDTO.getSelectGroup());
+            }
+        }catch(Exception e){
+
+        }
+    }
+
+    public void btnOnAction_Submit(ActionEvent actionEvent) {
+
+    }
+
+    public void btnOnAction_Clear(ActionEvent actionEvent) {
 
     }
 }
