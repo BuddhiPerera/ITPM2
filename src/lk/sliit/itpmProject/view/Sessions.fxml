@@ -54,12 +54,60 @@
             </Tab>
             <Tab style="-fx-background-color: #757575;" text="Parallel">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f1f3f3;" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f1f3f3;">
+                     <children>
+                        <TableView layoutX="34.0" layoutY="27.0" prefHeight="434.0" prefWidth="996.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" />
+                            <TableColumn prefWidth="117.0" text="ID" />
+                              <TableColumn prefWidth="127.0" text="Lecture 1" />
+                              <TableColumn prefWidth="119.0" text="Lecture 2" />
+                              <TableColumn prefWidth="133.0" text="Subject Code" />
+                              <TableColumn prefWidth="116.0" text="Subject" />
+                              <TableColumn prefWidth="126.0" text="Group ID" />
+                              <TableColumn prefWidth="125.0" text="Tag" />
+                          </columns>
+                        </TableView>
+                        <JFXButton layoutX="253.0" layoutY="503.0" onAction="#btnAddSessionOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="563.0" layoutY="503.0" prefHeight="38.0" prefWidth="150.0" style="-fx-background-color: #268104;" text="View" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </JFXButton>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab style="-fx-background-color: #757575;" text="Non Overlapping">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="44.0" layoutY="36.0" prefHeight="444.0" prefWidth="982.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" />
+                            <TableColumn prefWidth="112.0" text="ID" />
+                              <TableColumn prefWidth="112.0" text="Lecture 1" />
+                              <TableColumn prefWidth="112.0" text="Lecture 2" />
+                              <TableColumn prefWidth="112.0" text="Subject Code" />
+                              <TableColumn prefWidth="112.0" text="Subject" />
+                              <TableColumn prefWidth="112.0" text="Group ID" />
+                              <TableColumn prefWidth="112.0" text="Tag" />
+                          </columns>
+                        </TableView>
+                        <JFXButton layoutX="281.0" layoutY="510.0" onAction="#btnAddSessionOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="559.0" layoutY="510.0" prefHeight="38.0" prefWidth="150.0" style="-fx-background-color: #268104;" text="View" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </JFXButton>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab style="-fx-background-color: #757575;" text="NA Times -Lecturers">
