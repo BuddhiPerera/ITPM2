@@ -169,6 +169,7 @@ public class ManagesessionsController implements Initializable {
                     ));
                 }
             } catch (Exception e) {
+                System.out.println(e);
                 new Alert(Alert.AlertType.ERROR, "Something Something Went Wrong").show();
             }
         }
