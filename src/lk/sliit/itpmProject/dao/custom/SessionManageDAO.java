@@ -9,4 +9,6 @@ public interface SessionManageDAO extends CrudDAO<AddSession,String> {
     boolean save(AddSession addSession) throws Exception;
 
     int getLastNotAvbLectures() throws Exception;
+
+    void updateRoom(String val1, String val2) throws Exception;
 }

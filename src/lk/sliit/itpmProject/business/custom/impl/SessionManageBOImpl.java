@@ -41,7 +41,8 @@ public class SessionManageBOImpl  implements SessionManageBO {
                 addSessionDTO.getSelectGroup(),
                 addSessionDTO.getNoOfStudent(),
                 addSessionDTO.getSelectSubject(),
-                addSessionDTO.getDurationHrs()
+                addSessionDTO.getDurationHrs(),
+                addSessionDTO.getRoom()
         ));
     }
 
@@ -125,7 +126,9 @@ public class SessionManageBOImpl  implements SessionManageBO {
                 addSessionDTO.getSelectGroup(),
                 addSessionDTO.getNoOfStudent(),
                 addSessionDTO.getSelectSubject(),
-                addSessionDTO.getDurationHrs()
+                addSessionDTO.getDurationHrs(),
+                addSessionDTO.getRoom()
+
         ));
     }
 
@@ -172,6 +175,10 @@ public class SessionManageBOImpl  implements SessionManageBO {
         return dtos;
     }
 
+    @Override
+    public void saveRoom(String val1, String val2) throws Exception {
+        sessionManageDAO.updateRoom(val1,val2);
+    }
 
 
     @Override
@@ -187,7 +194,8 @@ public class SessionManageBOImpl  implements SessionManageBO {
                     addSession.getSelectGroup(),
                     addSession.getNoOfStudent(),
                     addSession.getSelectSubject(),
-                    addSession.getDurationHrs()
+                    addSession.getDurationHrs(),
+                    addSession.getRoom()
             ));
         }
         return addSessionDTOList;

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -127,6 +128,7 @@ public class ManageSessionRoomsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+       txtSelectedSession.setEditable(false);
         try{
             List<AddLocationsDTO> addLocationsDTOList = addLocationBO.findAllLocations();
             ObservableList<String> observableListRooms = cmbSelectRoom.getItems();
@@ -137,22 +139,46 @@ public class ManageSessionRoomsController implements Initializable {
 
         }
 
-        try{
-            List<AddSessionDTO> loadSessionDataDTOList = sessionManageBO.findAllSessions();
-            ObservableList<String> observableListSessions = cmbSelectSession.getItems();
-            for(AddSessionDTO addSessionDTO: loadSessionDataDTOList){
-                observableListSessions.add(addSessionDTO.getSelectGroup());
+        try {
+            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
+            ObservableList studentTMS2 = cmbSelectSession.getItems();
+            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
+
+                studentTMS2.add(Integer.valueOf(addSessionDTO.getId())+"-"+addSessionDTO.getLectureOne()+" "+
+                        addSessionDTO.getSubjectCode()+
+                        " "+addSessionDTO.getSubjectName()+" "+addSessionDTO.getGroupId());
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
+
     }
 
-    public void btnOnAction_Submit(ActionEvent actionEvent) {
+    public void btnOnAction_Submit(ActionEvent actionEvent)  {
+
+       String val1 = txtSelectedSession.getText();
+       String val2 = cmbSelectRoom.getValue();
+        String[] parts = val1.split("-");
+        String part1 = parts[0];
+
+
+        try {
+            sessionManageBO.saveRoom(part1, val2);
+            txtSelectedSession.clear();
+            new Alert(Alert.AlertType.INFORMATION,"Data Added").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+        }
 
     }
 
     public void btnOnAction_Clear(ActionEvent actionEvent) {
 
+    }
+
+    public void selectSessionOnAction(ActionEvent actionEvent) {
+        String cmb = cmbSelectSession.getValue();
+        txtSelectedSession.clear();
+        txtSelectedSession.setText(cmb);
     }
 }

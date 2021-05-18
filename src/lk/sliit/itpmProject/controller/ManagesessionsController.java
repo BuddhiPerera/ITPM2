@@ -311,7 +311,7 @@ public class ManagesessionsController implements Initializable {
                 tblManageSessions.getItems().remove(selectedItem);
             }catch(Exception e){
                 new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+                Logger.getLogger("").log(Level.SEVERE,null,e);
             }
         }
     }

@@ -61,7 +61,7 @@
             <Image url="@../assert/google-maps-location-icon-14.jpg" />
          </image>
       </ImageView>
-      <JFXComboBox fx:id="cmbSelectSession" layoutX="528.0" layoutY="219.0" prefHeight="31.0" prefWidth="289.0" />
+      <JFXComboBox fx:id="cmbSelectSession" layoutX="528.0" layoutY="219.0" onAction="#selectSessionOnAction" prefHeight="31.0" prefWidth="289.0" />
       <JFXComboBox fx:id="cmbSelectRoom" layoutX="528.0" layoutY="326.0" prefHeight="31.0" prefWidth="289.0" />
    </children>
 </AnchorPane>

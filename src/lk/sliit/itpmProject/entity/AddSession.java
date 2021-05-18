@@ -9,11 +9,12 @@ public class AddSession implements SuperEntity{
     int noOfStudent;
     String selectSubject;
     int durationHrs;
+    String room;
 
     public AddSession() {
     }
 
-    public AddSession(int id, String selectLecture, String selectTag, String selectedLecturer, String selectGroup, int noOfStudent, String selectSubject, int durationHrs) {
+    public AddSession(int id, String selectLecture, String selectTag, String selectedLecturer, String selectGroup, int noOfStudent, String selectSubject, int durationHrs, String room) {
         this.id = id;
         this.selectLecture = selectLecture;
         this.selectTag = selectTag;
@@ -22,9 +23,8 @@ public class AddSession implements SuperEntity{
         this.noOfStudent = noOfStudent;
         this.selectSubject = selectSubject;
         this.durationHrs = durationHrs;
+        this.room = room;
     }
-
-
 
     public int getId() {
         return id;
@@ -90,6 +90,14 @@ public class AddSession implements SuperEntity{
         this.durationHrs = durationHrs;
     }
 
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
     @Override
     public String toString() {
         return "AddSession{" +
@@ -101,6 +109,7 @@ public class AddSession implements SuperEntity{
                 ", noOfStudent=" + noOfStudent +
                 ", selectSubject='" + selectSubject + '\'' +
                 ", durationHrs=" + durationHrs +
+                ", room='" + room + '\'' +
                 '}';
     }
 }
