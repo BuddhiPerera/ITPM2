@@ -85,9 +85,9 @@ CREATE TABLE `AddSubject`
 CREATE TABLE `AddSession`
 (
     `id`               int         NOT NULL,
-    `lecture1`   varchar(70) NOT NULL,
+    `lecture1`   CHAR(70) NOT NULL,
     `SelectTag`        varchar(40) NOT NULL,
-    `lecture2` varchar(70) NOT NULL,
+    `lecture2` CHAR(70) NOT NULL,
     `SelectGroup`      varchar(50) NOT NULL,
     `NoOFStudent`      int(200)    NOT NULL,
     `SelectSubject`    varchar(40) NOT NULL,

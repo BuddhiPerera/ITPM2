@@ -122,7 +122,9 @@ public class SessionsController implements Initializable {
             ObservableList studentTMS2 = NaTimeLectureSessionIdTxt.getItems();
             for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
 
-                studentTMS2.add(Integer.valueOf(addSessionDTO.getId()));
+                studentTMS2.add(Integer.valueOf(addSessionDTO.getId())+"-"+addSessionDTO.getLectureOne()+" "+
+                        addSessionDTO.getSubjectCode()+
+                        " "+addSessionDTO.getSubjectName()+" "+addSessionDTO.getGroupId());
             }
         } catch (Exception e) {
 
@@ -228,6 +230,10 @@ public class SessionsController implements Initializable {
         String naTimeLectureGroupValue1 = String.valueOf(NaTimeLectureGroup.getValue());
         String naTimeLectureGroupValue = String.valueOf(v);
         String naTimeLectureSessionIdTxtValue = String.valueOf(NaTimeLectureSessionIdTxt.getValue());
+
+
+        String[] parts = naTimeLectureSessionIdTxtValue.split("-");
+        String part1 = parts[0];
         String naTimeLectureTxtText = NaTimeLectureTxt.getText();
 
 
@@ -236,7 +242,7 @@ public class SessionsController implements Initializable {
                 lectureComboValue,
                 naTimeLectureGroupValue1,
                 naTimeLectureGroupValue,
-                naTimeLectureSessionIdTxtValue,
+                part1,
                 naTimeLectureTxtText
         );
         try {

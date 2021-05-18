@@ -162,9 +162,7 @@ public class ManagesessionsController implements Initializable {
 
             tblManageSessions.getItems().clear();
             try {
-
                 List<LoadSessionDataDTO> loadSessionDataDTOList2 = sessionManageBO.loadSessionTableSearch(i, val);
-
                 ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
                 for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList2) {
                     sessionTMS.add(new SessionTM(
@@ -179,6 +177,7 @@ public class ManagesessionsController implements Initializable {
                     ));
                 }
             } catch (Exception e) {
+                System.out.println(e);
                 new Alert(Alert.AlertType.ERROR, "Something Something Went Wrong").show();
             }
         }

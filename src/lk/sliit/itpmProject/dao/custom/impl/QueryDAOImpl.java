@@ -32,29 +32,29 @@ public class QueryDAOImpl implements QueryDAO {
 
     @Override
     public List<CustomEntity> getInfoSelect(int i,String val) throws Exception {
+        val =val.trim();
         ResultSet rst = null;
         if(i==0){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where lecture1 ="+val);
+                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.`selectSubject` WHERE a.`lecture1`=?",val);
         }else if (i==1){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where lecture2 ="+val);
+                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where lecture2 =?",val);
         }else if (i==2){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubCode ="+val);
+                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubCode=?",val);
         }else if (i==3){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubName ="+val);
+                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubName =?",val);
         }else if (i==4){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SelectGroup ="+val);
+                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SelectGroup =?",val);
         }
-
 
         List<CustomEntity> al = new ArrayList<>();
         while (rst.next()){
