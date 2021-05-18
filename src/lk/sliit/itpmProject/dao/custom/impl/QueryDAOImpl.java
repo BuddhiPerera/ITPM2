@@ -55,7 +55,6 @@ public class QueryDAOImpl implements QueryDAO {
                     "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SelectGroup ="+val);
         }
 
-
         List<CustomEntity> al = new ArrayList<>();
         while (rst.next()){
             al.add(new CustomEntity(

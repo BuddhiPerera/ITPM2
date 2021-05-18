@@ -155,9 +155,7 @@ public class ManagesessionsController implements Initializable {
 
             tblManageSessions.getItems().clear();
             try {
-
                 List<LoadSessionDataDTO> loadSessionDataDTOList2 = sessionManageBO.loadSessionTableSearch(i, val);
-
                 ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
                 for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList2) {
                     sessionTMS.add(new SessionTM(
