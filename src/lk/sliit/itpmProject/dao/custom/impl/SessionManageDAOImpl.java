@@ -38,14 +38,17 @@ public class SessionManageDAOImpl implements SessionManageDAO {
                     rst.getString(5),
                     rst.getInt(6),
                     rst.getString(7),
-                    rst.getInt(8));
+                    rst.getInt(8),
+                    rst.getString(9)
+
+            );
         }
         return null;
     }
 
     @Override
     public boolean save(AddSession addSession) throws Exception {
-        return CrudUtil.execute("INSERT INTO addsession VALUES (?,?,?,?,?,?,?,?)",
+        return CrudUtil.execute("INSERT INTO addsession VALUES (?,?,?,?,?,?,?,?,?)",
                 addSession.getId(),
                 addSession.getSelectLecture(),
                 addSession.getSelectTag(),
@@ -53,7 +56,8 @@ public class SessionManageDAOImpl implements SessionManageDAO {
                 addSession.getSelectGroup(),
                 addSession.getNoOfStudent(),
                 addSession.getSelectSubject(),
-                addSession.getDurationHrs()
+                addSession.getDurationHrs(),
+                ""
         );
     }
 
@@ -69,9 +73,14 @@ public class SessionManageDAOImpl implements SessionManageDAO {
     }
 
     @Override
+    public void updateRoom(String val1, String val2) throws Exception {
+         CrudUtil.execute("UPDATE addsession SET room=? WHERE id=?", val2,val1);
+    }
+
+    @Override
     public boolean update(AddSession entity) throws Exception {
-        return CrudUtil.execute("UPDATE addsession SET lecture1=?, SelectTag=?, lecture2=? ,SelectGroup=?,NoOFStudent=?,SelectSubject=?,DurationHrs=? WHERE id=?", entity.getSelectLecture(), entity.getSelectTag(), entity.getSelectedLecturer()
-                , entity.getSelectGroup(),entity.getNoOfStudent(),entity.getSelectSubject(),entity.getDurationHrs(),entity.getId());
+        return CrudUtil.execute("UPDATE addsession SET lecture1=?, SelectTag=?, lecture2=? ,SelectGroup=?,NoOFStudent=?,SelectSubject=?,DurationHrs=?,room=? WHERE id=?", entity.getSelectLecture(), entity.getSelectTag(), entity.getSelectedLecturer()
+                , entity.getSelectGroup(),entity.getNoOfStudent(),entity.getSelectSubject(),entity.getDurationHrs(),"",entity.getId());
     }
 
     @Override

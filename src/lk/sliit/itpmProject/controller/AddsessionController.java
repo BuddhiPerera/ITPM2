@@ -161,7 +161,6 @@ public class AddsessionController implements Initializable {
 
 
                 String lec1 = cmb_selected_lecture.getText();
-                System.out.println(lec1);
 
                 String lec2 = "";
                 String yo[] = lec1.split(" ");
@@ -184,7 +183,8 @@ public class AddsessionController implements Initializable {
                         select_group,
                         No_of_Student,
                         select_Subject,
-                        select_duration_hrs
+                        select_duration_hrs,
+                        ""
                 );
 
                 try {
