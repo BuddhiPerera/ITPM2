@@ -142,6 +142,7 @@ public class ManagesessionsController implements Initializable {
         int i =-1;
         if(category == null){
             i= -1;
+
         }
         else if(category.equals("Lecture 1")){
             i=0;
@@ -155,6 +156,7 @@ public class ManagesessionsController implements Initializable {
             i=4;
         }
         if(val.equals("") || i == -1){
+
             new Alert(Alert.AlertType.ERROR, "Please Add Search Data").show();
         }else {
 
@@ -173,6 +175,7 @@ public class ManagesessionsController implements Initializable {
                             loadSessionDataDTO.getSubjectName(),
                             loadSessionDataDTO.getGroupId(),
                             loadSessionDataDTO.getTagName()
+
                     ));
                 }
             } catch (Exception e) {
