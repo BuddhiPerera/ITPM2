@@ -59,6 +59,7 @@ public class SessionsController implements Initializable {
     public JFXButton btnClearTeacher;
     public AnchorPane root1;
 
+    private final AddLocationsBO addLocationsBO= BOFactory.getInstance().getBO(BOTypes.AddLocations);
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
@@ -67,6 +68,9 @@ public class SessionsController implements Initializable {
     public TableView<SessionTM> tblParallel;
     public JFXTextField NaTimeLectureTxt1;
     public JFXTextField NaSGroupTxt;
+    public JFXComboBox NaTimeSROom;
+    public JFXTextField timeTxtRoom;
+    public JFXButton btnOnActionRoom;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -149,6 +153,16 @@ public class SessionsController implements Initializable {
             NaTimeLectureCombo.setValue("Select Name");
             for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
                 lecturerTMS.add(addLecturerDtO.getlName());
+            }
+        } catch (Exception e) {
+        }
+        try {
+            List<AddLocationsDTO> addLocationsDTOList = addLocationsBO.findAllLocations();
+
+            ObservableList<String> lecturerTMS = NaTimeSROom.getItems();
+            NaTimeSROom.setValue("Select Name");
+            for (AddLocationsDTO addLecturerDtO : addLocationsDTOList) {
+                lecturerTMS.add(addLecturerDtO.getRoomName());
             }
         } catch (Exception e) {
         }
@@ -415,6 +429,37 @@ public class SessionsController implements Initializable {
 
             sessionManageBO.saveNASessionSubGroup(addSessionNALectureDTO);
             new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void btnOnActionRoomOnAction(ActionEvent actionEvent) {
+
+        int maxCode = 0;
+        try {
+            int lastItemCode = sessionManageBO.getLastNARoom();
+            if (lastItemCode == 0) {
+                maxCode = 1;
+            } else {
+                maxCode = lastItemCode + 1;
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+
+        String lectureComboValu = String.valueOf(NaTimeSROom.getValue());
+        String naTimeLectureTxtText = timeTxtRoom.getText();
+
+        AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
+                maxCode,
+                lectureComboValu,
+                naTimeLectureTxtText
+        );
+        try {
+            sessionManageBO.saveNASessionRoom(addSessionNALectureDTO);
+            new Alert(Alert.AlertType.INFORMATION, "Room Added Successfully").show();
 
         } catch (Exception e) {
 

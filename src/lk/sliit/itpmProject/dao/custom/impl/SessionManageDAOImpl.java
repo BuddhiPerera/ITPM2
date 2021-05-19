@@ -98,6 +98,18 @@ public class SessionManageDAOImpl implements SessionManageDAO {
             return 0;
         }
     }
+
+    @Override
+    public int getLastNARoom() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM NotAvbSessionRooms ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+
     @Override
     public boolean update(AddSession entity) throws Exception {
         return CrudUtil.execute("UPDATE addsession SET lecture1=?, SelectTag=?, lecture2=? ,SelectGroup=?,NoOFStudent=?,SelectSubject=?,DurationHrs=?,room=? WHERE id=?", entity.getSelectLecture(), entity.getSelectTag(), entity.getSelectedLecturer()

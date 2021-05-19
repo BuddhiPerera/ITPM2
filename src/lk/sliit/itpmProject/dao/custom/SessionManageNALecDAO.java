@@ -9,4 +9,6 @@ public interface SessionManageNALecDAO extends CrudDAO<SessionManageNALec, Strin
     boolean saveGroup(SessionManageNALec sessionManageNALec) throws Exception;
 
     boolean saveSubGroup(SessionManageNALec sessionManageNALec) throws Exception;
+
+    boolean saveNASessionRoom(SessionManageNALec sessionManageNALec) throws Exception;
 }

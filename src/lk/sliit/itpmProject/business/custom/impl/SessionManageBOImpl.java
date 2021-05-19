@@ -244,6 +244,20 @@ public class SessionManageBOImpl  implements SessionManageBO {
         ));
     }
 
+    @Override
+    public int getLastNARoom() throws Exception {
+        return sessionManageDAO.getLastNARoom();
+    }
+
+    @Override
+    public void saveNASessionRoom(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception {
+        sessionManageNALecDAO.saveNASessionRoom(new SessionManageNALec(
+                addSessionNALectureDTO.getMaxCode(),
+                addSessionNALectureDTO.getLectureComboValue(),
+                addSessionNALectureDTO.getNaTimeLectureTxtText()
+        ));
+    }
+
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws Exception {

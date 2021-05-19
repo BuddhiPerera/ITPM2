@@ -82,4 +82,13 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
                 entity.getNaTimeLectureTxtText()
         );
     }
+
+    @Override
+    public boolean saveNASessionRoom(SessionManageNALec sessionManageNALec) throws Exception {
+        return CrudUtil.execute("INSERT INTO NotAvbSessionRooms VALUES (?,?,?)",
+                sessionManageNALec.getMaxCode(),
+                sessionManageNALec.getLectureComboValue(),
+                sessionManageNALec.getNaTimeLectureTxtText()
+        );
+    }
 }

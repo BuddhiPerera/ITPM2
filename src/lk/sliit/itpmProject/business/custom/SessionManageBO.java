@@ -48,4 +48,8 @@ public interface SessionManageBO extends SuperBO {
     int getLastNotAvbSubGroups() throws Exception;
 
     void saveNASessionSubGroup(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
+
+    int getLastNARoom() throws Exception;
+
+    void saveNASessionRoom(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
 }
