@@ -16,7 +16,7 @@ public class DBConnection {
 
     public static String username;
     public static String db;
-    public static  String password;
+    public static String password;
     public static String host;
     public static String port;
 
@@ -34,27 +34,27 @@ public class DBConnection {
             properties.load(fis);
             fis.close();
 
-            String ip=properties.getProperty("stdManagement.ip");
-            host="localhost";
-            String port=properties.getProperty("stdManagement.port");
+            String ip = properties.getProperty("stdManagement.ip");
+            host = "localhost";
+            String port = properties.getProperty("stdManagement.port");
             this.port = "3306";
 
-            String user= DEPCrypt.decode(properties.getProperty("stdManagement.user"),"123");
-            username="root";
-            String password=DEPCrypt.decode(properties.getProperty("stdManagement.password"),"123");
+            String user = DEPCrypt.decode(properties.getProperty("stdManagement.user"), "123");
+            username = "root";
+            String password = DEPCrypt.decode(properties.getProperty("stdManagement.password"), "123");
 
-            this.password="dulshan";
-            String db=properties.getProperty("stdManagement.db");
+            this.password = "dulshan";
+            String db = properties.getProperty("stdManagement.db");
 
-            connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+db+"?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "dulshan");
+            connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + db + "?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "dulshan");
 
             PreparedStatement pstm = connection.prepareStatement("SHOW TABLES");
             ResultSet resultSet = pstm.executeQuery();
-            if (!resultSet.next()){
+            if (!resultSet.next()) {
                 File dbScriptFile = new File("timeTable.sql");
-                if(!dbScriptFile.exists()){
-                    new Alert(Alert.AlertType.INFORMATION,"Cannot Find backup File");
-                    throw  new RuntimeException("Unable to find file");
+                if (!dbScriptFile.exists()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Cannot Find backup File");
+                    throw new RuntimeException("Unable to find file");
                 }
                 StringBuilder sb = new StringBuilder();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(dbScriptFile)));
