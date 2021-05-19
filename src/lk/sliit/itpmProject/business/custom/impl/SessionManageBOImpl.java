@@ -50,6 +50,7 @@ public class SessionManageBOImpl  implements SessionManageBO {
     public List<LoadSessionDataDTO> loadSessionTable() throws Exception {
         List<CustomEntity> all = queryDAO.getInfo();
         List<LoadSessionDataDTO> dtos = new ArrayList<>();
+
         for (CustomEntity customEntity : all) {
             dtos.add(new LoadSessionDataDTO(
                     customEntity.getId(),

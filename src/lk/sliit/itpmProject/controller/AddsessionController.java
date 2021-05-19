@@ -160,6 +160,9 @@ public class AddsessionController implements Initializable {
             String select_tag = cmb_select_tag.getValue();
             String select_group = cmb_select_group.getValue();
             String select_Subject = cmb_select_subject.getValue();
+            String[] parts = select_Subject.split("-");
+            String part1 = parts[0];
+            select_Subject =part1;
             int select_duration_hrs = Integer.parseInt(cmb_select_duration_hrs.getText());
 
 

@@ -91,6 +91,7 @@ public class ManagesessionsController implements Initializable {
 
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
+
             ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
             for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
                 sessionTMS.add(new SessionTM(
@@ -119,6 +120,7 @@ public class ManagesessionsController implements Initializable {
         tblManageSessions.getItems().clear();
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
+
             ObservableList<SessionTM> sessionTMS = tblManageSessions.getItems();
             for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
                 sessionTMS.add(new SessionTM(
