@@ -2,9 +2,13 @@ package lk.sliit.itpmProject.dao.custom.impl;
 
 import lk.sliit.itpmProject.dao.CrudUtil;
 import lk.sliit.itpmProject.dao.custom.ConsecutiveSessionsDAO;
+import lk.sliit.itpmProject.entity.AddSession;
+import lk.sliit.itpmProject.entity.AddSubject;
 import lk.sliit.itpmProject.entity.ConsecutiveSessions;
+import lk.sliit.itpmProject.entity.CustomEntity;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsecutiveSessionsDAOImpl implements ConsecutiveSessionsDAO {
@@ -111,5 +115,24 @@ public class ConsecutiveSessionsDAOImpl implements ConsecutiveSessionsDAO {
             );
         }
 
+    }
+
+    @Override
+    public List<ConsecutiveSessions> loadConsSessionTable() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM consecutive");
+
+        List<ConsecutiveSessions> addSubjectList = new ArrayList<>();
+        while(resultSet.next()){
+            addSubjectList.add(new ConsecutiveSessions(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8)
+            ));
+        }
+        return addSubjectList;
     }
 }

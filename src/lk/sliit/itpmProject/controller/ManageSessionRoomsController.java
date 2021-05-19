@@ -2,8 +2,10 @@ package lk.sliit.itpmProject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.TranslateTransition;
@@ -15,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,46 +28,93 @@ import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLocationsBO;
 import lk.sliit.itpmProject.business.custom.SessionManageBO;
 import lk.sliit.itpmProject.dto.AddLocationsDTO;
-import lk.sliit.itpmProject.dto.AddSessionDTO;
 import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 
 public class ManageSessionRoomsController implements Initializable {
 
+    public TextArea selectedSessionTxt;
+    public JFXComboBox selectSessionW;
+    public JFXComboBox selectTAgW;
+    public JFXComboBox selectTAgWRoom;
+    public JFXComboBox selectLectureW;
+    public JFXComboBox selectSessionWRoom;
+    public JFXComboBox selectSubjectWRoom;
+    public JFXComboBox selectSubjectW;
+    public JFXComboBox selectGroupWRoom;
+    public JFXComboBox selectGroupW;
+    public JFXComboBox selectLectureWRoom;
+    public JFXComboBox selectCSession;
+    public JFXComboBox scelectCSeasonRoom;
     @FXML
     private AnchorPane root;
 
-    @FXML
-    private TextArea txtSelectedSession;
 
-    @FXML
-    private Button btnSubmit;
-
-    @FXML
-    private Button btnClear;
-
-    @FXML
-    private ImageView iconHome;
-
-    @FXML
-    private ImageView iconLecture;
-
-    @FXML
-    private ImageView iconStudent;
-
-    @FXML
-    private ImageView iconTimeTable;
-
-    @FXML
-    private ImageView iconLocation;
-
-    @FXML
-    private JFXComboBox<String> cmbSelectSession;
-
-    @FXML
-    private JFXComboBox<String> cmbSelectRoom;
+    private final AddLocationsBO addLocationsBO = BOFactory.getInstance().getBO(BOTypes.AddLocations);
 
     private final AddLocationsBO addLocationBO = BOFactory.getInstance().getBO(BOTypes.AddLocations);
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        try {
+            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
+            ObservableList studentTMS2 = selectSessionW.getItems();
+            ObservableList selectTAgW2 = selectTAgW.getItems();
+            ObservableList selectLecture2 = selectLectureW.getItems();
+            ObservableList selectGroupW1 = selectGroupW.getItems();
+            ObservableList selectSubjectWq = selectSubjectW.getItems();
+            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
+                studentTMS2.add((addSessionDTO.getSubjectName()));
+                selectTAgW2.add((addSessionDTO.getTagName()));
+                selectGroupW1.add((addSessionDTO.getGroupId()));
+                selectLecture2.add((addSessionDTO.getLectureOne()));
+                selectSubjectWq.add((addSessionDTO.getSubjectCode()));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadConsSessionTable();
+            ObservableList studentTMS2 = selectCSession.getItems();
+            Set<String> strings = new HashSet<>();
+
+            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
+                if(!strings.contains(addSessionDTO.getId())){
+                    strings.add(addSessionDTO.getId());
+                    studentTMS2.add((addSessionDTO.getId() +"-" +addSessionDTO.getSubjectName()));
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            List<AddLocationsDTO> addLocationsDTOList = addLocationsBO.findAllLocations();
+
+            ObservableList<String> lecturerTMS = selectSessionWRoom.getItems();
+            ObservableList<String> lecturerTMS2 = selectTAgWRoom.getItems();
+            ObservableList<String> lecturerTMS3 = selectLectureWRoom.getItems();
+            ObservableList<String> lecturerTMS4 = selectGroupWRoom.getItems();
+            ObservableList<String> lecturerTMS5 = selectSubjectWRoom.getItems();
+            ObservableList<String> lecturerTMS6 = scelectCSeasonRoom.getItems();
+
+            for (AddLocationsDTO addLecturerDtO : addLocationsDTOList) {
+                lecturerTMS.add(addLecturerDtO.getRoomName());
+                lecturerTMS2.add(addLecturerDtO.getRoomName());
+                lecturerTMS3.add(addLecturerDtO.getRoomName());
+                lecturerTMS4.add(addLecturerDtO.getRoomName());
+                lecturerTMS5.add(addLecturerDtO.getRoomName());
+                lecturerTMS6.add(addLecturerDtO.getRoomName());
+            }
+        } catch (Exception e) {
+        }
+
+
+    }
+
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -110,75 +158,215 @@ public class ManageSessionRoomsController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
 
+    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
     }
 
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
+    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
     }
 
-    @FXML
-    void initialize() {
+    public void btnSubmitOnAction(ActionEvent actionEvent) {
+        String val1 = (String) selectSessionW.getValue();
+        String val2 = (String) selectTAgW.getValue();
+        String val3 = (String) selectLectureW.getValue();
+        String val4 = (String) selectGroupW.getValue();
+        String val5 = (String) selectSubjectW.getValue();
+        String val6 = (String) selectCSession.getValue();
+        int i = 0;
 
-
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-       txtSelectedSession.setEditable(false);
-        try{
-            List<AddLocationsDTO> addLocationsDTOList = addLocationBO.findAllLocations();
-            ObservableList<String> observableListRooms = cmbSelectRoom.getItems();
-            for(AddLocationsDTO addLocationsDTO: addLocationsDTOList){
-                observableListRooms.add(addLocationsDTO.getRoomName());
+        if (val1 != null) {
+            i = 3;
+            String val1R = (String) selectLectureWRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateLectureRoom(val3, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
             }
-        }catch(Exception e){
+//            /////////////////////////////
 
-        }
-
-        try {
-            List<LoadSessionDataDTO> addStudentDTOList = sessionManageBO.loadSessionTable();
-            ObservableList studentTMS2 = cmbSelectSession.getItems();
-            for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
-
-                studentTMS2.add(Integer.valueOf(addSessionDTO.getId())+"-"+addSessionDTO.getLectureOne()+" "+
-                        addSessionDTO.getSubjectCode()+
-                        " "+addSessionDTO.getSubjectName()+" "+addSessionDTO.getGroupId());
+        } else if (val2 != null) {
+            i = 2;
+            String val1R = (String) selectTAgWRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateTagRoom(val2, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
             }
-        } catch (Exception e) {
+        } else if (val3 != null) {
+            i = 1;
+            String val1R = (String) selectSessionWRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateSessionRoom(val1, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
+            }
+        } else if (val4 != null) {
+            i = 4;
+            String val1R = (String) selectGroupWRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateGroupRoom(val4, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
+            }
+        } else if (val5 != null) {
+            i = 5;
+            String val1R = (String) selectSubjectWRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateSubjectRoom(val5, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
+            }
+
+
+        } else if (val6 != null) {
+            i = 6;
+            String val1R = (String) scelectCSeasonRoom.getValue();
+            if (val1R == null) {
+                new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            } else {
+                try {
+                    sessionManageBO.setUpdateConstRoom(val6, val1R);
+                    new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                }
+            }
+
 
         }
 
+
     }
 
-    public void btnOnAction_Submit(ActionEvent actionEvent)  {
+    public void selectSessionWOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
 
-       String val1 = txtSelectedSession.getText();
-       String val2 = cmbSelectRoom.getValue();
-        String[] parts = val1.split("-");
-        String part1 = parts[0];
-
-
-        try {
-            sessionManageBO.saveRoom(part1, val2);
-            txtSelectedSession.clear();
-            new Alert(Alert.AlertType.INFORMATION,"Data Added").show();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+    void clickEve() {
+        String val = "";
+        String val1 = (String) selectSessionWRoom.getValue();
+        String val2 = (String) selectTAgW.getValue();
+        String val3 = (String) selectTAgWRoom.getValue();
+        String val4 = (String) selectLectureW.getValue();
+        String val5 = (String) selectLectureWRoom.getValue();
+        String val6 = (String) selectGroupW.getValue();
+        String val7 = (String) selectGroupWRoom.getValue();
+        String val8 = (String) selectSubjectW.getValue();
+        String val9 = (String) selectSubjectWRoom.getValue();
+        String val10 = (String) selectSessionW.getValue();
+        String val11 = (String) selectCSession.getValue();
+        String val12 = (String) scelectCSeasonRoom.getValue();
+        if (val1 == null) {
+            val1 = "";
         }
-
+        if (val2 == null) {
+            val2 = "";
+        }
+        if (val3 == null) {
+            val3 = "";
+        }
+        if (val4 == null) {
+            val4 = "";
+        }
+        if (val5 == null) {
+            val5 = "";
+        }
+        if (val6 == null) {
+            val6 = "";
+        }
+        if (val7 == null) {
+            val7 = "";
+        }
+        if (val8 == null) {
+            val8 = "";
+        }
+        if (val9 == null) {
+            val9 = "";
+        }
+        if (val10 == null) {
+            val10 = "";
+        }
+        if (val11 == null) {
+            val11 = "";
+        }
+        if (val12 == null) {
+            val12 = "";
+        }
+        val = (String) val10 + " - " + val1 + " , "
+                + val2 + " - " + val3 + " , "
+                + val4 + " - " + val5 + " , "
+                + val6 + " - " + val7 + " , "
+                + val8 + " - " + val9 + " , "
+                + val11 + " - " + val12;
+        selectedSessionTxt.setText(val);
     }
 
-    public void btnOnAction_Clear(ActionEvent actionEvent) {
-
+    public void selectTAgWOnAction(ActionEvent actionEvent) {
+        clickEve();
     }
 
-    public void selectSessionOnAction(ActionEvent actionEvent) {
-        String cmb = cmbSelectSession.getValue();
-        txtSelectedSession.clear();
-        txtSelectedSession.setText(cmb);
+    public void selectSessionWRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectTAgWRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectLectureWOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectLectureWRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectGroupWOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectGroupWRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectSubjectWOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectSubjectWRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void scelectCSessonRoomOnAction(ActionEvent actionEvent) {
+        clickEve();
+    }
+
+    public void selectCSessionOnActon(ActionEvent actionEvent) {
+        clickEve();
     }
 }

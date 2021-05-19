@@ -17,4 +17,16 @@ public interface SessionManageDAO extends CrudDAO<AddSession,String> {
     int getLastNotAvbSubGroups()throws Exception;
 
     int getLastNARoom() throws Exception;
+
+    void setUpdateSessionRoom(String val1, String val1R) throws Exception;
+
+    void setUpdateTagRoom(String val2, String val1R)throws Exception;
+
+    void setUpdateLectRoom(String val3, String val1R) throws Exception;
+
+    void setUpdateGroupRoom(String val4, String val1R) throws Exception;
+
+    void setUpdateSubjectRoom(String val5, String val1R) throws Exception;
+
+    void setUpdateConstRoom(String val6, String val1R) throws Exception;
 }

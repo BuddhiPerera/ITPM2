@@ -258,6 +258,55 @@ public class SessionManageBOImpl  implements SessionManageBO {
         ));
     }
 
+    @Override
+    public void setUpdateSessionRoom(String val1, String val1R) throws Exception {
+        sessionManageDAO.setUpdateSessionRoom( val1,  val1R);
+    }
+
+    @Override
+    public void setUpdateTagRoom(String val2, String val1R) throws Exception {
+        sessionManageDAO.setUpdateTagRoom( val2,  val1R);
+
+    }
+
+    @Override
+    public void setUpdateLectureRoom(String val3, String val1R) throws Exception {
+        sessionManageDAO.setUpdateLectRoom( val3,  val1R);
+    }
+
+    @Override
+    public void setUpdateGroupRoom(String val4, String val1R) throws Exception {
+        sessionManageDAO.setUpdateGroupRoom( val4,  val1R);
+    }
+
+    @Override
+    public void setUpdateSubjectRoom(String val5, String val1R) throws Exception {
+        sessionManageDAO.setUpdateSubjectRoom( val5,  val1R);
+    }
+
+    @Override
+    public List<LoadSessionDataDTO> loadConsSessionTable() throws Exception {
+        List<ConsecutiveSessions> all = consecutiveSessionsDAO.loadConsSessionTable();
+        List<LoadSessionDataDTO> dtos = new ArrayList<>();
+        for (ConsecutiveSessions customEntity : all) {
+            dtos.add(new LoadSessionDataDTO(
+                    customEntity.getId(),
+                    customEntity.getLectureOne(),
+                    customEntity.getLectureTwo(),
+                    customEntity.getSubjectCode(),
+                    customEntity.getSubjectName(),
+                    customEntity.getGroupId(),
+                    customEntity.getTagName()
+            ));
+        }
+        return dtos;
+    }
+
+    @Override
+    public void setUpdateConstRoom(String val6, String val1R) throws Exception {
+        sessionManageDAO.setUpdateConstRoom( val6,  val1R);
+    }
+
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws Exception {

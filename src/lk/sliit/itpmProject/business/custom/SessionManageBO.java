@@ -52,4 +52,18 @@ public interface SessionManageBO extends SuperBO {
     int getLastNARoom() throws Exception;
 
     void saveNASessionRoom(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
+
+    void setUpdateSessionRoom(String val1, String val1R) throws Exception;
+
+    void setUpdateTagRoom(String val2, String val1R)throws Exception;
+
+    void setUpdateLectureRoom(String val3, String val1R) throws Exception;
+
+    void setUpdateGroupRoom(String val4, String val1R)throws Exception;
+
+    void setUpdateSubjectRoom(String val5, String val1R)throws Exception;
+
+    List<LoadSessionDataDTO> loadConsSessionTable()throws Exception;
+
+    void setUpdateConstRoom(String val6, String val1R)throws Exception;
 }
