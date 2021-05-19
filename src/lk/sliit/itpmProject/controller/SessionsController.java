@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,11 +50,11 @@ public class SessionsController implements Initializable {
     @FXML
     public JFXButton btnViewTeacher;
     @FXML
-    public JFXComboBox NaTimeLectureSessionIdTxt;
+    public JFXComboBox<String> NaTimeLectureSessionIdTxt;
     @FXML
     public JFXComboBox NaTimeLectureSubGroupTxt;
     @FXML
-    public JFXComboBox NaTimeLectureGroup;
+    public JFXComboBox<String> NaTimeLectureGroup;
     @FXML
     public JFXButton btnClearTeacher;
     public AnchorPane root1;
@@ -64,6 +65,8 @@ public class SessionsController implements Initializable {
     public TableView<SessionTM> tblConsecutive;
     public TableView<SessionTM> tblNonOverLapping;
     public TableView<SessionTM> tblParallel;
+    public JFXTextField NaTimeLectureTxt1;
+    public JFXTextField NaSGroupTxt;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -98,7 +101,7 @@ public class SessionsController implements Initializable {
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
             ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
-            ObservableList<SessionTM> tblNonOverLap= tblNonOverLapping.getItems();
+            ObservableList<SessionTM> tblNonOverLap = tblNonOverLapping.getItems();
             ObservableList<SessionTM> tblPar = tblParallel.getItems();
             for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
                 sessionTMS.add(new SessionTM(
@@ -167,9 +170,9 @@ public class SessionsController implements Initializable {
             ObservableList studentTMS2 = NaTimeLectureSessionIdTxt.getItems();
             for (LoadSessionDataDTO addSessionDTO : addStudentDTOList) {
 
-                studentTMS2.add(Integer.valueOf(addSessionDTO.getId())+"-"+addSessionDTO.getLectureOne()+" "+
-                        addSessionDTO.getSubjectCode()+
-                        " "+addSessionDTO.getSubjectName()+" "+addSessionDTO.getGroupId());
+                studentTMS2.add(Integer.valueOf(addSessionDTO.getId()) + "-" + addSessionDTO.getLectureOne() + " " +
+                        addSessionDTO.getSubjectCode() +
+                        " " + addSessionDTO.getSubjectName() + " " + addSessionDTO.getGroupId());
             }
         } catch (Exception e) {
 
@@ -182,17 +185,17 @@ public class SessionsController implements Initializable {
             List<LoadSessionDataDTO> dtos = new ArrayList<>();
             ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
             for (SessionTM customEntity : sessionTMS) {
-             if(customEntity.getCheckBox().isSelected()){
-                 dtos.add(new LoadSessionDataDTO(
-                         customEntity.getId(),
-                         customEntity.getLectureOne(),
-                         customEntity.getLectureTwo(),
-                         customEntity.getSubjectCode(),
-                         customEntity.getSubjectName(),
-                         customEntity.getGroupId(),
-                         customEntity.getTagName()
-                 ));
-             }
+                if (customEntity.getCheckBox().isSelected()) {
+                    dtos.add(new LoadSessionDataDTO(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+                }
             }
             sessionManageBO.saveNATimeAlocations(dtos);
             new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
@@ -270,24 +273,15 @@ public class SessionsController implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
-        String v = String.valueOf((NaTimeLectureSubGroupTxt.getValue()));
+
+
         String lectureComboValue = NaTimeLectureCombo.getValue();
-        String naTimeLectureGroupValue1 = String.valueOf(NaTimeLectureGroup.getValue());
-        String naTimeLectureGroupValue = String.valueOf(v);
-        String naTimeLectureSessionIdTxtValue = String.valueOf(NaTimeLectureSessionIdTxt.getValue());
-
-
-        String[] parts = naTimeLectureSessionIdTxtValue.split("-");
-        String part1 = parts[0];
         String naTimeLectureTxtText = NaTimeLectureTxt.getText();
 
 
         AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
                 maxCode,
                 lectureComboValue,
-                naTimeLectureGroupValue1,
-                naTimeLectureGroupValue,
-                part1,
                 naTimeLectureTxtText
         );
         try {
@@ -365,4 +359,65 @@ public class SessionsController implements Initializable {
         }
     }
 
+    public void submitGroupNa(ActionEvent event) {
+        int maxCode = 0;
+        try {
+            int lastItemCode = sessionManageBO.getLastNotAvbGroups();
+            if (lastItemCode == 0) {
+                maxCode = 1;
+            } else {
+                maxCode = lastItemCode + 1;
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+
+        String lectureComboValu = NaTimeLectureGroup.getValue();
+        String naTimeLectureTxtText = NaTimeLectureTxt1.getText();
+
+        AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
+                maxCode,
+                lectureComboValu,
+                naTimeLectureTxtText
+        );
+        try {
+
+            sessionManageBO.saveNASessionGroup(addSessionNALectureDTO);
+            new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void submitSGroupOnAction(ActionEvent actionEvent) {
+        int maxCode = 0;
+        try {
+            int lastItemCode = sessionManageBO.getLastNotAvbSubGroups();
+            if (lastItemCode == 0) {
+                maxCode = 1;
+            } else {
+                maxCode = lastItemCode + 1;
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+        int s = (int) NaTimeLectureSubGroupTxt.getValue();
+        String lectureComboValu = String.valueOf(s);
+        String naTimeLectureTxtText = NaSGroupTxt.getText();
+
+        AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
+                maxCode,
+                lectureComboValu,
+                naTimeLectureTxtText
+        );
+        try {
+
+            sessionManageBO.saveNASessionSubGroup(addSessionNALectureDTO);
+            new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
+
+        } catch (Exception e) {
+
+        }
+    }
 }

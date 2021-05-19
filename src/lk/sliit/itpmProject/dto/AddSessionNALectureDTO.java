@@ -8,7 +8,10 @@ public class AddSessionNALectureDTO {
     String naTimeLectureSessionIdTxtValue;
     String naTimeLectureTxtText;
 
-    public AddSessionNALectureDTO() {
+    public AddSessionNALectureDTO(int maxCode, String lectureComboValue, String naTimeLectureTxtText) {
+        this.maxCode = maxCode;
+        this.lectureComboValue = lectureComboValue;
+        this.naTimeLectureTxtText = naTimeLectureTxtText;
     }
 
     public AddSessionNALectureDTO(int maxCode, String lectureComboValue, String naTimeLectureGroupValue1, String naTimeLectureGroupValue, String naTimeLectureSessionIdTxtValue, String naTimeLectureTxtText) {

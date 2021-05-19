@@ -89,12 +89,9 @@ public class SessionManageBOImpl  implements SessionManageBO {
 
     @Override
     public void saveNASessionLec(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception {
-        sessionManageNALecDAO.save(new SessionManageNALec(
+        sessionManageNALecDAO.saveLec(new SessionManageNALec(
                 addSessionNALectureDTO.getMaxCode(),
                 addSessionNALectureDTO.getLectureComboValue(),
-                addSessionNALectureDTO.getNaTimeLectureGroupValue1(),
-                addSessionNALectureDTO.getNaTimeLectureGroupValue(),
-                addSessionNALectureDTO.getNaTimeLectureSessionIdTxtValue(),
                 addSessionNALectureDTO.getNaTimeLectureTxtText()
         ));
     }
@@ -217,6 +214,34 @@ public class SessionManageBOImpl  implements SessionManageBO {
         }
         consecutiveSessionsDAO.savetblNonOverLapping(consecutiveSessions);
 
+    }
+
+    @Override
+    public void saveNASessionGroup(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception {
+        sessionManageNALecDAO.saveGroup(new SessionManageNALec(
+                addSessionNALectureDTO.getMaxCode(),
+                addSessionNALectureDTO.getLectureComboValue(),
+                addSessionNALectureDTO.getNaTimeLectureTxtText()
+        ));
+    }
+
+    @Override
+    public int getLastNotAvbGroups() throws Exception {
+        return sessionManageDAO.getLastNotAvbGroups();
+    }
+
+    @Override
+    public int getLastNotAvbSubGroups() throws Exception {
+        return sessionManageDAO.getLastNotAvbSubGroups();
+    }
+
+    @Override
+    public void saveNASessionSubGroup(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception {
+        sessionManageNALecDAO.saveSubGroup(new SessionManageNALec(
+                addSessionNALectureDTO.getMaxCode(),
+                addSessionNALectureDTO.getLectureComboValue(),
+                addSessionNALectureDTO.getNaTimeLectureTxtText()
+        ));
     }
 
 

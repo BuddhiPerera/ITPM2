@@ -54,4 +54,32 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
     public boolean delete(String s) throws Exception {
         return false;
     }
+
+    @Override
+    public boolean saveLec(SessionManageNALec entity) throws Exception {
+        return CrudUtil.execute("INSERT INTO NotAvbSessionLec VALUES (?,?,?)",
+                entity.getMaxCode(),
+                entity.getLectureComboValue(),
+                entity.getNaTimeLectureTxtText()
+        );
+    }
+
+    @Override
+    public boolean saveGroup(SessionManageNALec entity) throws Exception {
+        System.out.println(entity);
+        return CrudUtil.execute("INSERT INTO NotAvbSessionGroup VALUES (?,?,?)",
+                entity.getMaxCode(),
+                entity.getLectureComboValue(),
+                entity.getNaTimeLectureTxtText()
+        );
+    }
+
+    @Override
+    public boolean saveSubGroup(SessionManageNALec entity) throws Exception {
+        return CrudUtil.execute("INSERT INTO NotAvbSessionSibGroup VALUES (?,?,?)",
+                entity.getMaxCode(),
+                entity.getLectureComboValue(),
+                entity.getNaTimeLectureTxtText()
+        );
+    }
 }

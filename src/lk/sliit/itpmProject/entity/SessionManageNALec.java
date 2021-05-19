@@ -20,6 +20,12 @@ public class SessionManageNALec implements SuperEntity {
     public SessionManageNALec() {
     }
 
+    public SessionManageNALec(int maxCode, String lectureComboValue, String naTimeLectureTxtText) {
+        this.maxCode = maxCode;
+        this.lectureComboValue = lectureComboValue;
+        this.naTimeLectureTxtText = naTimeLectureTxtText;
+    }
+
     public int getMaxCode() {
         return maxCode;
     }

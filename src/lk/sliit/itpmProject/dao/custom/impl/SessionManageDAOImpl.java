@@ -78,6 +78,27 @@ public class SessionManageDAOImpl implements SessionManageDAO {
     }
 
     @Override
+    public int getLastNotAvbGroups() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM NotAvbSessionGroup ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getLastNotAvbSubGroups() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM NotAvbSessionSibGroup ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+    @Override
     public boolean update(AddSession entity) throws Exception {
         return CrudUtil.execute("UPDATE addsession SET lecture1=?, SelectTag=?, lecture2=? ,SelectGroup=?,NoOFStudent=?,SelectSubject=?,DurationHrs=?,room=? WHERE id=?", entity.getSelectLecture(), entity.getSelectTag(), entity.getSelectedLecturer()
                 , entity.getSelectGroup(),entity.getNoOfStudent(),entity.getSelectSubject(),entity.getDurationHrs(),"",entity.getId());

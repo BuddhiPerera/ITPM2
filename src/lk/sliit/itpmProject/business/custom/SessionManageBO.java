@@ -40,4 +40,12 @@ public interface SessionManageBO extends SuperBO {
     void savetblParallel(List<LoadSessionDataDTO> dtos) throws Exception;
 
     void savetblNonOverLapping(List<LoadSessionDataDTO> dtos) throws Exception;
+
+    void saveNASessionGroup(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
+
+    int getLastNotAvbGroups() throws Exception;
+
+    int getLastNotAvbSubGroups() throws Exception;
+
+    void saveNASessionSubGroup(AddSessionNALectureDTO addSessionNALectureDTO) throws Exception;
 }
