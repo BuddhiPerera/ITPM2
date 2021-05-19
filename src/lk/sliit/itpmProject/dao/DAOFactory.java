@@ -8,33 +8,33 @@ public class DAOFactory {
 
     private static DAOFactory daoFactory;
 
-    private DAOFactory(){
+    private DAOFactory() {
 
     }
 
-    public static DAOFactory getInstance(){
-        return (daoFactory == null)? (daoFactory = new DAOFactory()): daoFactory;
+    public static DAOFactory getInstance() {
+        return (daoFactory == null) ? (daoFactory = new DAOFactory()) : daoFactory;
     }
 
-    public <T extends SuperDAO> T getDAO(DAOTypes daoTypes){
-        switch (daoTypes){
+    public <T extends SuperDAO> T getDAO(DAOTypes daoTypes) {
+        switch (daoTypes) {
             case AddWorkingDaysDAO:
                 return (T) new AddWorkingDaysDAOImpl();
             case AddStudent:
                 return (T) new AddStudentDAOImpl();
             case AddLecturer:
                 return (T) new AddLecturerDAOImpl();
-            case  AddSubject:
+            case AddSubject:
                 return (T) new AddSubjectDAOImpl();
             case AddTag:
                 return (T) new AddTagDAOImpl();
             case AddLocations:
                 return (T) new AddLocationsDAOImpl();
-            case  AddSessions:
+            case AddSessions:
                 return (T) new SessionManageDAOImpl();
-            case  QUERY:
+            case QUERY:
                 return (T) new QueryDAOImpl();
-            case  StudentStatics:
+            case StudentStatics:
                 return (T) new StudentStaticsDAOImpl();
             case ConsecutiveSessions:
                 return (T) new ConsecutiveSessionsDAOImpl();
