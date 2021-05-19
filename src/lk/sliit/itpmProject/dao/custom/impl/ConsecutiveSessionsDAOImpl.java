@@ -67,4 +67,49 @@ public class ConsecutiveSessionsDAOImpl implements ConsecutiveSessionsDAO {
         }
 
     }
+
+    @Override
+    public void savetblNonOverLapping(List<ConsecutiveSessions> consecutiveSessions) throws Exception {
+        int id =0;
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM Parallel ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            id = resultSet.getInt(1);
+        }
+        for (ConsecutiveSessions entity: consecutiveSessions) {
+            CrudUtil.execute("INSERT INTO Parallel VALUES (?,?,?,?,?,?,?,?)",
+                    id+1,
+                    entity.getId(),
+                    entity.getLectureOne(),
+                    entity.getLectureTwo(),
+                    entity.getSubjectCode(),
+                    entity.getSubjectName(),
+                    entity.getGroupId(),
+                    entity.getTagName()
+            );
+        }
+
+    }
+
+    @Override
+    public void savetblParallel(List<ConsecutiveSessions> consecutiveSessions) throws Exception {
+
+        int id =0;
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM NonOverLapping ORDER BY id DESC LIMIT 1");
+        if(resultSet.next()){
+            id = resultSet.getInt(1);
+        }
+        for (ConsecutiveSessions entity: consecutiveSessions) {
+            CrudUtil.execute("INSERT INTO NonOverLapping VALUES (?,?,?,?,?,?,?,?)",
+                    id+1,
+                    entity.getId(),
+                    entity.getLectureOne(),
+                    entity.getLectureTwo(),
+                    entity.getSubjectCode(),
+                    entity.getSubjectName(),
+                    entity.getGroupId(),
+                    entity.getTagName()
+            );
+        }
+
+    }
 }

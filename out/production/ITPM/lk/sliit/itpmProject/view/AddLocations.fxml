@@ -42,12 +42,12 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <RadioButton id="lhall" fx:id="LHallRadio" layoutX="504.0" layoutY="410.0" mnemonicParsing="false" text="Lecture Hall">
+      <RadioButton id="lhall" fx:id="LHallRadio" layoutX="504.0" layoutY="410.0" mnemonicParsing="false" onAction="#LHallRadioaction" text="Lecture Hall">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton id="lab" fx:id="LabHallRadio" layoutX="688.0" layoutY="410.0" mnemonicParsing="false" text="Laboratory">
+      <RadioButton id="lab" fx:id="LabHallRadio" layoutX="688.0" layoutY="410.0" mnemonicParsing="false" onAction="#LabHallRadioaction" text="Laboratory">
          <font>
             <Font size="18.0" />
          </font>

@@ -50,6 +50,7 @@ public class SessionManageBOImpl  implements SessionManageBO {
     public List<LoadSessionDataDTO> loadSessionTable() throws Exception {
         List<CustomEntity> all = queryDAO.getInfo();
         List<LoadSessionDataDTO> dtos = new ArrayList<>();
+
         for (CustomEntity customEntity : all) {
             dtos.add(new LoadSessionDataDTO(
                     customEntity.getId(),
@@ -178,6 +179,44 @@ public class SessionManageBOImpl  implements SessionManageBO {
     @Override
     public void saveRoom(String val1, String val2) throws Exception {
         sessionManageDAO.updateRoom(val1,val2);
+    }
+
+    @Override
+    public void savetblParallel(List<LoadSessionDataDTO> dtos) throws Exception {
+        List<ConsecutiveSessions> consecutiveSessions = new ArrayList<>();
+        for (LoadSessionDataDTO customEntity : dtos) {
+            consecutiveSessions.add(
+                    new ConsecutiveSessions(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+        }
+        consecutiveSessionsDAO.savetblParallel(consecutiveSessions);
+
+    }
+
+    @Override
+    public void savetblNonOverLapping(List<LoadSessionDataDTO> dtos) throws Exception {
+        List<ConsecutiveSessions> consecutiveSessions = new ArrayList<>();
+        for (LoadSessionDataDTO customEntity : dtos) {
+            consecutiveSessions.add(
+                    new ConsecutiveSessions(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+        }
+        consecutiveSessionsDAO.savetblNonOverLapping(consecutiveSessions);
+
     }
 
 

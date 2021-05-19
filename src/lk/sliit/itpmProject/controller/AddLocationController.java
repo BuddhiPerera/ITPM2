@@ -22,6 +22,8 @@ import java.io.IOException;
 public class AddLocationController {
 
     public Button btnStatistics;
+    public Button btnManageSessionRooms;
+    public Button btnManage;
 
     @FXML
     private AnchorPane root;
@@ -213,5 +215,13 @@ public class AddLocationController {
         }
     }
     public void refreshOnAction(ActionEvent actionEvent) {
+    }
+
+    public void LHallRadioaction(ActionEvent actionEvent) {
+        LabHallRadio.setSelected(false);
+    }
+
+    public void LabHallRadioaction(ActionEvent actionEvent) {
+        LHallRadio.setSelected(false);
     }
 }
