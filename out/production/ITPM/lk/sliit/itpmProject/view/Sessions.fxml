@@ -56,7 +56,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f1f3f3;">
                      <children>
+<<<<<<< HEAD
+                        <TableView layoutX="34.0" layoutY="27.0" prefHeight="434.0" prefWidth="996.0">
+=======
                         <TableView fx:id="tblParallel" layoutX="34.0" layoutY="27.0" prefHeight="434.0" prefWidth="996.0">
+>>>>>>> 201302e9b50b760a36a29a9fce5a1f81c56cecee
                           <columns>
                             <TableColumn prefWidth="75.0" />
                             <TableColumn prefWidth="117.0" text="ID" />
@@ -68,7 +72,11 @@
                               <TableColumn prefWidth="125.0" text="Tag" />
                           </columns>
                         </TableView>
+<<<<<<< HEAD
+                        <JFXButton layoutX="253.0" layoutY="503.0" onAction="#btnAddSessionOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+=======
                         <JFXButton layoutX="253.0" layoutY="503.0" onAction="#btnAddSessionParaOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+>>>>>>> 201302e9b50b760a36a29a9fce5a1f81c56cecee
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
@@ -85,7 +93,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+<<<<<<< HEAD
+                        <TableView layoutX="44.0" layoutY="36.0" prefHeight="444.0" prefWidth="982.0">
+=======
                         <TableView fx:id="tblNonOverLapping" layoutX="44.0" layoutY="36.0" prefHeight="444.0" prefWidth="982.0">
+>>>>>>> 201302e9b50b760a36a29a9fce5a1f81c56cecee
                           <columns>
                             <TableColumn prefWidth="75.0" />
                             <TableColumn prefWidth="112.0" text="ID" />
@@ -97,7 +109,11 @@
                               <TableColumn prefWidth="112.0" text="Tag" />
                           </columns>
                         </TableView>
+<<<<<<< HEAD
+                        <JFXButton layoutX="281.0" layoutY="510.0" onAction="#btnAddSessionOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+=======
                         <JFXButton layoutX="281.0" layoutY="510.0" onAction="#btnAddSessionOnNAOverLapAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Add Sessions" textFill="WHITE">
+>>>>>>> 201302e9b50b760a36a29a9fce5a1f81c56cecee
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
