@@ -302,6 +302,46 @@ public class AddWorkingDaysAndHoursController implements Initializable {
             tt.play();
         }
     }
+
+    public void onActionthursdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void OnActionwednesdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void OnActiontuesdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void onActionMonday(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void onActionSunday(ActionEvent actionEvent) {
+        SetWeekEnd();
+    }
+
+    public void onActionSaturday(ActionEvent actionEvent) {
+        SetWeekEnd();
+
+    }
+    public void SetWeekDAY() {
+        saturdayCB.setSelected(false);
+        sundayCB.setSelected(false);
+    }
+    public void SetWeekEnd() {
+        mondayCB.setSelected(false);
+        thursdayCB.setSelected(false);
+        wednesdayCB.setSelected(false);
+        tuesdayCB.setSelected(false);
+        fridayCB.setSelected(false);
+    }
+
+    public void onActionfridayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
 }
 
 

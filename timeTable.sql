@@ -84,18 +84,18 @@ CREATE TABLE `AddSubject`
 
 CREATE TABLE `AddSession`
 (
-    `id`               int         NOT NULL,
-    `lecture1`   CHAR(70) NOT NULL,
-    `SelectTag`        varchar(40) NOT NULL,
-    `lecture2` CHAR(70) NOT NULL,
-    `SelectGroup`      varchar(50) NOT NULL,
-    `NoOFStudent`      int(200)    NOT NULL,
-    `SelectSubject`    varchar(40) NOT NULL,
-    `DurationHrs`      int(40)     NOT NULL,
+    `id`            int         NOT NULL,
+    `lecture1`      CHAR(70)    NOT NULL,
+    `SelectTag`     varchar(40) NOT NULL,
+    `lecture2`      CHAR(70)    NOT NULL,
+    `SelectGroup`   varchar(50) NOT NULL,
+    `NoOFStudent`   int(200)    NOT NULL,
+    `SelectSubject` varchar(40) NOT NULL,
+    `DurationHrs`   int(40)     NOT NULL,
+    `room`          varchar(30),
     PRIMARY KEY (`id`)
+);
 
-) ENGINE = InnoDB
-  DEFAULT CHARSET = latin1;
 
 CREATE TABLE `NotAvbSessionLec`
 (
@@ -124,3 +124,41 @@ create table consecutive
     primary key (id, rowId)
 );
 
+CREATE TABLE `Parallel`
+(
+    `id`          int          NOT NULL,
+    `rowId`       int          NOT NULL,
+    `lectureOne`  varchar(250) NOT NULL,
+    `lectureTwo`  varchar(250) NOT NULL,
+    `subjectCode` varchar(200) NOT NULL,
+    `subject`     varchar(405) NOT NULL,
+    `groupId`     varchar(405) NOT NULL,
+    `tag`         varchar(200) NOT NULL,
+    PRIMARY KEY (`id`, `rowId`)
+);
+
+CREATE TABLE `NonOverLapping`
+(
+    `id`          int          NOT NULL,
+    `rowId`       int          NOT NULL,
+    `lectureOne`  varchar(250) NOT NULL,
+    `lectureTwo`  varchar(250) NOT NULL,
+    `subjectCode` varchar(200) NOT NULL,
+    `subject`     varchar(405) NOT NULL,
+    `groupId`     varchar(405) NOT NULL,
+    `tag`         varchar(200) NOT NULL,
+    PRIMARY KEY (`id`, `rowId`)
+);
+
+CREATE TABLE `LecturerWorkDay`
+(
+    `empId`     varchar(6) NOT NULL,
+    `sunday`    boolean DEFAULT 0,
+    `monday`    boolean DEFAULT 0,
+    `tuesday`   boolean DEFAULT 0,
+    `wednesday` boolean DEFAULT 0,
+    `thursday`  boolean DEFAULT 0,
+    `friday`    boolean DEFAULT 0,
+    `saturday`  boolean DEFAULT 0,
+    PRIMARY KEY (`empId`)
+);

@@ -36,4 +36,8 @@ public interface SessionManageBO extends SuperBO {
     List<LoadSessionDataDTO> loadSessionTableSearch(int i, String val) throws Exception;
 
     void saveRoom(String val1, String val2) throws Exception;
+
+    void savetblParallel(List<LoadSessionDataDTO> dtos) throws Exception;
+
+    void savetblNonOverLapping(List<LoadSessionDataDTO> dtos) throws Exception;
 }

@@ -180,6 +180,44 @@ public class SessionManageBOImpl  implements SessionManageBO {
         sessionManageDAO.updateRoom(val1,val2);
     }
 
+    @Override
+    public void savetblParallel(List<LoadSessionDataDTO> dtos) throws Exception {
+        List<ConsecutiveSessions> consecutiveSessions = new ArrayList<>();
+        for (LoadSessionDataDTO customEntity : dtos) {
+            consecutiveSessions.add(
+                    new ConsecutiveSessions(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+        }
+        consecutiveSessionsDAO.savetblParallel(consecutiveSessions);
+
+    }
+
+    @Override
+    public void savetblNonOverLapping(List<LoadSessionDataDTO> dtos) throws Exception {
+        List<ConsecutiveSessions> consecutiveSessions = new ArrayList<>();
+        for (LoadSessionDataDTO customEntity : dtos) {
+            consecutiveSessions.add(
+                    new ConsecutiveSessions(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+        }
+        consecutiveSessionsDAO.savetblNonOverLapping(consecutiveSessions);
+
+    }
+
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws Exception {

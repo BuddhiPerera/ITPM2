@@ -62,6 +62,8 @@ public class SessionsController implements Initializable {
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
     public TableView<SessionTM> tblConsecutive;
+    public TableView<SessionTM> tblNonOverLapping;
+    public TableView<SessionTM> tblParallel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,12 +77,55 @@ public class SessionsController implements Initializable {
         tblConsecutive.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
         tblConsecutive.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
 
+        tblNonOverLapping.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+        tblNonOverLapping.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblNonOverLapping.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
+        tblNonOverLapping.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
+        tblNonOverLapping.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        tblNonOverLapping.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        tblNonOverLapping.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
+        tblNonOverLapping.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
+
+        tblParallel.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+        tblParallel.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblParallel.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("lectureOne"));
+        tblParallel.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lectureTwo"));
+        tblParallel.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        tblParallel.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        tblParallel.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
+        tblParallel.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("tagName"));
 
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
             ObservableList<SessionTM> sessionTMS = tblConsecutive.getItems();
+            ObservableList<SessionTM> tblNonOverLap= tblNonOverLapping.getItems();
+            ObservableList<SessionTM> tblPar = tblParallel.getItems();
             for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
                 sessionTMS.add(new SessionTM(
+                        new CheckBox(),
+                        loadSessionDataDTO.getId(),
+                        loadSessionDataDTO.getLectureOne(),
+                        loadSessionDataDTO.getLectureTwo(),
+                        loadSessionDataDTO.getSubjectCode(),
+                        loadSessionDataDTO.getSubjectName(),
+                        loadSessionDataDTO.getGroupId(),
+                        loadSessionDataDTO.getTagName()
+                ));
+            }
+            for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
+                tblNonOverLap.add(new SessionTM(
+                        new CheckBox(),
+                        loadSessionDataDTO.getId(),
+                        loadSessionDataDTO.getLectureOne(),
+                        loadSessionDataDTO.getLectureTwo(),
+                        loadSessionDataDTO.getSubjectCode(),
+                        loadSessionDataDTO.getSubjectName(),
+                        loadSessionDataDTO.getGroupId(),
+                        loadSessionDataDTO.getTagName()
+                ));
+            }
+            for (LoadSessionDataDTO loadSessionDataDTO : loadSessionDataDTOList) {
+                tblPar.add(new SessionTM(
                         new CheckBox(),
                         loadSessionDataDTO.getId(),
                         loadSessionDataDTO.getLectureOne(),
@@ -269,6 +314,54 @@ public class SessionsController implements Initializable {
             tt.setFromX(-subScene.getWidth());
             tt.setToX(0);
             tt.play();
+        }
+    }
+
+    public void btnAddSessionParaOnAction(ActionEvent actionEvent) {
+        try {
+            List<LoadSessionDataDTO> dtos = new ArrayList<>();
+            ObservableList<SessionTM> sessionTMS = tblParallel.getItems();
+            for (SessionTM customEntity : sessionTMS) {
+                if (customEntity.getCheckBox().isSelected()) {
+                    dtos.add(new LoadSessionDataDTO(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+                }
+            }
+            sessionManageBO.savetblParallel(dtos);
+            new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+        }
+    }
+
+    public void btnAddSessionOnNAOverLapAction(ActionEvent actionEvent) {
+        try {
+            List<LoadSessionDataDTO> dtos = new ArrayList<>();
+            ObservableList<SessionTM> sessionTMS = tblNonOverLapping.getItems();
+            for (SessionTM customEntity : sessionTMS) {
+                if (customEntity.getCheckBox().isSelected()) {
+                    dtos.add(new LoadSessionDataDTO(
+                            customEntity.getId(),
+                            customEntity.getLectureOne(),
+                            customEntity.getLectureTwo(),
+                            customEntity.getSubjectCode(),
+                            customEntity.getSubjectName(),
+                            customEntity.getGroupId(),
+                            customEntity.getTagName()
+                    ));
+                }
+            }
+            sessionManageBO.savetblNonOverLapping(dtos);
+            new Alert(Alert.AlertType.INFORMATION, "Data Added").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
     }
 
