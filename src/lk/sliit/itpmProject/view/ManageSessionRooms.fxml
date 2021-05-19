@@ -97,7 +97,7 @@
         <JFXComboBox layoutX="1073.0" layoutY="419.0" prefHeight="31.0" prefWidth="184.0" />
         <Text layoutX="291.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Subject">
             <font>
-                <Font size="20.0" />
+                <Font size="20.0"/>
             </font>
         </Text>
         <JFXComboBox layoutX="545.0" layoutY="486.0" prefHeight="31.0" prefWidth="193.0" />
