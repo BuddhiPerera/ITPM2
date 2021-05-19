@@ -2,6 +2,7 @@ package lk.sliit.itpmProject.dao.custom.impl;
 
 import lk.sliit.itpmProject.dao.CrudUtil;
 import lk.sliit.itpmProject.dao.custom.AddLecturerDAO;
+import lk.sliit.itpmProject.entity.AddLectureWorkingDays;
 import lk.sliit.itpmProject.entity.AddLecturer;
 
 import java.sql.ResultSet;
@@ -79,5 +80,43 @@ public class AddLecturerDAOImpl implements AddLecturerDAO {
         else {
             return 0;
         }
+    }
+
+    @Override
+    public List<AddLecturer> findAllNames() throws Exception {
+
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM AddLecturer");
+        List<AddLecturer> addLecturerList = new ArrayList<>();
+        while (resultSet.next()){
+            addLecturerList.add(new AddLecturer(
+                    resultSet.getString(3)
+            ) );
+        }
+        return addLecturerList;
+    }
+
+    @Override
+    public int checkExists(String val) throws Exception {
+       int i = 0;
+        ResultSet rst = null;
+        rst = CrudUtil.execute("SELECT id FROM AddLecturer where empId =?",val);
+        while(rst.next()){
+            i = 1;
+        }
+        return i;
+    }
+
+    @Override
+    public boolean saveDays(AddLectureWorkingDays addLectureWorkingDays) throws Exception {
+        return CrudUtil.execute("INSERT INTO LecturerWorkDay VALUES (?,?,?,?,?,?,?,?)",
+                addLectureWorkingDays.getEmpId(),
+                addLectureWorkingDays.isSundayCB(),
+                addLectureWorkingDays.isMondayCB(),
+                addLectureWorkingDays.isTuesdayCB(),
+                addLectureWorkingDays.isWednesdayCB(),
+                addLectureWorkingDays.isThursdayCB(),
+                addLectureWorkingDays.isFridayCB(),
+                addLectureWorkingDays.isSaturdayCB()
+        );
     }
 }

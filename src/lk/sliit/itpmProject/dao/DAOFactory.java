@@ -1,8 +1,8 @@
 package lk.sliit.itpmProject.dao;
 
 
-import lk.sliit.itpmProject.business.custom.impl.StudentStaticsBOImpl;
 import lk.sliit.itpmProject.dao.custom.impl.*;
+import lk.sliit.itpmProject.entity.ConsecutiveSessions;
 
 public class DAOFactory {
 
@@ -30,10 +30,16 @@ public class DAOFactory {
                 return (T) new AddTagDAOImpl();
             case AddLocations:
                 return (T) new AddLocationsDAOImpl();
+            case  AddSessions:
+                return (T) new SessionManageDAOImpl();
+            case  QUERY:
+                return (T) new QueryDAOImpl();
             case  StudentStatics:
                 return (T) new StudentStaticsDAOImpl();
-
-
+            case ConsecutiveSessions:
+                return (T) new ConsecutiveSessionsDAOImpl();
+            case SessionManageNaLec:
+                return (T) new SessionManageNALecDAOImpl();
             default:
                 return null;
         }

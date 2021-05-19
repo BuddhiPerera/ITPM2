@@ -21,7 +21,11 @@
             <Font size="20.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <Text layoutX="292.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Tag">
+=======
+      <Text layoutX="286.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Room">
+>>>>>>> 259ddf5db62277ef30d0bfe074d91265bda7a9be
          <font>
             <Font size="20.0" />
          </font>
@@ -32,9 +36,18 @@
             <Font size="20.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <TextArea id="selecteds" layoutX="523.0" layoutY="584.0" prefHeight="81.0" prefWidth="422.0" />
       <Button id="sub" layoutX="520.0" layoutY="714.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #064E98;" text="Submit" />
       <Button id="lea" layoutX="710.0" layoutY="714.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #980606;" text="Clear" />
+=======
+      <TextArea id="selecteds" fx:id="txtSelectedSession" layoutX="520.0" layoutY="436.0" prefHeight="81.0" prefWidth="422.0" />
+      <Button id="sub" fx:id="btnSubmit" layoutX="528.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Submit" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #064E98;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button id="lea" fx:id="btnClear" layoutX="817.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Clear" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE" />
+>>>>>>> 259ddf5db62277ef30d0bfe074d91265bda7a9be
       <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="77.0" layoutY="139.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/home-icon.png" />
@@ -58,6 +71,7 @@
             <Image url="@../assert/google-maps-location-icon-14.jpg" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <JFXComboBox layoutX="545.0" layoutY="222.0" prefHeight="31.0" prefWidth="193.0" />
       <JFXComboBox layoutX="541.0" layoutY="285.0" prefHeight="0.0" prefWidth="193.0" />
       <JFXComboBox layoutX="1073.0" layoutY="221.0" prefHeight="31.0" prefWidth="184.0" />
@@ -108,5 +122,9 @@
          </font>
       </Text>
       <JFXComboBox layoutX="1082.0" layoutY="486.0" prefHeight="31.0" prefWidth="184.0" />
+=======
+      <JFXComboBox fx:id="cmbSelectSession" layoutX="528.0" layoutY="219.0" onAction="#selectSessionOnAction" prefHeight="31.0" prefWidth="289.0" />
+      <JFXComboBox fx:id="cmbSelectRoom" layoutX="528.0" layoutY="326.0" prefHeight="31.0" prefWidth="289.0" />
+>>>>>>> 259ddf5db62277ef30d0bfe074d91265bda7a9be
    </children>
 </AnchorPane>

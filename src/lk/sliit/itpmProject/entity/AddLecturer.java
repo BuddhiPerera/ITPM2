@@ -27,6 +27,10 @@ public class AddLecturer implements SuperEntity {
     public AddLecturer() {
     }
 
+    public AddLecturer(String lName) {
+        this.lName = lName;
+    }
+
     public int getId() {
         return id;
     }

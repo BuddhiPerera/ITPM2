@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
@@ -108,5 +109,22 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
+      <Button id="MLClear" fx:id="btnsession" layoutX="850.0" layoutY="727.0" mnemonicParsing="false" onAction="#btnOnAction_Session" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #21bfbf;" text="Session" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Button>
+      <JFXCheckBox fx:id="thursdayCB" layoutX="874.0" layoutY="343.0" onAction="#onActionthursdayCB" prefHeight="21.0" prefWidth="106.0" text="Thursday" />
+      <JFXCheckBox fx:id="wednesdayCB" layoutX="875.0" layoutY="292.0" onAction="#OnActionwednesdayCB" prefHeight="21.0" prefWidth="110.0" text="Wednesday" />
+      <JFXCheckBox fx:id="tuesdayCB" layoutX="876.0" layoutY="244.0" onAction="#OnActiontuesdayCB" prefHeight="21.0" prefWidth="86.0" text="Tuesday" />
+      <JFXCheckBox fx:id="mondayCB" layoutX="876.0" layoutY="198.0" onAction="#onActionMonday" prefHeight="21.0" prefWidth="161.0" text="Monday" />
+      <JFXCheckBox fx:id="sundayCB" layoutX="1058.0" layoutY="244.0" onAction="#onActionSunday" prefHeight="21.0" prefWidth="82.0" text="Sunday" />
+      <JFXCheckBox fx:id="saturdayCB" layoutX="1059.0" layoutY="198.0" onAction="#onActionSaturday" text="Saturday" />
+      <JFXCheckBox fx:id="fridayCB" layoutX="874.0" layoutY="387.0" onAction="#onActionfridayCB" prefHeight="21.0" prefWidth="86.0" text="Friday" />
+      <Text fill="#6b6e69" layoutX="874.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customize Your Working Days" wrappingWidth="312.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

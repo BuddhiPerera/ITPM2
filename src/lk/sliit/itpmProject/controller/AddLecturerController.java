@@ -1,5 +1,6 @@
 package lk.sliit.itpmProject.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
@@ -22,13 +23,26 @@ import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.AddLecturerBO;
 import lk.sliit.itpmProject.dto.AddLecturerDTO;
+import lk.sliit.itpmProject.dto.DaysDTO;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddLecturerController implements Initializable {
 
+    public JFXCheckBox thursdayCB;
+    public JFXCheckBox wednesdayCB;
+    public JFXCheckBox tuesdayCB;
+    public JFXCheckBox mondayCB;
+    public JFXCheckBox sundayCB;
+    public JFXCheckBox saturdayCB;
+    public JFXCheckBox fridayCB;
+    public Button btnAddSubject;
+    public Button btnManage;
+    public Button btnsession;
+    public Button btnGenerate;
     @FXML
     private AnchorPane root1;
 
@@ -75,9 +89,16 @@ public class AddLecturerController implements Initializable {
     private JFXTextField nameTxt;
 
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        mondayCB.setSelected(true);
+        thursdayCB.setSelected(true);
+        wednesdayCB.setSelected(true);
+        tuesdayCB.setSelected(true);
+        fridayCB.setSelected(true);
+        rankTxt.setDisable(true);
         centerCombo.setValue("Malabe");
         ObservableList list1 = centerCombo.getItems();
         list1.add("Malabe");
@@ -174,74 +195,112 @@ public class AddLecturerController implements Initializable {
     }
 
     @FXML
-    void ADLGenrateRank_OnAction(ActionEvent event){
+    void ADLGenrateRank_OnAction(ActionEvent event) {
         String tempLevel = null;
         String lecId = empIdTxt.getText();
         String level = levelCombo.getValue();
 
-        if(level == "Professor"){
+        if (level == "Professor") {
             tempLevel = "1";
-        }
-        else if(level == "Assistant Professor"){
+        } else if (level == "Assistant Professor") {
             tempLevel = "2";
-        }
-        else if(level == "Senior Lecturer(HG)"){
+        } else if (level == "Senior Lecturer(HG)") {
             tempLevel = "3";
-        }
-        else if(level == "Senior Lecturer"){
+        } else if (level == "Senior Lecturer") {
             tempLevel = "4";
-        }
-        else if(level == "Lecturer"){
+        } else if (level == "Lecturer") {
             tempLevel = "5";
-        }
-        else if(level == "Assistant Lecturer"){
+        } else if (level == "Assistant Lecturer") {
             tempLevel = "6";
         }
 
         rankTxt.setText(tempLevel + "." + lecId);
     }
+
     @FXML
     public void btnSave_OnAction(ActionEvent event) throws Exception {
-        int maxCode = 0;
-        try{
-            int lastItemCode = addLecturerBO.getLastItemCode();
-            if(lastItemCode == 0){
-                maxCode = 1;
-            }
-            else{
-                maxCode = lastItemCode + 1;
-            }
-        }catch(Exception e){
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
-        }
-
         String empId = empIdTxt.getText();
-        String lName = nameTxt.getText();
-        String department = (String) departmentCombo.getValue();
-        String faculty = (String) facultyCombo.getValue();
-        String center = centerCombo.getValue();
-        String buildingNo = (String) buildingCombo.getValue();
-        String level = levelCombo.getValue();
-        String rank = rankTxt.getText();
+        int maxCode = 0;
 
-        AddLecturerDTO addLecturerDTO = new AddLecturerDTO(
-                maxCode,
-                empId,
-                lName,
-                department,
-                faculty,
-                center,
-                buildingNo,
-                level,
-                rank
-        );
+        boolean val = Pattern.matches("\\d{6}", empId);
+        System.out.println(val);
+        if (val) {
 
-        try {
-            addLecturerBO.saveLecturer(addLecturerDTO);
-            new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+            int exists = addLecturerBO.checkExists(empId);
+            if (exists == 1) {
+                new Alert(Alert.AlertType.ERROR, "Employee Id already exists").show();
+            } else {
 
-        } catch (Exception e) {
-            System.out.println(e);
+                try {
+
+                    int lastItemCode = addLecturerBO.getLastItemCode();
+                    if (lastItemCode == 0) {
+                        maxCode = 1;
+                    } else {
+                        maxCode = lastItemCode + 1;
+                    }
+
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+                }
+
+
+                String lName = nameTxt.getText();
+                String department = (String) departmentCombo.getValue();
+                String faculty = (String) facultyCombo.getValue();
+                String center = centerCombo.getValue();
+                String buildingNo = (String) buildingCombo.getValue();
+                String level = levelCombo.getValue();
+                String rank = rankTxt.getText();
+
+//                ////////////////////////////////////////////////////////////////////
+
+                boolean saturday =saturdayCB.isSelected();
+                boolean sundayC=sundayCB.isSelected();
+                boolean mondayC=mondayCB.isSelected();
+                boolean thursdayC=thursdayCB.isSelected();
+                boolean wednesdayC=wednesdayCB.isSelected();
+                boolean tuesdayC=tuesdayCB.isSelected();
+                boolean fridayC=fridayCB.isSelected();
+
+                DaysDTO daysDTO = new DaysDTO(
+                        empId,
+                        saturday,
+                        sundayC,
+                        mondayC,
+                        tuesdayC,
+                        wednesdayC,
+                        thursdayC,
+                        fridayC
+
+                );
+
+//                //////////////////////////////////////////////////////////////////
+                AddLecturerDTO addLecturerDTO = new AddLecturerDTO(
+                        maxCode,
+                        empId,
+                        lName,
+                        department,
+                        faculty,
+                        center,
+                        buildingNo,
+                        level,
+                        rank
+                );
+
+                try {
+                   boolean val1 = addLecturerBO.saveLecturerDays(daysDTO);
+                   if (val1){
+                       addLecturerBO.saveLecturer(addLecturerDTO);
+                       new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
+                   }
+
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.ERROR, "Something Went Wrong").show();
+                }
+            }
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Enter 6 Digit Number to the Employee Id").show();
         }
     }
 
@@ -298,4 +357,69 @@ public class AddLecturerController implements Initializable {
             tt.play();
         }
     }
+
+    public void btnOnAction_Session(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader;
+        Parent root = null;
+
+        root = FXMLLoader.load(this.getClass().getResource("../view/Managesessions.fxml"));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    @FXML
+    void onActionMonday(ActionEvent event) {
+        SetWeekDAY();
+    }
+
+    @FXML
+    void onActionSaturday(ActionEvent event) {
+        SetWeekEnd();
+    }
+
+    @FXML
+    void onActionSunday(ActionEvent event) {
+        SetWeekEnd();
+    }
+
+    public void SetWeekDAY() {
+        saturdayCB.setSelected(false);
+        sundayCB.setSelected(false);
+    }
+
+    public void SetWeekEnd() {
+        mondayCB.setSelected(false);
+        thursdayCB.setSelected(false);
+        wednesdayCB.setSelected(false);
+        tuesdayCB.setSelected(false);
+        fridayCB.setSelected(false);
+    }
+
+    @FXML
+    void onActionfridayCB(ActionEvent event) {
+        SetWeekDAY();
+    }
+
+    @FXML
+    void onActionthursdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void OnActionwednesdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
+    public void OnActiontuesdayCB(ActionEvent actionEvent) {
+        SetWeekDAY();
+    }
+
 }

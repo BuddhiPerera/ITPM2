@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -20,101 +20,71 @@
       </Text>
       <TabPane layoutX="229.0" layoutY="160.0" prefHeight="505.0" prefWidth="922.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Select Lectures &amp; Tag">
+          <Tab fx:id="select_group_tab" text="Add session">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="290.0" prefWidth="465.0">
+              <AnchorPane fx:id="tab2" minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="899.0">
                      <children>
-                        <Text layoutX="36.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Lecturer(s)">
+                        <Text layoutX="464.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Group">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <ChoiceBox id="selectlecturersAS" layoutX="230.0" layoutY="96.0" prefHeight="31.0" prefWidth="194.0" />
-                        <Text layoutX="461.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Tag">
+                        <Text layoutX="462.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Subject">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <ChoiceBox id="selecttagAS" layoutX="602.0" layoutY="96.0" prefHeight="31.0" prefWidth="206.0" />
-                        <Text layoutX="25.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Lecturer(s)">
+                        <Text layoutX="43.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No.Of.Student">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <TextField id="selectedlecturersAS" layoutX="230.0" layoutY="217.0" prefHeight="31.0" prefWidth="580.0" />
-                        <Button id="btnnextAS" layoutX="230.0" layoutY="312.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Next" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font></Button>
-                        <Text layoutX="36.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1">
+                        <TextField id="NOstudentAS" fx:id="cmb_No_of_Student" layoutX="222.0" layoutY="240.0" onAction="#cmb_No_of_StudentOnAction" onKeyReleased="#onPressStudent" />
+                        <Text layoutX="484.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <Button id="ADLClear" layoutX="732.0" layoutY="710.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #00b4b5;" text="Clear">
+                        <TextField id="durationAS" fx:id="cmb_select_duration_hrs" layoutX="633.0" layoutY="243.0" onAction="#durationAction" onKeyReleased="#durationRelese" />
+                        <Text layoutX="577.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hrs">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font size="20.0" />
                            </font>
-                        </Button>
-                        <Button id="btnclearAS" layoutX="424.0" layoutY="313.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE">
+                        </Text>
+                        <Button id="btnsubmitAS" fx:id="btnSu" layoutX="215.0" layoutY="390.0" mnemonicParsing="false" onAction="#btn_onaction_submit" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Submit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Button>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Select Group &amp; Subject">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="899.0">
-                     <children>
-                        <Text layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="39.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Group">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <ChoiceBox id="selectgroupAS" layoutX="198.0" layoutY="112.0" prefWidth="150.0" />
-                        <ChoiceBox id="selectsubjectAS" layoutX="198.0" layoutY="258.0" prefWidth="150.0" />
-                        <Text layoutX="39.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Subject">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="485.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No.Of.Student">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <TextField id="NOstudentAS" layoutX="635.0" layoutY="112.0" />
-                        <Text layoutX="485.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <TextField id="durationAS" layoutX="635.0" layoutY="255.0" />
-                        <Text layoutX="579.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hrs">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <Button id="btnsubmitAS" layoutX="191.0" layoutY="356.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Submit" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></Button>
-                        <Button id="btnclearAS" layoutX="399.0" layoutY="356.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE">
+                        <Button id="btnclearAS" layoutX="433.0" layoutY="389.0" mnemonicParsing="false" onAction="#btn_onaction_clear" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font></Button>
-                        <Button id="btnbackAS" layoutX="612.0" layoutY="351.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #268104;" text="Back" textFill="WHITE">
+                        <Button id="btnbackAS" layoutX="633.0" layoutY="389.0" mnemonicParsing="false" onAction="#btn_onaction_back" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #268104;" text="Back" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Button>
+                        <Text layoutX="43.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Lecturer(s)">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="43.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Tag">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <JFXComboBox fx:id="cmb_select_lecture" layoutX="224.0" layoutY="59.0" onAction="#selectLectureMouseClick" prefHeight="31.0" prefWidth="182.0" />
+                        <Text layoutX="43.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Lecturer(s)">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField id="selectedlecturersAS" fx:id="cmb_selected_lecture" layoutX="224.0" layoutY="119.0" prefHeight="31.0" prefWidth="594.0" />
+                        <TextField id="selectedlecturersAS" fx:id="tctSession" layoutX="224.0" layoutY="326.0" prefHeight="31.0" prefWidth="596.0" />
+                        <JFXComboBox fx:id="cmb_select_subject" layoutX="636.0" layoutY="59.0" onAction="#cmb_select_subjectOnAction" prefHeight="31.0" prefWidth="182.0" />
+                        <JFXComboBox fx:id="cmb_select_tag" layoutX="225.0" layoutY="172.0" onAction="#cmb_select_tagOnAction" prefHeight="31.0" prefWidth="182.0" />
+                        <JFXComboBox fx:id="cmb_select_group" layoutX="636.0" layoutY="171.0" onAction="#cmb_select_group_OnAction" prefHeight="31.0" prefWidth="182.0" />
                      </children>
                   </AnchorPane>
             </content>
