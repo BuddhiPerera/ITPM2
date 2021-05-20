@@ -155,13 +155,13 @@ public class AddLecturerController implements Initializable {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddRBLocation.fxml"));
                     break;
                 case "iconTimeTable":
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
@@ -327,7 +327,7 @@ public class AddLecturerController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/AddSubject.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddSubject.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);
@@ -345,7 +345,7 @@ public class AddLecturerController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/ManageLecturers.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageLecturers.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);
@@ -363,7 +363,7 @@ public class AddLecturerController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/Managesessions.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/Managesessions.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);

@@ -40,6 +40,8 @@ public class DAOFactory {
                 return (T) new ConsecutiveSessionsDAOImpl();
             case SessionManageNaLec:
                 return (T) new SessionManageNALecDAOImpl();
+            case TimeTable:
+                return (T) new TimeTableDAOImpl();
             default:
                 return null;
         }

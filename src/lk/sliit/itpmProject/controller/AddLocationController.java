@@ -62,16 +62,16 @@ public class AddLocationController implements Initializable {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLecturer.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }
@@ -137,7 +137,7 @@ public class AddLocationController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/VisualizingStatistic.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/VisualizingStatistic.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);
@@ -155,7 +155,7 @@ public class AddLocationController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/ManageLocations.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageLocations.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);
@@ -186,7 +186,7 @@ public class AddLocationController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/ManageSessionRooms.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageSessionRooms.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);
@@ -204,7 +204,7 @@ public class AddLocationController implements Initializable {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/ManageSessionRooms.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageSessionRooms.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);

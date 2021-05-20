@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="root" prefHeight="865.0" prefWidth="1310.0" style="-fx-background-color: #f1f3f3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sliit.itpmProject.controller.GenerateTimeTablesController">
    <children>
-      <Label layoutX="128.0" layoutY="57.0" prefHeight="54.0" prefWidth="411.0" style="-fx-font: green;" text="Generate Time Tables" textFill="#8338ab">
+      <Label layoutX="128.0" layoutY="57.0" prefHeight="54.0" prefWidth="411.0" text="Generate Time Tables" textFill="#8338ab">
          <font>
             <Font name="Arial" size="36.0" />
          </font>
@@ -25,7 +25,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="17.0" layoutY="120.0" prefHeight="432.0" prefWidth="915.0">
+                        <TableView fx:id="tblLecture" layoutX="14.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
                               <TableColumn prefWidth="103.0" text="Time Slots" />
                               <TableColumn prefWidth="142.0" text="Monday" />
@@ -35,7 +35,7 @@
                               <TableColumn prefWidth="149.0" text="Friday" />
                            </columns>
                         </TableView>
-                        <JFXButton layoutX="586.0" layoutY="47.0" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
+                        <JFXButton fx:id="btnLecGenerate" layoutX="586.0" layoutY="47.0" onAction="#btnLecGenerateOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
@@ -45,7 +45,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXButton>
-                        <JFXComboBox layoutX="273.0" layoutY="50.0" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboLec" layoutX="273.0" layoutY="50.0" onAction="#comboLecOnAction" prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="180.0" layoutY="52.0" text="Lecture">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -55,11 +55,11 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab style="-fx-background-color: #757575;" text="Student">
+            <Tab fx:id="tblStd" style="-fx-background-color: #757575;" text="Student">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
+                        <TableView fx:id="tbleStdu" layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
                               <TableColumn prefWidth="103.0" text="Time Slots" />
                               <TableColumn prefWidth="142.0" text="Monday" />
@@ -69,13 +69,13 @@
                               <TableColumn prefWidth="149.0" text="Friday" />
                            </columns>
                         </TableView>
-                        <JFXComboBox layoutX="264.0" layoutY="43.0" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboGroup" layoutX="264.0" layoutY="43.0" onAction="#comboGroupOnaction" prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="171.0" layoutY="45.0" text="Group">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="577.0" layoutY="37.0" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
+                        <JFXButton fx:id="studentGenerate" layoutX="577.0" layoutY="37.0" onAction="#studentGenerateOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
@@ -93,7 +93,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
+                        <TableView fx:id="tbleLocation" layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
                               <TableColumn prefWidth="103.0" text="Time Slots" />
                               <TableColumn prefWidth="142.0" text="Monday" />
@@ -103,7 +103,7 @@
                               <TableColumn prefWidth="149.0" text="Friday" />
                            </columns>
                         </TableView>
-                        <JFXComboBox layoutX="264.0" layoutY="43.0" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboLocation" layoutX="264.0" layoutY="43.0" onAction="#comboLocationOnAction" prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="171.0" layoutY="45.0" text="Location">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -114,7 +114,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton layoutX="579.0" layoutY="37.0" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
+                        <JFXButton fx:id="GentLocation" layoutX="579.0" layoutY="37.0" onAction="#GentLocationOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
