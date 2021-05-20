@@ -4,6 +4,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,8 +19,10 @@ import lk.sliit.itpmProject.business.custom.AddLocationsBO;
 import lk.sliit.itpmProject.dto.AddLocationsDTO;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AddLocationController {
+public class AddLocationController implements Initializable {
 
     public Button btnStatistics;
     public Button btnManageSessionRooms;
@@ -223,5 +226,10 @@ public class AddLocationController {
 
     public void LabHallRadioaction(ActionEvent actionEvent) {
         LHallRadio.setSelected(false);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

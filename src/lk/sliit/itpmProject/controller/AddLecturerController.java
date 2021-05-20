@@ -43,6 +43,7 @@ public class AddLecturerController implements Initializable {
     public Button btnManage;
     public Button btnsession;
     public Button btnGenerate;
+    public AnchorPane root;
     @FXML
     private AnchorPane root1;
 

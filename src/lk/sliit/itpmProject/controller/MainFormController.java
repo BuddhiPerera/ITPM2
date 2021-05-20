@@ -5,6 +5,7 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainFormController {
+public class MainFormController implements Initializable {
 
     @FXML
     private ImageView iconStudent;
@@ -115,16 +116,16 @@ public class MainFormController {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconMap":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLocations.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLocations.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLecturer.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }

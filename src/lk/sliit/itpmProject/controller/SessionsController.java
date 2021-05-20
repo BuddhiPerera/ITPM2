@@ -30,7 +30,7 @@ import lk.sliit.itpmProject.demoData.AddSessionDemo;
 import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.util.SessionTM;
 import lk.sliit.itpmProject.util.StudentTM;
-import org.drools.template.parser.BooleanCell;
+
 
 import java.io.IOException;
 import java.net.URL;

@@ -28,25 +28,9 @@ public class DBConnection {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Properties properties = new Properties();
-            File file = new File("resources/application.properties");
-            FileInputStream fis = new FileInputStream(file);
-            properties.load(fis);
-            fis.close();
 
-            String ip = properties.getProperty("stdManagement.ip");
-            host = "localhost";
-            String port = properties.getProperty("stdManagement.port");
-            this.port = "3306";
 
-            String user = DEPCrypt.decode(properties.getProperty("stdManagement.user"), "123");
-            username = "root";
-            String password = DEPCrypt.decode(properties.getProperty("stdManagement.password"), "123");
-
-            this.password = "1234";
-            String db = properties.getProperty("stdManagement.db");
-
-            connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + db + "?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://" + "localhost" + ":" + 3306 + "/" + "fff" + "?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "1234");
 
             PreparedStatement pstm = connection.prepareStatement("SHOW TABLES");
             ResultSet resultSet = pstm.executeQuery();
