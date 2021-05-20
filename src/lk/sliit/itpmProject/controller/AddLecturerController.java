@@ -367,7 +367,7 @@ public class AddLecturerController implements Initializable {
 
         if (root != null) {
             Scene subScene = new Scene(root);
-            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
             TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
