@@ -465,4 +465,55 @@ public class SessionsController implements Initializable {
 
         }
     }
+
+    public void btnOnAction_View(ActionEvent actionEvent) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/Managesessions.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnOnAction_ViewParallel(ActionEvent event) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/Managesessions.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnOnAction_ViewNonOveralapping(ActionEvent event) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/Managesessions.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
 }

@@ -53,7 +53,7 @@ public class AddLecturerDAOImpl implements AddLecturerDAO {
 
     @Override
     public boolean update(AddLecturer entity) throws Exception {
-        return CrudUtil.execute("UPDATE AddLecturer SET empId = ?, lName = ?, department =?, faculty =?, center =?, buildingNO = ?, `level` =?, `rank` =? WHERE id = ?",
+        return CrudUtil.execute("UPDATE AddLecturer SET empId = ?, lName = ?, department =?, faculty =?, center =?, buildingNO = ?, `levelx` =?, `rankx` =? WHERE id = ?",
                 entity.getEmpId(),
                 entity.getlName(),
                 entity.getDepartment(),

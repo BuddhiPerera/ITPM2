@@ -114,7 +114,7 @@ public class AddTagController implements Initializable {
     public void btnSaveTag_onAction(ActionEvent actionEvent) {
         String tagCode1 = (txtAddTagCode.getText());
 int tagCode;
-        boolean val = Pattern.matches("\\d{6}", tagCode1);
+        boolean val = Pattern.matches("\\d+", tagCode1);
         if(val){
             tagCode = Integer.parseInt(tagCode1);
 
@@ -147,7 +147,7 @@ int tagCode;
             System.out.println(e);
         }
     }else {
-            new Alert(Alert.AlertType.ERROR, "Add 6 Digit Number").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid Tag Code").show();
         }
     }
 

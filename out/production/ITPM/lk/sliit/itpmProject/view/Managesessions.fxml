@@ -40,15 +40,11 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btnviewMS" layoutX="1119.0" layoutY="377.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #649292;" text="View" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Button>
       <Button id="btnupdateMS" layoutX="1119.0" layoutY="311.0" mnemonicParsing="false" onAction="#sessionUpdate" onMouseClicked="#clickedUpdate" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btndeleteMS" layoutX="1121.0" layoutY="449.0" mnemonicParsing="false" onAction="#btnOnAction_Delete" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Delete" textFill="WHITE">
+      <Button id="btndeleteMS" layoutX="1119.0" layoutY="385.0" mnemonicParsing="false" onAction="#btnOnAction_Delete" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

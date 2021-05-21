@@ -59,11 +59,6 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font></Button>
-                        <Button id="btnbackAS" layoutX="633.0" layoutY="389.0" mnemonicParsing="false" onAction="#btn_onaction_back" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #268104;" text="Back" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
                         <Text layoutX="43.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Lecturer(s)">
                            <font>
                               <Font size="20.0" />
