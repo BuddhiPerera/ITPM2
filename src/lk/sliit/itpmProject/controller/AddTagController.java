@@ -146,9 +146,11 @@ int tagCode;
         }catch (Exception e){
             System.out.println(e);
         }
+
     }else {
             new Alert(Alert.AlertType.ERROR, "Invalid Tag Code").show();
         }
+
     }
 
     public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
