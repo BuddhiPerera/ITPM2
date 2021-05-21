@@ -146,9 +146,7 @@ int tagCode;
         }catch (Exception e){
             System.out.println(e);
         }
-    }else {
-            new Alert(Alert.AlertType.ERROR, "Add 6 Digit Number").show();
-        }
+    }
     }
 
     public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
