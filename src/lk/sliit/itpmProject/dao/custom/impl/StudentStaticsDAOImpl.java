@@ -97,7 +97,7 @@ public class StudentStaticsDAOImpl  implements StudentStaticsDAO {
 
     @Override
     public String findLatestSubject() throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT subName AS val FROM AddSubject ORDER BY id DESC LIMIT 1");
+        ResultSet rs = CrudUtil.execute("SELECT SubName AS val FROM AddSubject ORDER BY id DESC LIMIT 1");
         if (rs.next()) {
             String i = rs.getString("val");
             return i;
@@ -107,7 +107,7 @@ public class StudentStaticsDAOImpl  implements StudentStaticsDAO {
 
     @Override
     public int findLecturerHallCount() throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE LectureHall = true");
+        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE lectureHall = true");
         if (rs.next()) {
             int i = rs.getInt("val");
             return i;
@@ -117,7 +117,7 @@ public class StudentStaticsDAOImpl  implements StudentStaticsDAO {
 
     @Override
     public int findLabCount() throws Exception {
-        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE Laboratory = true");
+        ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE laboratory = true");
         if (rs.next()) {
             int i = rs.getInt("val");
             return i;

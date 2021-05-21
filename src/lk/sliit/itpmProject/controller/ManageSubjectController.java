@@ -266,6 +266,7 @@ public class ManageSubjectController implements Initializable {
         }
     }
 
+    @FXML
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
