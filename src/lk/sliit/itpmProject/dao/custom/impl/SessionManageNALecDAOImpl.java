@@ -19,10 +19,8 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
             addTagList.add(new SessionManageNALec(
                     resultSet.getInt(1),
                     resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6)
+                    resultSet.getString(3)
+
             ));
         }
         return addTagList;
@@ -52,7 +50,7 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
 
     @Override
     public boolean delete(String s) throws Exception {
-        return false;
+        return CrudUtil.execute("DELETE FROM MFkwg22AgC.NotAvbSessionLec WHERE id = ?", s);
     }
 
     @Override
@@ -90,5 +88,65 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
                 sessionManageNALec.getLectureComboValue(),
                 sessionManageNALec.getNaTimeLectureTxtText()
         );
+    }
+
+    @Override
+    public List<SessionManageNALec> findAllDataSes() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM NotAvbSessionGroup");
+        List<SessionManageNALec> addTagList = new ArrayList<>();
+        while(resultSet.next()){
+            addTagList.add(new SessionManageNALec(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3)
+
+            ));
+        }
+        return addTagList;
+    }
+
+    @Override
+    public boolean deleteGroup(String valueOf) throws Exception {
+        return CrudUtil.execute("DELETE FROM MFkwg22AgC.NotAvbSessionGroup WHERE id = ?", valueOf);
+    }
+
+    @Override
+    public List<SessionManageNALec> findAllDataSUbGroup() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM MFkwg22AgC.NotAvbSessionSibGroup");
+        List<SessionManageNALec> addTagList = new ArrayList<>();
+        while(resultSet.next()){
+            addTagList.add(new SessionManageNALec(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3)
+
+            ));
+        }
+        return addTagList;
+    }
+
+    @Override
+    public boolean deleteSGroup(String valueOf) throws Exception {
+        return CrudUtil.execute("DELETE FROM MFkwg22AgC.NotAvbSessionSibGroup WHERE id = ?", valueOf);
+    }
+
+    @Override
+    public List<SessionManageNALec> findAllDataRoom() throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM MFkwg22AgC.NotAvbSessionRooms");
+        List<SessionManageNALec> addTagList = new ArrayList<>();
+        while(resultSet.next()){
+            addTagList.add(new SessionManageNALec(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3)
+
+            ));
+        }
+        return addTagList;
+    }
+
+    @Override
+    public boolean deleteRoomNa(String valueOf) throws Exception {
+        return CrudUtil.execute("DELETE FROM MFkwg22AgC.NotAvbSessionRooms WHERE id = ?", valueOf);
     }
 }

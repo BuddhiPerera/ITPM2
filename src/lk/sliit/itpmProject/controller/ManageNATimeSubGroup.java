@@ -1,17 +1,8 @@
 package lk.sliit.itpmProject.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -28,65 +19,20 @@ import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.SessionManageBO;
-import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 import lk.sliit.itpmProject.dto.ManageNotAvbTimeDTO;
-import lk.sliit.itpmProject.util.LecturerTM;
 import lk.sliit.itpmProject.util.ManageNotAvbTimeTM;
-import lk.sliit.itpmProject.util.SessionTM;
 
-public class ManageNotAvailableTimesController implements Initializable {
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-
+public class ManageNATimeSubGroup implements Initializable {
     public TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane root1;
-
-    @FXML
-    private ImageView iconHome;
-
-    @FXML
-    private ImageView iconLecture;
-
-    @FXML
-    private ImageView iconStudent;
-
-    @FXML
-    private ImageView iconTImeTable;
-
-    @FXML
-    private ImageView iconLocation;
-    private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        tblNotAvbTimes.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
-        tblNotAvbTimes.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("duration"));
-        tblNotAvbTimes.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("sessionId"));
-
-        try {
-            List<ManageNotAvbTimeDTO> manageNotAvbTimeDTOS = sessionManageBO.findAllData();
-            ObservableList<ManageNotAvbTimeTM> sessionTMS = tblNotAvbTimes.getItems();
-            for (ManageNotAvbTimeDTO manageNotAvbTimeDTO : manageNotAvbTimeDTOS) {
-                sessionTMS.add(new ManageNotAvbTimeTM(
-                        manageNotAvbTimeDTO.getId(),
-                        manageNotAvbTimeDTO.getDuration(),
-                        manageNotAvbTimeDTO.getLecture(),
-                        manageNotAvbTimeDTO.getGroupId(),
-                        manageNotAvbTimeDTO.getSubGroupId(),
-                        manageNotAvbTimeDTO.getSessionId()
-                ));
-            }
-        } catch (Exception e) {
-
-        }
-    }
+    public AnchorPane root1;
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -130,18 +76,10 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
-
+    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
     }
 
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-
-    public void btnRefresh(ActionEvent actionEvent) {
+    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
     }
 
     public void btnBackw(ActionEvent actionEvent) throws IOException {
@@ -161,6 +99,8 @@ public class ManageNotAvailableTimesController implements Initializable {
             tt.play();
         }
     }
+    public void btnRefresh(ActionEvent actionEvent) {
+    }
 
     public void btnDelete(ActionEvent actionEvent) {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
@@ -175,12 +115,38 @@ public class ManageNotAvailableTimesController implements Initializable {
         if (buttonType.get() == ButtonType.YES) {
 
             try {
-                sessionManageBO.deleteItemNaLec(selectedItem.getId());
+                sessionManageBO.deleteItemNaSubGroup(selectedItem.getId());
                 tblNotAvbTimes.getItems().remove(selectedItem);
             } catch (Exception e) {
                 new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
                 Logger.getLogger("").log(Level.SEVERE,null,e);
             }
+        }
+    }
+
+    private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tblNotAvbTimes.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblNotAvbTimes.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("duration"));
+        tblNotAvbTimes.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("sessionId"));
+
+        try {
+            List<ManageNotAvbTimeDTO> manageNotAvbTimeDTOS = sessionManageBO.findAllDataSUbGroup();
+            ObservableList<ManageNotAvbTimeTM> sessionTMS = tblNotAvbTimes.getItems();
+            for (ManageNotAvbTimeDTO manageNotAvbTimeDTO : manageNotAvbTimeDTOS) {
+                sessionTMS.add(new ManageNotAvbTimeTM(
+                        manageNotAvbTimeDTO.getId(),
+                        manageNotAvbTimeDTO.getDuration(),
+                        manageNotAvbTimeDTO.getLecture(),
+                        manageNotAvbTimeDTO.getGroupId(),
+                        manageNotAvbTimeDTO.getSubGroupId(),
+                        manageNotAvbTimeDTO.getSessionId()
+                ));
+            }
+        } catch (Exception e) {
+
         }
     }
 }

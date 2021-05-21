@@ -72,4 +72,18 @@ public interface SessionManageBO extends SuperBO {
     List<AddSessionDTO> loadSessionStd(String s) throws Exception;
 
     List<AddSessionDTO> loadSessionLoc(String s)throws Exception;
+
+    void deleteItemNaLec(int id)throws Exception;
+
+    List<ManageNotAvbTimeDTO> findAllDataSes()throws Exception;
+
+    void deleteItemNaGroup(int id)throws Exception;
+
+    List<ManageNotAvbTimeDTO> findAllDataSUbGroup()throws Exception;
+
+    void deleteItemNaSubGroup(int id)throws Exception;
+
+    void deleteItemNaLecRoom(int id)throws Exception;
+
+    List<ManageNotAvbTimeDTO> findAllDataRom()throws Exception;
 }

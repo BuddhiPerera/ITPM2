@@ -370,6 +370,80 @@ public class SessionManageBOImpl  implements SessionManageBO {
         return dtos;
     }
 
+    @Override
+    public void deleteItemNaLec(int id) throws Exception {
+        sessionManageNALecDAO.delete(String.valueOf(id));
+    }
+
+    @Override
+    public List<ManageNotAvbTimeDTO> findAllDataSes() throws Exception {
+        List<SessionManageNALec> sessionManageNALecs = sessionManageNALecDAO.findAllDataSes();
+        List<ManageNotAvbTimeDTO> addTagDTOList = new ArrayList<>();
+        for (SessionManageNALec sessionManageNALec:sessionManageNALecs
+        ) {
+            addTagDTOList.add(new ManageNotAvbTimeDTO(
+                    sessionManageNALec.getMaxCode(),
+                    sessionManageNALec.getLectureComboValue(),
+                    sessionManageNALec.getNaTimeLectureGroupValue1(),
+                    sessionManageNALec.getNaTimeLectureGroupValue(),
+                    sessionManageNALec.getNaTimeLectureSessionIdTxtValue(),
+                    sessionManageNALec.getNaTimeLectureTxtText()
+            ));
+        }
+        return addTagDTOList;
+    }
+
+    @Override
+    public void deleteItemNaGroup(int id) throws Exception {
+        sessionManageNALecDAO.deleteGroup(String.valueOf(id));
+    }
+
+    @Override
+    public List<ManageNotAvbTimeDTO> findAllDataSUbGroup() throws Exception {
+        List<SessionManageNALec> sessionManageNALecs = sessionManageNALecDAO.findAllDataSUbGroup();
+        List<ManageNotAvbTimeDTO> addTagDTOList = new ArrayList<>();
+        for (SessionManageNALec sessionManageNALec:sessionManageNALecs
+        ) {
+            addTagDTOList.add(new ManageNotAvbTimeDTO(
+                    sessionManageNALec.getMaxCode(),
+                    sessionManageNALec.getLectureComboValue(),
+                    sessionManageNALec.getNaTimeLectureGroupValue1(),
+                    sessionManageNALec.getNaTimeLectureGroupValue(),
+                    sessionManageNALec.getNaTimeLectureSessionIdTxtValue(),
+                    sessionManageNALec.getNaTimeLectureTxtText()
+            ));
+        }
+        return addTagDTOList;
+    }
+
+    @Override
+    public void deleteItemNaSubGroup(int id) throws Exception {
+        sessionManageNALecDAO.deleteSGroup(String.valueOf(id));
+    }
+
+    @Override
+    public void deleteItemNaLecRoom(int id) throws Exception {
+        sessionManageNALecDAO.deleteRoomNa(String.valueOf(id));
+    }
+
+    @Override
+    public List<ManageNotAvbTimeDTO> findAllDataRom() throws Exception {
+        List<SessionManageNALec> sessionManageNALecs = sessionManageNALecDAO.findAllDataRoom();
+        List<ManageNotAvbTimeDTO> addTagDTOList = new ArrayList<>();
+        for (SessionManageNALec sessionManageNALec:sessionManageNALecs
+        ) {
+            addTagDTOList.add(new ManageNotAvbTimeDTO(
+                    sessionManageNALec.getMaxCode(),
+                    sessionManageNALec.getLectureComboValue(),
+                    sessionManageNALec.getNaTimeLectureGroupValue1(),
+                    sessionManageNALec.getNaTimeLectureGroupValue(),
+                    sessionManageNALec.getNaTimeLectureSessionIdTxtValue(),
+                    sessionManageNALec.getNaTimeLectureTxtText()
+            ));
+        }
+        return addTagDTOList;
+    }
+
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws Exception {

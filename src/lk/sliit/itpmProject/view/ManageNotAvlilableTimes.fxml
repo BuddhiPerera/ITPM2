@@ -18,12 +18,9 @@
       </Label>
       <TableView fx:id="tblNotAvbTimes" layoutX="271.0" layoutY="216.0" prefHeight="369.0" prefWidth="802.0">
         <columns>
-          <TableColumn prefWidth="90.0" text="ID" />
-          <TableColumn prefWidth="167.0" text="Duration" />
-            <TableColumn prefWidth="175.0" text="Lecture" />
-            <TableColumn prefWidth="114.0" text="Group ID" />
-            <TableColumn prefWidth="108.0" text="Sub-Group ID" />
-            <TableColumn prefWidth="128.0" text="SessionId" />
+          <TableColumn prefWidth="216.0" text="ID" />
+          <TableColumn prefWidth="329.0" text="Lecturer" />
+            <TableColumn prefWidth="234.0" text="Time" />
         </columns>
       </TableView>
       <JFXButton layoutX="1101.0" layoutY="278.0" onAction="#btnRefresh" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #064E98;" text="Refresh" textFill="WHITE">

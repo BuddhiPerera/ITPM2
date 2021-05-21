@@ -59,7 +59,7 @@ public class SessionsController implements Initializable {
     public JFXButton btnClearTeacher;
     public AnchorPane root1;
 
-    private final AddLocationsBO addLocationsBO= BOFactory.getInstance().getBO(BOTypes.AddLocations);
+    private final AddLocationsBO addLocationsBO = BOFactory.getInstance().getBO(BOTypes.AddLocations);
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
     private final AddStudentBO addStudentBO = BOFactory.getInstance().getBO(BOTypes.AddStudent);
     private final AddLecturerBO addLecturerBO = BOFactory.getInstance().getBO(BOTypes.AddLecturer);
@@ -68,6 +68,7 @@ public class SessionsController implements Initializable {
     public TableView<SessionTM> tblParallel;
     public JFXTextField NaTimeLectureTxt1;
     public JFXTextField NaSGroupTxt;
+    @FXML
     public JFXComboBox NaTimeSROom;
     public JFXTextField timeTxtRoom;
     public JFXButton btnOnActionRoom;
@@ -150,7 +151,7 @@ public class SessionsController implements Initializable {
             List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
 
             ObservableList<String> lecturerTMS = NaTimeLectureCombo.getItems();
-            NaTimeLectureCombo.setValue("Select Name");
+
             for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
                 lecturerTMS.add(addLecturerDtO.getlName());
             }
@@ -160,7 +161,7 @@ public class SessionsController implements Initializable {
             List<AddLocationsDTO> addLocationsDTOList = addLocationsBO.findAllLocations();
 
             ObservableList<String> lecturerTMS = NaTimeSROom.getItems();
-            NaTimeSROom.setValue("Select Name");
+
             for (AddLocationsDTO addLecturerDtO : addLocationsDTOList) {
                 lecturerTMS.add(addLecturerDtO.getRoomName());
             }
@@ -173,7 +174,7 @@ public class SessionsController implements Initializable {
             ObservableList studentTMS2 = NaTimeLectureSubGroupTxt.getItems();
             for (AddStudentDTO addStudentDTO : addStudentDTOList) {
                 studentTMS.add(addStudentDTO.getGroupId());
-                studentTMS2.add(addStudentDTO.getSubGroupNo());
+                studentTMS2.add(addStudentDTO.getSubGroupNo() + "-" + addStudentDTO.getSubGroupId());
             }
         } catch (Exception e) {
 
@@ -270,12 +271,19 @@ public class SessionsController implements Initializable {
         NaTimeLectureSubGroupTxt.setValue("");
         NaTimeLectureCombo.setValue("");
         NaTimeLectureGroup.setValue("");
-        NaTimeLectureSessionIdTxt.setValue("");
         NaTimeLectureTxt.setText("");
     }
 
     public void btnSubmitTeacherOnAction(ActionEvent actionEvent) {
-
+        String lectureComboValue = NaTimeLectureCombo.getValue();
+        if (lectureComboValue == null || lectureComboValue.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Select a Lecturer").show();
+            return;
+        }
+        if (NaTimeLectureTxt.getText().equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Add a Time").show();
+            return;
+        }
         int maxCode = 0;
         try {
             int lastItemCode = sessionManageBO.getLastNotAvbLectures();
@@ -287,19 +295,13 @@ public class SessionsController implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
-
-
-        String lectureComboValue = NaTimeLectureCombo.getValue();
         String naTimeLectureTxtText = NaTimeLectureTxt.getText();
-
-
         AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
                 maxCode,
                 lectureComboValue,
                 naTimeLectureTxtText
         );
         try {
-
             sessionManageBO.saveNASessionLec(addSessionNALectureDTO);
             new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
 
@@ -374,6 +376,15 @@ public class SessionsController implements Initializable {
     }
 
     public void submitGroupNa(ActionEvent event) {
+        String lectureComboValue = NaTimeLectureGroup.getValue();
+        if (lectureComboValue == null || lectureComboValue.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Select a Group").show();
+            return;
+        }
+        if (NaTimeLectureTxt1.getText().equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Add a Time").show();
+            return;
+        }
         int maxCode = 0;
         try {
             int lastItemCode = sessionManageBO.getLastNotAvbGroups();
@@ -397,7 +408,7 @@ public class SessionsController implements Initializable {
         try {
 
             sessionManageBO.saveNASessionGroup(addSessionNALectureDTO);
-            new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
+            new Alert(Alert.AlertType.INFORMATION, "Group Added Successfully").show();
 
         } catch (Exception e) {
 
@@ -405,6 +416,21 @@ public class SessionsController implements Initializable {
     }
 
     public void submitSGroupOnAction(ActionEvent actionEvent) {
+        int s = 0;
+        String string = String.valueOf(NaTimeLectureSubGroupTxt.getValue());;
+        String[] parts = string.split("-");
+        String part1 = parts[0];
+
+
+        if (part1.equals("")|| part1 == null) {
+            new Alert(Alert.AlertType.ERROR, "Select a Group").show();
+            return;
+        }
+        if (NaSGroupTxt.getText().equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Add a Time").show();
+            return;
+        }
+
         int maxCode = 0;
         try {
             int lastItemCode = sessionManageBO.getLastNotAvbSubGroups();
@@ -416,13 +442,14 @@ public class SessionsController implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
-        int s = (int) NaTimeLectureSubGroupTxt.getValue();
+
         String lectureComboValu = String.valueOf(s);
+
         String naTimeLectureTxtText = NaSGroupTxt.getText();
 
         AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
                 maxCode,
-                lectureComboValu,
+                part1,
                 naTimeLectureTxtText
         );
         try {
@@ -436,7 +463,17 @@ public class SessionsController implements Initializable {
     }
 
     public void btnOnActionRoomOnAction(ActionEvent actionEvent) {
+        String lectureComboValu = String.valueOf(NaTimeSROom.getValue());
+        String naTimeLectureTxtText = timeTxtRoom.getText();
 
+        if (lectureComboValu.equals("")|| lectureComboValu == null) {
+            new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            return;
+        }
+        if (naTimeLectureTxtText.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Add a Time").show();
+            return;
+        }
         int maxCode = 0;
         try {
             int lastItemCode = sessionManageBO.getLastNARoom();
@@ -449,8 +486,6 @@ public class SessionsController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
 
-        String lectureComboValu = String.valueOf(NaTimeSROom.getValue());
-        String naTimeLectureTxtText = timeTxtRoom.getText();
 
         AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
                 maxCode,
@@ -515,5 +550,67 @@ public class SessionsController implements Initializable {
             tt.setToX(0);
             tt.play();
         }
+    }
+
+    public void viewGroupOnAction(ActionEvent actionEvent) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageNotAvbTimeGroup.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void clearGroupOnAction(ActionEvent actionEvent) {
+        NaTimeLectureTxt1.setText("");
+    }
+
+    public void btnSGroupOnAction(ActionEvent actionEvent) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageNATimeSubGroup.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void sGroupClear(ActionEvent actionEvent) {
+        NaSGroupTxt.setText("");
+    }
+
+    public void viewOnActionRoomS(ActionEvent actionEvent) throws IOException {
+        Parent root;
+
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageNotAvilableTimeRoom.fxml")));
+
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
+    }
+
+    public void btnClarRoom(ActionEvent actionEvent) {timeTxtRoom.setText("");
     }
 }

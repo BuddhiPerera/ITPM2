@@ -1,16 +1,7 @@
 package lk.sliit.itpmProject.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,31 +12,32 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sliit.itpmProject.business.BOFactory;
 import lk.sliit.itpmProject.business.BOTypes;
 import lk.sliit.itpmProject.business.custom.SessionManageBO;
-import lk.sliit.itpmProject.dto.LoadSessionDataDTO;
 import lk.sliit.itpmProject.dto.ManageNotAvbTimeDTO;
-import lk.sliit.itpmProject.util.LecturerTM;
 import lk.sliit.itpmProject.util.ManageNotAvbTimeTM;
-import lk.sliit.itpmProject.util.SessionTM;
 
-public class ManageNotAvailableTimesController implements Initializable {
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class ManageNATimeGroup implements Initializable {
 
-    public TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
     @FXML
-    private ResourceBundle resources;
+    private AnchorPane root;
 
     @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane root1;
+    private TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
 
     @FXML
     private ImageView iconHome;
@@ -62,16 +54,14 @@ public class ManageNotAvailableTimesController implements Initializable {
     @FXML
     private ImageView iconLocation;
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.AddSession);
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         tblNotAvbTimes.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblNotAvbTimes.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("duration"));
         tblNotAvbTimes.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("sessionId"));
 
         try {
-            List<ManageNotAvbTimeDTO> manageNotAvbTimeDTOS = sessionManageBO.findAllData();
+            List<ManageNotAvbTimeDTO> manageNotAvbTimeDTOS = sessionManageBO.findAllDataSes();
             ObservableList<ManageNotAvbTimeTM> sessionTMS = tblNotAvbTimes.getItems();
             for (ManageNotAvbTimeDTO manageNotAvbTimeDTO : manageNotAvbTimeDTOS) {
                 sessionTMS.add(new ManageNotAvbTimeTM(
@@ -88,7 +78,23 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
-    public void navigate(MouseEvent mouseEvent) throws IOException {
+    @FXML
+    void btnBackw(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDelete(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnRefresh(ActionEvent event) {
+
+    }
+
+    @FXML
+    void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
@@ -116,7 +122,7 @@ public class ManageNotAvailableTimesController implements Initializable {
 
             if (root != null) {
                 Scene subScene = new Scene(root);
-                Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+                Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
                 primaryStage.centerOnScreen();
@@ -130,6 +136,7 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
+
     @FXML
     void playMouseEnterAnimation(MouseEvent event) {
 
@@ -141,10 +148,10 @@ public class ManageNotAvailableTimesController implements Initializable {
     }
 
 
-    public void btnRefresh(ActionEvent actionEvent) {
+    public void btnRefresh(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void btnBackw(ActionEvent actionEvent) throws IOException {
+    public void btnBackw(javafx.event.ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
@@ -152,7 +159,7 @@ public class ManageNotAvailableTimesController implements Initializable {
 
         if (root != null) {
             Scene subScene = new Scene(root);
-            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
             TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
@@ -162,7 +169,7 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
-    public void btnDelete(ActionEvent actionEvent) {
+    public void btnDelete(javafx.event.ActionEvent actionEvent) {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
         if(selectedItem == null){
             new Alert(Alert.AlertType.INFORMATION,"Select a  Row").show();
@@ -175,12 +182,21 @@ public class ManageNotAvailableTimesController implements Initializable {
         if (buttonType.get() == ButtonType.YES) {
 
             try {
-                sessionManageBO.deleteItemNaLec(selectedItem.getId());
+                sessionManageBO.deleteItemNaGroup(selectedItem.getId());
                 tblNotAvbTimes.getItems().remove(selectedItem);
             } catch (Exception e) {
                 new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
                 Logger.getLogger("").log(Level.SEVERE,null,e);
             }
         }
+    }
+
+    public void navigate(javafx.scene.input.MouseEvent mouseEvent) {
+    }
+
+    public void playMouseEnterAnimation(javafx.scene.input.MouseEvent mouseEvent) {
+    }
+
+    public void playMouseExitAnimatio(javafx.scene.input.MouseEvent mouseEvent) {
     }
 }
