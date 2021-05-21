@@ -14,11 +14,12 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    public static String username;
-    public static String db;
-    public static String password;
+    public static String username ="MFkwg22AgC";
+    public static String db ="MFkwg22AgC";
+    public static String password ="YTrnJWogtE";
     public static String host;
     public static String port;
+
 
 
     private static lk.sliit.itpmProject.db.DBConnection dbConnection;
@@ -26,12 +27,12 @@ public class DBConnection {
 
     private DBConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
 
 
-            connection = DriverManager.getConnection("jdbc:mysql://" + "localhost" + ":" + 3306 + "/" + "fff" + "?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "1234");
-
+            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MFkwg22AgC", username,"YTrnJWogtE");
+          //  connection = DriverManager.getConnection("jdbc:mysql://" + "localhost" + ":" + 3306 + "/" + "fff" + "?createDatabaseIfNotExist=true&allowMultiQueries=true", "root", "1234");
             PreparedStatement pstm = connection.prepareStatement("SHOW TABLES");
             ResultSet resultSet = pstm.executeQuery();
             if (!resultSet.next()) {

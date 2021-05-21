@@ -53,12 +53,12 @@ public class ConsecutiveSessionsDAOImpl implements ConsecutiveSessionsDAO {
     @Override
     public void addconsecutiveSessions(List<ConsecutiveSessions> entity1) throws Exception {
        int id =0;
-        ResultSet resultSet = CrudUtil.execute("SELECT id FROM Consecutive ORDER BY id DESC LIMIT 1");
+        ResultSet resultSet = CrudUtil.execute("SELECT id FROM consecutive ORDER BY id DESC LIMIT 1");
         if(resultSet.next()){
             id = resultSet.getInt(1);
         }
         for (ConsecutiveSessions entity: entity1) {
-            CrudUtil.execute("INSERT INTO Consecutive VALUES (?,?,?,?,?,?,?,?)",
+            CrudUtil.execute("INSERT INTO consecutive VALUES (?,?,?,?,?,?,?,?)",
                     id+1,
                     entity.getId(),
                     entity.getLectureOne(),

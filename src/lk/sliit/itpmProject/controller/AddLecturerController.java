@@ -164,7 +164,7 @@ public class AddLecturerController implements Initializable {
                     root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddRBLocation.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }
@@ -331,7 +331,7 @@ public class AddLecturerController implements Initializable {
 
         if (root != null) {
             Scene subScene = new Scene(root);
-            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
             TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
@@ -349,7 +349,7 @@ public class AddLecturerController implements Initializable {
 
         if (root != null) {
             Scene subScene = new Scene(root);
-            Stage primaryStage = (Stage) this.root1.getScene().getWindow();
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
             TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());

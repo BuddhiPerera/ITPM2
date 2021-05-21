@@ -45,7 +45,7 @@ public class TimeTableDAOImpl implements TimeTableDAO {
             employeeId =  rst.getString(1);
         }
 
-        rst = CrudUtil.execute("SELECT * FROM lecturerworkday where empId=? ORDER BY empId DESC LIMIT 1",employeeId);
+        rst = CrudUtil.execute("SELECT * FROM MFkwg22AgC.LecturerWorkDay where empId=? ORDER BY empId DESC LIMIT 1",employeeId);
      TimeTable timeTables = new TimeTable();
         while(rst.next()) {
             timeTables.setTimeSlot(rst.getString(1));

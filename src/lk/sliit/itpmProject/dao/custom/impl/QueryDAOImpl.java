@@ -15,7 +15,7 @@ public class QueryDAOImpl implements QueryDAO {
     public List<CustomEntity> getInfo() throws Exception {
         ResultSet rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                 "s.SubName,a.SelectGroup,a.SelectTag " +
-                "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject");
+                "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject` s ON s.subCode=a.selectSubject");
         List<CustomEntity> al = new ArrayList<>();
         while (rst.next()){
             al.add(new CustomEntity(
@@ -37,23 +37,23 @@ public class QueryDAOImpl implements QueryDAO {
         if(i==0){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.`selectSubject` WHERE a.`lecture1`=?",val);
+                    "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject` s ON s.subCode=a.`selectSubject` WHERE a.`lecture1`=?",val);
         }else if (i==1){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where lecture2 =?",val);
+                     "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject`  s ON s.subCode=a.selectSubject where lecture2 =?",val);
         }else if (i==2){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubCode=?",val);
+                     "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject`  s ON s.subCode=a.selectSubject where SubCode=?",val);
         }else if (i==3){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SubName =?",val);
+                     "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject`  s ON s.subCode=a.selectSubject where SubName =?",val);
         }else if (i==4){
              rst = CrudUtil.execute("SELECT a.id,a.lecture1, a.lecture2,a.SelectSubject AS subjectCode," +
                     "s.SubName,a.SelectGroup,a.SelectTag " +
-                    "FROM addsession a INNER JOIN `addSubject` s ON s.subCode=a.selectSubject where SelectGroup =?",val);
+                     "FROM MFkwg22AgC.AddSession a INNER JOIN MFkwg22AgC.`AddSubject`  s ON s.subCode=a.selectSubject where SelectGroup =?",val);
         }
 
         List<CustomEntity> al = new ArrayList<>();
