@@ -169,7 +169,7 @@ public class AddsessionController implements Initializable {
             String lec1 = cmb_selected_lecture.getText();
 
             String lec2 = "";
-            String yo[] = lec1.split(" ");
+            String yo[] = lec1.split("-");
             int count = 0;
 
             for (int i = 0; i < yo.length; i++) {
@@ -323,7 +323,7 @@ public class AddsessionController implements Initializable {
     public void cmb_select_subjectOnAction(ActionEvent actionEvent) {
         cmb_select_tag.setDisable(false);
         tctSession.setText("");
-        AddLecturer.value = cmb_selected_lecture.getText() +" "+cmb_select_subject.getValue();
+        AddLecturer.value = cmb_selected_lecture.getText() +"-"+cmb_select_subject.getValue();
         tctSession.setText(AddLecturer.value);
     }
 

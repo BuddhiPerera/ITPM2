@@ -49,7 +49,7 @@ public class AddStudentDAOImpl implements AddStudentDAO {
 
     @Override
     public boolean update(AddStudent entity) throws Exception {
-        return CrudUtil.execute("UPDATE AddStudentSubGroups SET year = ?, semester = ?, programme = ?, groupNo = ?, subGroupNo = ?, groupId =?, subGroupId =? WHERE id = ?",
+        return CrudUtil.execute("UPDATE AddStudentSubGroups SET yearx = ?, semester = ?, programme = ?, groupNo = ?, subGroupNo = ?, groupId =?, subGroupId =? WHERE id = ?",
                 entity.getYear(),
                 entity.getSemester(),
                 entity.getProgramme(),

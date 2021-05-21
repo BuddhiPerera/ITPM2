@@ -23,6 +23,7 @@ import lk.sliit.itpmProject.dto.AddTagDTO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddTagController implements Initializable {
 
@@ -111,6 +112,12 @@ public class AddTagController implements Initializable {
     }
 
     public void btnSaveTag_onAction(ActionEvent actionEvent) {
+        String tagCode1 = (txtAddTagCode.getText());
+int tagCode;
+        boolean val = Pattern.matches("\\d{6}", tagCode1);
+        if(val){
+            tagCode = Integer.parseInt(tagCode1);
+
         int maxCode = 0;
         try {
             int lastItemCode = addTagBO.getLastItemCode();
@@ -124,7 +131,7 @@ public class AddTagController implements Initializable {
         }
 
         String tagName = txtAddTag.getText();
-        int tagCode = Integer.parseInt(txtAddTagCode.getText());
+
         String addTag = cmbAddTag.getValue();
 
         AddTagDTO addTagDTO = new AddTagDTO(
@@ -138,6 +145,9 @@ public class AddTagController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION, "Tag Added Successfully").show();
         }catch (Exception e){
             System.out.println(e);
+        }
+    }else {
+            new Alert(Alert.AlertType.ERROR, "Add 6 Digit Number").show();
         }
     }
 
