@@ -69,14 +69,13 @@ public class VisualizingStatisticController implements Initializable {
     private final StudentStaticsBO staticsBO = BOFactory.getInstance().getBO(BOTypes.StudentStatics);
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-XYChart.Series set1 = new XYChart.Series<>();
-XYChart.Series set2 = new XYChart.Series<>();
-set1.setName("LecturerRooms");
-set2.setName("Laboratories");
+        XYChart.Series set1 = new XYChart.Series<>();
+        XYChart.Series set2 = new XYChart.Series<>();
+        set1.setName("LecturerRooms");
+        set2.setName("Laboratories");
 
         int labCount = 0;
         try {
@@ -97,20 +96,20 @@ set2.setName("Laboratories");
         System.out.println(labLectureCount);
 
 
-        set2.getData().add(new XYChart.Data("LecturerRooms ",labLectureCount));
-set1.getData().add(new XYChart.Data("Laboratories ",labCount));
-barChartX.getData().addAll(set1);
-barChartX.getData().addAll(set2);
+        set2.getData().add(new XYChart.Data("LecturerRooms ", labLectureCount));
+        set1.getData().add(new XYChart.Data("Laboratories ", labCount));
+        barChartX.getData().addAll(set1);
+        barChartX.getData().addAll(set2);
 
 
         try {
-           int registeredLecturers = staticsBO.findLectureCount();
+            int registeredLecturers = staticsBO.findLectureCount();
 
             lblRLect.setText(String.valueOf(registeredLecturers));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
             int studentCount = staticsBO.findStudentCount();
@@ -118,8 +117,8 @@ barChartX.getData().addAll(set2);
             lblRStudent.setText(String.valueOf(studentCount));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
             int subjectCount = staticsBO.findSubjhectCount();
@@ -127,16 +126,16 @@ barChartX.getData().addAll(set2);
             lblRegiSubject.setText(String.valueOf(subjectCount));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
             int regisRoom = staticsBO.findRegisteredRoomCount();
             lblRegiRooms.setText(String.valueOf(regisRoom));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
 
         try {
@@ -144,24 +143,24 @@ barChartX.getData().addAll(set2);
             lblLLecturer.setText((latestLecturer));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
             String latestGroup = staticsBO.findLatestGroup();
             lblLGroup.setText((latestGroup));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
             String lastSubject = staticsBO.findLatestSubject();
             lblLSubject.setText((lastSubject));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
     }
 

@@ -3,6 +3,8 @@ package lk.sliit.itpmProject.dao.custom;
 import lk.sliit.itpmProject.dao.CrudDAO;
 import lk.sliit.itpmProject.entity.AddSession;
 
+import java.util.List;
+
 public interface SessionManageDAO extends CrudDAO<AddSession,String> {
     int getLastSessionId() throws Exception;
 
@@ -29,4 +31,10 @@ public interface SessionManageDAO extends CrudDAO<AddSession,String> {
     void setUpdateSubjectRoom(String val5, String val1R) throws Exception;
 
     void setUpdateConstRoom(String val6, String val1R) throws Exception;
+
+    List<AddSession> loadSessionLec(String empId) throws Exception;
+
+    List<AddSession> loadSessionStd(String s)throws Exception;
+
+    List<AddSession> loadSessionLoc(String s)throws Exception;
 }

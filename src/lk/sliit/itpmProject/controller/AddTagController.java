@@ -23,6 +23,7 @@ import lk.sliit.itpmProject.dto.AddTagDTO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddTagController implements Initializable {
 
@@ -67,19 +68,19 @@ public class AddTagController implements Initializable {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLecturer.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }
@@ -111,6 +112,12 @@ public class AddTagController implements Initializable {
     }
 
     public void btnSaveTag_onAction(ActionEvent actionEvent) {
+        String tagCode1 = (txtAddTagCode.getText());
+int tagCode;
+        boolean val = Pattern.matches("\\d{6}", tagCode1);
+        if(val){
+            tagCode = Integer.parseInt(tagCode1);
+
         int maxCode = 0;
         try {
             int lastItemCode = addTagBO.getLastItemCode();
@@ -124,7 +131,7 @@ public class AddTagController implements Initializable {
         }
 
         String tagName = txtAddTag.getText();
-        int tagCode = Integer.parseInt(txtAddTagCode.getText());
+
         String addTag = cmbAddTag.getValue();
 
         AddTagDTO addTagDTO = new AddTagDTO(
@@ -139,13 +146,16 @@ public class AddTagController implements Initializable {
         }catch (Exception e){
             System.out.println(e);
         }
+    }else {
+            new Alert(Alert.AlertType.ERROR, "Add 6 Digit Number").show();
+        }
     }
 
     public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader;
         Parent root = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("../view/ManageTag.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageTag.fxml"));
 
         if (root != null) {
             Scene subScene = new Scene(root);

@@ -169,7 +169,7 @@ public class AddsessionController implements Initializable {
             String lec1 = cmb_selected_lecture.getText();
 
             String lec2 = "";
-            String yo[] = lec1.split(" ");
+            String yo[] = lec1.split("-");
             int count = 0;
 
             for (int i = 0; i < yo.length; i++) {
@@ -255,20 +255,20 @@ public class AddsessionController implements Initializable {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLecturer.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddRBLocation.fxml"));
                     break;
             }
 
@@ -323,7 +323,7 @@ public class AddsessionController implements Initializable {
     public void cmb_select_subjectOnAction(ActionEvent actionEvent) {
         cmb_select_tag.setDisable(false);
         tctSession.setText("");
-        AddLecturer.value = cmb_selected_lecture.getText() +" "+cmb_select_subject.getValue();
+        AddLecturer.value = cmb_selected_lecture.getText() +"-"+cmb_select_subject.getValue();
         tctSession.setText(AddLecturer.value);
     }
 

@@ -30,7 +30,7 @@ import lk.sliit.itpmProject.demoData.AddSessionDemo;
 import lk.sliit.itpmProject.dto.*;
 import lk.sliit.itpmProject.util.SessionTM;
 import lk.sliit.itpmProject.util.StudentTM;
-import org.drools.template.parser.BooleanCell;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -227,19 +227,19 @@ public class SessionsController implements Initializable {
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddStudent.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddRBLocation.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("../view/AddLecturer.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmProject/view/AddLecturer.fxml"));
                     break;
                 case "iconTimeTable":
-                    fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/AddWorkingDaysAndHours.fxml"));
+                    fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmProject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
             }
@@ -311,7 +311,7 @@ public class SessionsController implements Initializable {
     public void viewTeacherOnAction(ActionEvent actionEvent) throws IOException {
         Parent root;
 
-        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../view/ManageNotAvlilableTimes.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmProject/view/ManageNotAvlilableTimes.fxml")));
 
         if (root != null) {
             Scene subScene = new Scene(root);

@@ -118,6 +118,7 @@ public class StudentStaticsDAOImpl  implements StudentStaticsDAO {
     @Override
     public int findLabCount() throws Exception {
         ResultSet rs = CrudUtil.execute("SELECT COUNT(*) AS val FROM AddLocations WHERE laboratory = true");
+
         if (rs.next()) {
             int i = rs.getInt("val");
             return i;

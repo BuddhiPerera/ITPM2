@@ -33,6 +33,8 @@ public class BOFactory {
                 return (T) new StudentStaticsBOImpl();
             case AddSession:
                 return (T) new SessionManageBOImpl();
+            case TimeTable:
+                return  (T) new TimeTableBOImpl();
 
             default:
                 return null;

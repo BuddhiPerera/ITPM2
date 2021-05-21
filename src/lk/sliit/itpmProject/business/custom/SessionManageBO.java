@@ -66,4 +66,10 @@ public interface SessionManageBO extends SuperBO {
     List<LoadSessionDataDTO> loadConsSessionTable()throws Exception;
 
     void setUpdateConstRoom(String val6, String val1R)throws Exception;
+
+    List<AddSessionDTO> loadSessionLec(String empId)throws Exception;
+
+    List<AddSessionDTO> loadSessionStd(String s) throws Exception;
+
+    List<AddSessionDTO> loadSessionLoc(String s)throws Exception;
 }

@@ -307,6 +307,69 @@ public class SessionManageBOImpl  implements SessionManageBO {
         sessionManageDAO.setUpdateConstRoom( val6,  val1R);
     }
 
+    @Override
+    public List<AddSessionDTO> loadSessionLec(String empId) throws Exception {
+        List<AddSession> all = sessionManageDAO.loadSessionLec(empId);
+        List<AddSessionDTO> dtos = new ArrayList<>();
+
+        for (AddSession addSession : all) {
+            dtos.add(new AddSessionDTO(
+                    addSession.getId(),
+                    addSession.getSelectLecture(),
+                    addSession.getSelectTag(),
+                    addSession.getSelectedLecturer(),
+                    addSession.getSelectGroup(),
+                    addSession.getNoOfStudent(),
+                    addSession.getSelectSubject(),
+                    addSession.getDurationHrs(),
+                    addSession.getRoom()
+            ));
+        }
+        return dtos;
+    }
+
+    @Override
+    public List<AddSessionDTO> loadSessionStd(String s) throws Exception {
+        List<AddSession> all = sessionManageDAO.loadSessionStd(s);
+        List<AddSessionDTO> dtos = new ArrayList<>();
+
+        for (AddSession addSession : all) {
+            dtos.add(new AddSessionDTO(
+                    addSession.getId(),
+                    addSession.getSelectLecture(),
+                    addSession.getSelectTag(),
+                    addSession.getSelectedLecturer(),
+                    addSession.getSelectGroup(),
+                    addSession.getNoOfStudent(),
+                    addSession.getSelectSubject(),
+                    addSession.getDurationHrs(),
+                    addSession.getRoom()
+            ));
+        }
+        return dtos;
+    }
+
+    @Override
+    public List<AddSessionDTO> loadSessionLoc(String s) throws Exception {
+        List<AddSession> all = sessionManageDAO.loadSessionLoc(s);
+        List<AddSessionDTO> dtos = new ArrayList<>();
+
+        for (AddSession addSession : all) {
+            dtos.add(new AddSessionDTO(
+                    addSession.getId(),
+                    addSession.getSelectLecture(),
+                    addSession.getSelectTag(),
+                    addSession.getSelectedLecturer(),
+                    addSession.getSelectGroup(),
+                    addSession.getNoOfStudent(),
+                    addSession.getSelectSubject(),
+                    addSession.getDurationHrs(),
+                    addSession.getRoom()
+            ));
+        }
+        return dtos;
+    }
+
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws Exception {
