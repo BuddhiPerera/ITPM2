@@ -83,4 +83,15 @@ public class AddSubjectDAOImpl implements AddSubjectDAO {
             return 0;
         }
     }
+
+    @Override
+    public String findOne(String selectSubject) throws Exception {
+        ResultSet resultSet = CrudUtil.execute("SELECT SubName FROM AddSubject where SubCode =? ORDER BY id DESC LIMIT 1",selectSubject);
+        if(resultSet.next()){
+            return resultSet.getString(1);
+        }
+        else {
+            return "";
+        }
+    }
 }

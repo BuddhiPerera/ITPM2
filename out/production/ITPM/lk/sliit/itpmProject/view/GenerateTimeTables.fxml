@@ -28,11 +28,13 @@
                         <TableView fx:id="tblLecture" layoutX="14.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
                               <TableColumn prefWidth="103.0" text="Time Slots" />
-                              <TableColumn prefWidth="142.0" text="Monday" />
-                              <TableColumn prefWidth="167.0" text="Tuesday" />
-                              <TableColumn prefWidth="175.0" text="Wednesday" />
-                              <TableColumn prefWidth="156.0" text="Thursday" />
-                              <TableColumn prefWidth="149.0" text="Friday" />
+                              <TableColumn prefWidth="120.0" text="Monday" />
+                              <TableColumn prefWidth="120.0" text="Tuesday" />
+                              <TableColumn prefWidth="143.0" text="Wednesday" />
+                              <TableColumn prefWidth="123.0" text="Thursday" />
+                              <TableColumn prefWidth="130.0" text="Friday" />
+                              <TableColumn prefWidth="130.0" text="Saturday" />
+                              <TableColumn prefWidth="130.0" text="Sunday" />
                            </columns>
                         </TableView>
                         <JFXButton fx:id="btnLecGenerate" layoutX="586.0" layoutY="47.0" onAction="#btnLecGenerateOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
@@ -59,14 +61,16 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
+                        <TableView fx:id="tbleStdu" layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
-                              <TableColumn prefWidth="103.0" text="Time Slots" />
-                              <TableColumn prefWidth="142.0" text="Monday" />
-                              <TableColumn prefWidth="167.0" text="Tuesday" />
-                              <TableColumn prefWidth="175.0" text="Wednesday" />
-                              <TableColumn prefWidth="156.0" text="Thursday" />
-                              <TableColumn prefWidth="149.0" text="Friday" />
+                              <TableColumn prefWidth="81.0" text="Time Slots" />
+                              <TableColumn prefWidth="86.0" text="Monday" />
+                              <TableColumn prefWidth="123.0" text="Tuesday" />
+                              <TableColumn prefWidth="139.0" text="Wednesday" />
+                              <TableColumn prefWidth="133.0" text="Thursday" />
+                              <TableColumn prefWidth="129.0" text="Friday" />
+                              <TableColumn prefWidth="129.0" text="Saturday" />
+                              <TableColumn prefWidth="129.0" text="Sunday" />
                            </columns>
                         </TableView>
                         <JFXComboBox fx:id="comboGroup" layoutX="264.0" layoutY="43.0" onAction="#comboGroupOnaction" prefHeight="31.0" prefWidth="284.0" />
@@ -95,12 +99,14 @@
                      <children>
                         <TableView fx:id="tbleLocation" layoutX="18.0" layoutY="125.0" prefHeight="432.0" prefWidth="915.0">
                            <columns>
-                              <TableColumn prefWidth="103.0" text="Time Slots" />
-                              <TableColumn prefWidth="142.0" text="Monday" />
-                              <TableColumn prefWidth="167.0" text="Tuesday" />
-                              <TableColumn prefWidth="175.0" text="Wednesday" />
-                              <TableColumn prefWidth="156.0" text="Thursday" />
-                              <TableColumn prefWidth="149.0" text="Friday" />
+                              <TableColumn prefWidth="86.0" text="Time Slots" />
+                              <TableColumn prefWidth="107.0" text="Monday" />
+                              <TableColumn prefWidth="120.0" text="Tuesday" />
+                              <TableColumn prefWidth="122.0" text="Wednesday" />
+                              <TableColumn prefWidth="129.0" text="Thursday" />
+                              <TableColumn prefWidth="124.0" text="Friday" />
+                              <TableColumn prefWidth="124.0" text="Saturday" />
+                              <TableColumn prefWidth="124.0" text="Sunday" />
                            </columns>
                         </TableView>
                         <JFXComboBox fx:id="comboLocation" layoutX="264.0" layoutY="43.0" onAction="#comboLocationOnAction" prefHeight="31.0" prefWidth="284.0" />

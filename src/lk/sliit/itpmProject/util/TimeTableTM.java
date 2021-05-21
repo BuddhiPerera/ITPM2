@@ -10,8 +10,8 @@ public class TimeTableTM {
     String saturday;
     String sunday;
 
-    public TimeTableTM() {
-    }
+  
+
 
     @Override
     public String toString() {

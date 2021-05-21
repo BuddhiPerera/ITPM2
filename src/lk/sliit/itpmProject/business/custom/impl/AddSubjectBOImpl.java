@@ -76,4 +76,9 @@ public class AddSubjectBOImpl implements AddSubjectBO {
                 addSubjectDTO.getSubCode()
         ));
     }
+
+    @Override
+    public String findSubjectName(String selectSubject) throws Exception {
+        return addSubjectDAO.findOne(selectSubject);
+    }
 }
