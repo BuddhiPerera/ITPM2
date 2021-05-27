@@ -1,0 +1,5 @@
+package lk.sliit.itpmproject.business;
+
+public enum BOTypes {
+    TIME_TABLE, ADD_SESSION, ADD_STUDENT, ADD_WORKING_DAYS, ADD_LECTURER, ADD_LOCATIONS, ADD_TAG, ADD_SUBJECT, STUDENT_STATICS;
+}
