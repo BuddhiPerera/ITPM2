@@ -259,7 +259,6 @@ public class AddLecturerController implements Initializable {
                 String level = levelCombo.getValue();
                 String rank = rankTxt.getText();
 
-//                ////////////////////////////////////////////////////////////////////
 
                 boolean saturday =saturdayCB.isSelected();
                 boolean sundayC=sundayCB.isSelected();
