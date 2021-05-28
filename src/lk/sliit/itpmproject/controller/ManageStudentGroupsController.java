@@ -11,8 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,71 +90,68 @@ public class ManageStudentGroupsController implements Initializable {
         tblStudent.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("groupId"));
         tblStudent.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("subGroupId"));
 
-
-        ObservableList list1 = cmbProgramme.getItems();
+        ObservableList<String> list1;
+        list1 = cmbProgramme.getItems();
         list1.add("IT");
         list1.add("CSSE");
         list1.add("CSE");
         list1.add("IM");
 
-        try{
+        try {
             List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
             ObservableList<StudentTM> studentTMS = tblStudent.getItems();
-            for (AddStudentDTO addStudentDTO:addStudentDTOList
-                 ) {
+            for (AddStudentDTO addStudentDTO : addStudentDTOList
+            ) {
                 studentTMS.add(new StudentTM(
-                   addStudentDTO.getId(),
-                   addStudentDTO.getYear(),
-                   addStudentDTO.getSemester(),
-                   addStudentDTO.getProgramme(),
-                   addStudentDTO.getGroupNo(),
-                   addStudentDTO.getSubGroupNo(),
-                   addStudentDTO.getGroupId(),
-                   addStudentDTO.getSubGroupId()
+                        addStudentDTO.getId(),
+                        addStudentDTO.getYear(),
+                        addStudentDTO.getSemester(),
+                        addStudentDTO.getProgramme(),
+                        addStudentDTO.getGroupNo(),
+                        addStudentDTO.getSubGroupNo(),
+                        addStudentDTO.getGroupId(),
+                        addStudentDTO.getSubGroupId()
                 ));
             }
-        }catch(Exception e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        tblStudent.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<StudentTM>() {
-            @Override
-            public void changed(ObservableValue<? extends StudentTM> observable, StudentTM oldValue, StudentTM newValue) {
-                StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
-                if (selectedItem == null) {
-                    btnDelete.setDisable(true);
-                    return;
-                }
-
-                btnDelete.setDisable(false);
-
-                txtGroupId.setText(selectedItem.getGroupId());
-                txtSubGroupId.setText(selectedItem.getSubGroupId());
-                int spinSem = selectedItem.getSemester();
-                int spinGroup = selectedItem.getGroupNo();
-                int spinSubGroup = selectedItem.getSubGroupNo();
-                int spinYe = selectedItem.getYear();
-
-                SpinnerValueFactory<Integer> valueFactory =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSem);
-                spinSemester.setValueFactory(valueFactory);
-                SpinnerValueFactory<Integer> valueFactory1 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinGroup);
-                spinGroupNo.setValueFactory(valueFactory1);
-                SpinnerValueFactory<Integer> valueFactory2 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSubGroup);
-                spinSubGroupNo.setValueFactory(valueFactory2);
-                SpinnerValueFactory<Integer> valueFactory3 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYe);
-                spinYear.setValueFactory(valueFactory3);
-
-                cmbProgramme.setValue(selectedItem.getProgramme());
+        tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
+            if (selectedItem == null) {
+                btnDelete.setDisable(true);
+                return;
             }
+
+            btnDelete.setDisable(false);
+
+            txtGroupId.setText(selectedItem.getGroupId());
+            txtSubGroupId.setText(selectedItem.getSubGroupId());
+            int spinSem = selectedItem.getSemester();
+            int spinGroup = selectedItem.getGroupNo();
+            int spinSubGroup = selectedItem.getSubGroupNo();
+            int spinYe = selectedItem.getYear();
+
+            SpinnerValueFactory<Integer> valueFactory =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSem);
+            spinSemester.setValueFactory(valueFactory);
+            SpinnerValueFactory<Integer> valueFactory1 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinGroup);
+            spinGroupNo.setValueFactory(valueFactory1);
+            SpinnerValueFactory<Integer> valueFactory2 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, spinSubGroup);
+            spinSubGroupNo.setValueFactory(valueFactory2);
+            SpinnerValueFactory<Integer> valueFactory3 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYe);
+            spinYear.setValueFactory(valueFactory3);
+
+            cmbProgramme.setValue(selectedItem.getProgramme());
         });
     }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionClear(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -182,27 +177,31 @@ public class ManageStudentGroupsController implements Initializable {
     }
 
     @FXML
-    void btnOnAction_Delete(ActionEvent event) {
+    void btnOnActionDelete(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
-            try {
-                addStudentBO.deleteItem(selectedItem.getId());
-                tblStudent.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+        boolean val = buttonType.isPresent();
+        if (val) {
+            ButtonType a = buttonType.get();
+            if (a == ButtonType.YES) {
+                StudentTM selectedItem = tblStudent.getSelectionModel().getSelectedItem();
+                try {
+                    addStudentBO.deleteItem(selectedItem.getId());
+                    tblStudent.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
 
     @FXML
-    void btnOnAction_Update(ActionEvent event)  {
+    void btnOnActionUpdate(ActionEvent event) {
         int year = spinYear.getValue();
-        int semester =spinSemester.getValue();
+        int semester = spinSemester.getValue();
         String programme = cmbProgramme.getValue();
         int subGroupNo = spinSubGroupNo.getValue();
         int groupNo = spinGroupNo.getValue();
@@ -218,7 +217,7 @@ public class ManageStudentGroupsController implements Initializable {
                     subGroupNo,
                     txtGroupId.getText(),
                     txtSubGroupId.getText()
-                    ));
+            ));
             selectedItem.setGroupId(txtGroupId.getText());
             selectedItem.setGroupNo(groupNo);
             selectedItem.setSubGroupNo(subGroupNo);
@@ -229,8 +228,8 @@ public class ManageStudentGroupsController implements Initializable {
             tblStudent.refresh();
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
     }
 
@@ -238,30 +237,30 @@ public class ManageStudentGroupsController implements Initializable {
         if (event.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) event.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconTimeTable":
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
-                case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                default:
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -277,9 +276,4 @@ public class ManageStudentGroupsController implements Initializable {
     }
 
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
-
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }

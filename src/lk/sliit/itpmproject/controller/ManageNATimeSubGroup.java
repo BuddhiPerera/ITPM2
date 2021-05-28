@@ -2,7 +2,7 @@ package lk.sliit.itpmproject.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -31,8 +31,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ManageNATimeSubGroup implements Initializable {
-    public TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
-    public AnchorPane root1;
+    @FXML
+    TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
+    @FXML
+    AnchorPane root1;
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -54,7 +56,7 @@ public class ManageNATimeSubGroup implements Initializable {
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
@@ -76,14 +78,9 @@ public class ManageNATimeSubGroup implements Initializable {
         }
     }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
+    public void btnBackw() throws IOException {
 
-    public void btnBackw(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
         Parent root = null;
 
         root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml"));
@@ -99,27 +96,30 @@ public class ManageNATimeSubGroup implements Initializable {
             tt.play();
         }
     }
-    public void btnRefresh(ActionEvent actionEvent) {
-    }
 
-    public void btnDelete(ActionEvent actionEvent) {
+    public void btnDelete() {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){
-            new Alert(Alert.AlertType.INFORMATION,"Select a  Row").show();
+        if (selectedItem == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Select a  Row").show();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
+        boolean ol = buttonType.isPresent();
+        if (ol) {
+            ButtonType bol = buttonType.get();
 
-            try {
-                sessionManageBO.deleteItemNaSubGroup(selectedItem.getId());
-                tblNotAvbTimes.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE,null,e);
+            if (bol == ButtonType.YES) {
+
+                try {
+                    sessionManageBO.deleteItemNaSubGroup(selectedItem.getId());
+                    tblNotAvbTimes.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
@@ -146,7 +146,7 @@ public class ManageNATimeSubGroup implements Initializable {
                 ));
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

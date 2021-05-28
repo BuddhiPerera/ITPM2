@@ -86,7 +86,7 @@ public class MainFormController implements Initializable {
                     lblMenu.setText("Manage Lecture");
                     lblDescription.setText("Click here to Manage Lecturers");
                     break;
-                case "iconTimeTable":
+                default:
                     lblMenu.setText("Manage Time Table");
                     lblDescription.setText("Click if you want to search Time Tables");
                     break;
@@ -111,27 +111,27 @@ public class MainFormController implements Initializable {
         if (event.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) event.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconMap":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLocations.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLocations.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);

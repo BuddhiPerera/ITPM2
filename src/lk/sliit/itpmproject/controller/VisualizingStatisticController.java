@@ -66,9 +66,10 @@ public class VisualizingStatisticController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        XYChart.Series set1 = new XYChart.Series<>();
-        XYChart.Series set2 = new XYChart.Series<>();
+        XYChart.Series set1;
+        XYChart.Series set2;
+        set1 = new XYChart.Series<>();
+         set2 = new XYChart.Series<>();
         set1.setName("LecturerRooms");
         set2.setName("Laboratories");
 
@@ -79,17 +80,12 @@ public class VisualizingStatisticController implements Initializable {
             e.printStackTrace();
         }
 
-        System.out.println(labCount);
-
-
         int labLectureCount = 0;
         try {
             labLectureCount = staticsBO.findLecturerHallCount();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(labLectureCount);
-
 
         set2.getData().add(new XYChart.Data("LecturerRooms ", labLectureCount));
         set1.getData().add(new XYChart.Data("Laboratories ", labCount));
@@ -121,7 +117,7 @@ public class VisualizingStatisticController implements Initializable {
             lblRegiSubject.setText(String.valueOf(subjectCount));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, "Something went ").show();
             Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
@@ -129,7 +125,7 @@ public class VisualizingStatisticController implements Initializable {
             lblRegiRooms.setText(String.valueOf(regisRoom));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, "Something wrong").show();
             Logger.getLogger("").log(Level.SEVERE, null, e);
         }
 
@@ -138,7 +134,7 @@ public class VisualizingStatisticController implements Initializable {
             lblLLecturer.setText((latestLecturer));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, "went wrong").show();
             Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
@@ -146,7 +142,7 @@ public class VisualizingStatisticController implements Initializable {
             lblLGroup.setText((latestGroup));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, " went wrong").show();
             Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
@@ -163,30 +159,30 @@ public class VisualizingStatisticController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -201,9 +197,5 @@ public class VisualizingStatisticController implements Initializable {
         }
     }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }

@@ -91,33 +91,37 @@ public class AddSubjectController implements Initializable {
     }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionclear(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            txtSubName.clear();
-            txtSubCode.clear();
-            chkSemester1.setSelected(false);
-            SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
-            this.spinOfferedYear.setValueFactory(spinnerValueFactory1);
-            SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
-            this.spinNoOfHours.setValueFactory(spinnerValueFactory2);
-            SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
-            this.spinNoOfTuteHours.setValueFactory(spinnerValueFactory3);
-            SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
-            this.spinNoOfLabHours.setValueFactory(spinnerValueFactory4);
-            SpinnerValueFactory<Integer> spinnerValueFactory5 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
-            this.spinNoOfEvHours.setValueFactory(spinnerValueFactory5);
+        boolean bl = buttonType.isPresent();
+        if (bl) {
+            ButtonType btnType = buttonType.get();
+
+            if (btnType == ButtonType.YES) {
+                txtSubName.clear();
+                txtSubCode.clear();
+                chkSemester1.setSelected(false);
+                SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
+                this.spinOfferedYear.setValueFactory(spinnerValueFactory1);
+                SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+                this.spinNoOfHours.setValueFactory(spinnerValueFactory2);
+                SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+                this.spinNoOfTuteHours.setValueFactory(spinnerValueFactory3);
+                SpinnerValueFactory<Integer> spinnerValueFactory4 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+                this.spinNoOfLabHours.setValueFactory(spinnerValueFactory4);
+                SpinnerValueFactory<Integer> spinnerValueFactory5 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 1);
+                this.spinNoOfEvHours.setValueFactory(spinnerValueFactory5);
 
 
-
+            }
         }
     }
 
     @FXML
-    void btnOnAction_Save(ActionEvent event) {
+    void btnOnActionSave(ActionEvent event) {
         int maxCode = 0;
         try {
             int lastItemCode = addSubjectBO.getLastItemCode();
@@ -127,17 +131,20 @@ public class AddSubjectController implements Initializable {
                 maxCode = lastItemCode + 1;
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
         }
 
-        int i = 0;
-        boolean semesterOne = false, semesterTwo = false;
 
-        if(chkSemester1.selectedProperty().getValue()){
+        boolean semesterOne = false;
+        boolean semesterTwo = false;
+
+        boolean val1 = chkSemester1.selectedProperty().getValue();
+        if (val1) {
             semesterOne = true;
 
         }
-        if(chkSemester2.selectedProperty().getValue()){
+        boolean val2 = chkSemester2.selectedProperty().getValue();
+        if (val2) {
             semesterTwo = true;
 
         }
@@ -168,18 +175,17 @@ public class AddSubjectController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION, "Subject Added Successfully").show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
-    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
+    public void btnOnActionManage() throws IOException {
+        Parent root1 = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageSubject.fxml"));
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageSubject.fxml"));
 
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
@@ -194,30 +200,30 @@ public class AddSubjectController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -232,10 +238,5 @@ public class AddSubjectController implements Initializable {
         }
     }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-
-    }
 }

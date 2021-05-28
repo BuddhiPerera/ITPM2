@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,8 +32,8 @@ import lk.sliit.itpmproject.util.ManageNotAvbTimeTM;
 
 public class ManageNotAvailableTimesController implements Initializable {
 
-
-    public TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
+    @FXML
+    TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
     @FXML
     private ResourceBundle resources;
 
@@ -81,7 +80,7 @@ public class ManageNotAvailableTimesController implements Initializable {
                 ));
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -105,7 +104,7 @@ public class ManageNotAvailableTimesController implements Initializable {
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
@@ -127,22 +126,9 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
 
-    }
+    public void btnBackw() throws IOException {
 
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-
-    public void btnRefresh(ActionEvent actionEvent) {
-    }
-
-    public void btnBackw(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
         Parent root = null;
 
         root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml"));
@@ -159,24 +145,28 @@ public class ManageNotAvailableTimesController implements Initializable {
         }
     }
 
-    public void btnDelete(ActionEvent actionEvent) {
+    public void btnDelete() {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){
-            new Alert(Alert.AlertType.INFORMATION,"Select a  Row").show();
+        if (selectedItem == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Select a  Row").show();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
+        boolean bool = buttonType.isPresent();
+        if (bool) {
+            ButtonType br= buttonType.get();
+            if (br == ButtonType.YES) {
 
-            try {
-                sessionManageBO.deleteItemNaLec(selectedItem.getId());
-                tblNotAvbTimes.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE,null,e);
+                try {
+                    sessionManageBO.deleteItemNaLec(selectedItem.getId());
+                    tblNotAvbTimes.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }

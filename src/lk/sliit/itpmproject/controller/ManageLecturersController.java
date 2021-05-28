@@ -11,8 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,7 +92,9 @@ public class ManageLecturersController implements Initializable {
         tblLecturer.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("level"));
         tblLecturer.getColumns().get(8).setCellValueFactory(new PropertyValueFactory<>("rank"));
 
-        ObservableList list1 = cmbCenter.getItems();
+        ObservableList<String> list1;
+
+        list1 = cmbCenter.getItems();
         list1.add("Malabe");
         list1.add("Metro");
         list1.add("Matara");
@@ -102,7 +102,8 @@ public class ManageLecturersController implements Initializable {
         list1.add("Kurunagala");
         list1.add("Jaffna");
 
-        ObservableList list2 = cmbLevel.getItems();
+        ObservableList<String> list2;
+        list2 = cmbLevel.getItems();
         list2.add("Professor");
         list2.add("Assistant Professor");
         list2.add("Senior Lecturer(HG)");
@@ -110,36 +111,39 @@ public class ManageLecturersController implements Initializable {
         list2.add("Lecturer");
         list2.add("Assistant Lecturer");
 
-        ObservableList List3 = cmbFaculty.getItems();
-        List3.add("Computing Faculty");
-        List3.add("Bussiness Faculty");
-        List3.add("Engineering Faculty");
-        List3.add("Architecture Faculty");
-        List3.add("Faculty of Humanities and Science");
+        ObservableList<String> list33;
+        list33 = cmbFaculty.getItems();
+        list33.add("Computing Faculty");
+        list33.add("Bussiness Faculty");
+        list33.add("Engineering Faculty");
+        list33.add("Architecture Faculty");
+        list33.add("Faculty of Humanities and Science");
 
-        ObservableList List4 = cmbDepartment.getItems();
-        List4.add("IT");
-        List4.add("SE");
-        List4.add("ISE");
-        List4.add("DS");
-        List4.add("CS");
-        List4.add("IM");
-        List4.add("CSNE");
-        List4.add("Civil");
-        List4.add("Electronic Engineering");
-        List4.add("Mechanical Engineering");
-        List4.add("QS");
+        ObservableList<String> list44;
+        list44 = cmbDepartment.getItems();
+        list44.add("IT");
+        list44.add("SE");
+        list44.add("ISE");
+        list44.add("DS");
+        list44.add("CS");
+        list44.add("IM");
+        list44.add("CSNE");
+        list44.add("Civil");
+        list44.add("Electronic Engineering");
+        list44.add("Mechanical Engineering");
+        list44.add("QS");
 
-        ObservableList List5 = cmbBuilding.getItems();
-        List5.add("Block A");
-        List5.add("Block B");
-        List5.add("Block E");
-        List5.add("Block F");
+        ObservableList<String> list55;
+        list55 = cmbBuilding.getItems();
+        list55.add("Block A");
+        list55.add("Block B");
+        list55.add("Block E");
+        list55.add("Block F");
 
-        try{
+        try {
             List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturers();
             ObservableList<LecturerTM> lecturerTMS = tblLecturer.getItems();
-            for (AddLecturerDTO addLecturerDtO: addLecturerDTOList) {
+            for (AddLecturerDTO addLecturerDtO : addLecturerDTOList) {
                 lecturerTMS.add(new LecturerTM(
                         addLecturerDtO.getId(),
                         addLecturerDtO.getEmpId(),
@@ -152,34 +156,31 @@ public class ManageLecturersController implements Initializable {
                         addLecturerDtO.getRank()
                 ));
             }
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tblLecturer.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            LecturerTM selectedItem = tblLecturer.getSelectionModel().getSelectedItem();
+            if (selectedItem == null) {
+                btnDelete.setDisable(true);
+                return;
             }
-        tblLecturer.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LecturerTM>() {
-            @Override
-            public void changed(ObservableValue<? extends LecturerTM> observable, LecturerTM oldValue, LecturerTM newValue) {
-                LecturerTM selectedItem = tblLecturer.getSelectionModel().getSelectedItem();
-                if(selectedItem == null){
-                    btnDelete.setDisable(true);
-                    return;
-                }
 
-                btnDelete.setDisable(false);
+            btnDelete.setDisable(false);
 
-                cmbBuilding.setValue(selectedItem.getBuildingNo());
-                cmbFaculty.setValue(selectedItem.getFaculty());
-                cmbCenter.setValue(selectedItem.getCenter());
-                cmbLevel.setValue(selectedItem.getLevel());
-                cmbDepartment.setValue(selectedItem.getDepartment());
-                txtLemid.setText(selectedItem.getEmpId());
-                txtLname.setText(selectedItem.getLastName());
-                txtRank.setText(selectedItem.getRank());
-            }
+            cmbBuilding.setValue(selectedItem.getBuildingNo());
+            cmbFaculty.setValue(selectedItem.getFaculty());
+            cmbCenter.setValue(selectedItem.getCenter());
+            cmbLevel.setValue(selectedItem.getLevel());
+            cmbDepartment.setValue(selectedItem.getDepartment());
+            txtLemid.setText(selectedItem.getEmpId());
+            txtLname.setText(selectedItem.getLastName());
+            txtRank.setText(selectedItem.getRank());
         });
     }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionClear(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -196,25 +197,28 @@ public class ManageLecturersController implements Initializable {
     }
 
     @FXML
-    void btnOnAction_Delete(ActionEvent event) {
+    void btnOnActionDelete(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            LecturerTM selectedItem = tblLecturer.getSelectionModel().getSelectedItem();
-            try {
-                addLecturerBO.deleteItem(selectedItem.getId());
-                tblLecturer.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE,null,e);
+        boolean val = buttonType.isPresent();
+        if (val) {
+            ButtonType boll = buttonType.get();
+            if (boll == ButtonType.YES) {
+                LecturerTM selectedItem = tblLecturer.getSelectionModel().getSelectedItem();
+                try {
+                    addLecturerBO.deleteItem(selectedItem.getId());
+                    tblLecturer.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
-
     @FXML
-    void btnOnAction_Update(ActionEvent event) {
+    void btnOnActionUpdate(ActionEvent event) {
         String building = cmbBuilding.getValue();
         String faculty = cmbFaculty.getValue();
         String center = cmbCenter.getValue();
@@ -225,7 +229,7 @@ public class ManageLecturersController implements Initializable {
         String rank = txtRank.getText();
 
         LecturerTM selectedItem = tblLecturer.getSelectionModel().getSelectedItem();
-        try{
+        try {
             addLecturerBO.updateLecturer(new AddLecturerDTO(
                     selectedItem.getId(),
                     emId,
@@ -237,7 +241,7 @@ public class ManageLecturersController implements Initializable {
                     level,
                     rank
             ));
-            
+
             selectedItem.setEmpId(txtLemid.getText());
             selectedItem.setLastName(txtLname.getText());
             selectedItem.setRank(txtRank.getText());
@@ -251,9 +255,9 @@ public class ManageLecturersController implements Initializable {
 
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
 
-        }catch (Exception e){
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
     }
 
@@ -261,30 +265,30 @@ public class ManageLecturersController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -299,9 +303,4 @@ public class ManageLecturersController implements Initializable {
         }
     }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
-
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }

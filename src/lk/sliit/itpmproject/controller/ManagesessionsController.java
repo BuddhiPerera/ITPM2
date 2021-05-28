@@ -2,6 +2,7 @@ package lk.sliit.itpmproject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -10,7 +11,6 @@ import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,10 +38,12 @@ import lk.sliit.itpmproject.dto.LoadSessionDataDTO;
 import lk.sliit.itpmproject.util.SessionTM;
 
 public class ManagesessionsController implements Initializable {
-
-    public TableView<SessionTM> tblManageSessions;
-    public TextField txtManageSessions;
-    public ChoiceBox manageSessionsOnAction;
+    @FXML
+     TableView<SessionTM> tblManageSessions;
+    @FXML
+     TextField txtManageSessions;
+    @FXML
+    ChoiceBox<String> manageSessionsOnAction;
 
     @FXML
     private AnchorPane root;
@@ -103,10 +105,10 @@ public class ManagesessionsController implements Initializable {
                 ));
             }
         } catch (Exception e) {
-            System.out.println(e);
+           e.printStackTrace();
         }
-
-        ObservableList list1 = manageSessionsOnAction.getItems();
+        ObservableList<String> list1;
+        list1 = manageSessionsOnAction.getItems();
         list1.add("Lecture 1");
         list1.add("Lecture 2");
         list1.add("Subject Code");
@@ -114,7 +116,7 @@ public class ManagesessionsController implements Initializable {
         list1.add("Group");
 
     }
-    public void btnRefreshOnAction(ActionEvent actionEvent) {
+    public void btnRefreshOnAction( ) {
         tblManageSessions.getItems().clear();
         try {
             List<LoadSessionDataDTO> loadSessionDataDTOList = sessionManageBO.loadSessionTable();
@@ -132,12 +134,12 @@ public class ManagesessionsController implements Initializable {
                 ));
             }
         } catch (Exception e) {
-            System.out.println(e);
+          e.printStackTrace();
         }
     }
-    public void btnSearchOnAction(ActionEvent mouseEvent) throws Exception {
+    public void btnSearchOnAction( )  {
         String category ="";
-        category = (String) manageSessionsOnAction.getValue();
+        category =  manageSessionsOnAction.getValue();
         String val =   txtManageSessions.getText();
         int i =-1;
         if(category == null){
@@ -177,7 +179,6 @@ public class ManagesessionsController implements Initializable {
                     ));
                 }
             } catch (Exception e) {
-                System.out.println(e);
                 new Alert(Alert.AlertType.ERROR, "Something Something Went Wrong").show();
             }
         }
@@ -187,30 +188,30 @@ public class ManagesessionsController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -225,29 +226,16 @@ public class ManagesessionsController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
 
-    }
 
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
+    public void btnOnActionAddSession( ) throws IOException {
 
-    }
+        Parent root1 = null;
 
-    @FXML
-    void initialize() {
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Addsession.fxml"));
 
-    }
-
-    public void btnOnAction_AddSession(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
-
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Addsession.fxml"));
-
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
@@ -258,12 +246,9 @@ public class ManagesessionsController implements Initializable {
         }
     }
 
-    public void tblOrders_OnMouseClicked(MouseEvent mouseEvent) throws IOException {
 
-    }
-
-    public void clickedUpdate(MouseEvent mouseEvent) throws Exception {
-        Parent root = null;
+    public void clickedUpdate(MouseEvent mouseEvent) throws SQLException, IOException {
+        Parent root1 = null;
         SessionTM selectedOrder = tblManageSessions.getSelectionModel().getSelectedItem();
         if (selectedOrder != null) {
             AddSessionDTO addSessionDTO = sessionManageBO.findAllSessions(selectedOrder.getId());
@@ -279,8 +264,8 @@ public class ManagesessionsController implements Initializable {
 
             if (mouseEvent.getClickCount() == 1) {
 
-                root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Addsession.fxml"));
-                Scene subScene = new Scene(root);
+                root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Addsession.fxml"));
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
                 primaryStage.setScene(subScene);
                 primaryStage.centerOnScreen();
@@ -295,16 +280,17 @@ public class ManagesessionsController implements Initializable {
         }
     }
 
-    public void sessionUpdate(ActionEvent actionEvent) {
-    }
 
 
-    public void btnOnAction_Delete(ActionEvent actionEvent) {
+    public void btnOnActionDelete( ) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if(buttonType.get() == ButtonType.YES){
+        boolean dd = buttonType.isPresent();
+        if(dd){
+        ButtonType cc =buttonType.get();
+        if(cc== ButtonType.YES){
             SessionTM selectedItem = tblManageSessions.getSelectionModel().getSelectedItem();
             try{
                 sessionManageBO.deleteItem(selectedItem.getId());
@@ -314,6 +300,6 @@ public class ManagesessionsController implements Initializable {
                 Logger.getLogger("").log(Level.SEVERE,null,e);
             }
         }
-    }
+    }}
 }
 

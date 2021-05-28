@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,10 +44,10 @@ public class ManageLocationsController implements Initializable {
     private TableView<LocationTM> tblLocations;
 
     @FXML
-    private RadioButton LHallRadio;
+    private RadioButton lHallRadio;
 
     @FXML
-    private RadioButton LabHallRadio;
+    private RadioButton labHallRadio;
 
     @FXML
     private TextField txtBuildingName;
@@ -69,7 +67,7 @@ public class ManageLocationsController implements Initializable {
     @FXML
     private Button btnClear;
 
-    private final AddLocationsBO addLocationsBO= BOFactory.getInstance().getBO(BOTypes.ADD_LOCATIONS);
+    private final AddLocationsBO addLocationsBO = BOFactory.getInstance().getBO(BOTypes.ADD_LOCATIONS);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,54 +78,51 @@ public class ManageLocationsController implements Initializable {
         tblLocations.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("laboratory"));
         tblLocations.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("Capacity"));
 
-        try{
+        try {
             List<AddLocationsDTO> addLocationsDTOList = addLocationsBO.findAllLocations();
             ObservableList<LocationTM> locationTMS = tblLocations.getItems();
-            for (AddLocationsDTO addlocationsDTO: addLocationsDTOList
-                 ) {
+            for (AddLocationsDTO addlocationsDTO : addLocationsDTOList
+            ) {
                 locationTMS.add(new LocationTM(
-                   addlocationsDTO.getId(),
-                   addlocationsDTO.getBuildingName(),
-                   addlocationsDTO.getRoomName(),
-                   addlocationsDTO.isLectureHall(),
-                   addlocationsDTO.isLaboratory(),
-                   addlocationsDTO.getCapacity()
+                        addlocationsDTO.getId(),
+                        addlocationsDTO.getBuildingName(),
+                        addlocationsDTO.getRoomName(),
+                        addlocationsDTO.isLectureHall(),
+                        addlocationsDTO.isLaboratory(),
+                        addlocationsDTO.getCapacity()
 
                 ));
             }
-        }catch(Exception e) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        tblLocations.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LocationTM>() {
-            @Override
-            public void changed(ObservableValue<? extends LocationTM> observable, LocationTM oldValue, LocationTM newValue) {
-                LocationTM selectedItem = tblLocations.getSelectionModel().getSelectedItem();
-                if (selectedItem == null) {
-                    btnDelete.setDisable(true);
-                    return;
-                }
-
-                btnDelete.setDisable(false);
-
-                txtcapacity.setText(selectedItem.getCapacity());
-                txtBuildingName.setText(selectedItem.getBuildingName());
-                txtRoomName.setText(selectedItem.getRoomName());
-                LabHallRadio.selectedProperty().getValue();
-
-                if(selectedItem.isLectureHall()){
-                    LHallRadio.setSelected(true);
-                }else {
-                    LabHallRadio.setSelected(true);
-                }
-
-
+        tblLocations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            LocationTM selectedItem = tblLocations.getSelectionModel().getSelectedItem();
+            if (selectedItem == null) {
+                btnDelete.setDisable(true);
+                return;
             }
+
+            btnDelete.setDisable(false);
+
+            txtcapacity.setText(selectedItem.getCapacity());
+            txtBuildingName.setText(selectedItem.getBuildingName());
+            txtRoomName.setText(selectedItem.getRoomName());
+            labHallRadio.selectedProperty().getValue();
+
+            if (selectedItem.isLectureHall()) {
+                lHallRadio.setSelected(true);
+            } else {
+                labHallRadio.setSelected(true);
+            }
+
+
         });
-        }
+    }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionClear() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -136,50 +131,55 @@ public class ManageLocationsController implements Initializable {
         txtBuildingName.setText("");
         txtcapacity.setText("");
         txtRoomName.setText("");
-        LabHallRadio.selectedProperty().setValue(false);
-        LHallRadio.selectedProperty().setValue(false);
+        labHallRadio.selectedProperty().setValue(false);
+        lHallRadio.selectedProperty().setValue(false);
     }
 
     @FXML
-    void btnOnAction_Delete(ActionEvent event) {
+    void btnOnActionDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            LocationTM selectedItem = tblLocations.getSelectionModel().getSelectedItem();
-            try {
-                addLocationsBO.deleteItem(selectedItem.getId());
-                tblLocations.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
+
+        boolean bol = buttonType.isPresent();
+        if (bol) {
+            ButtonType bool = buttonType.get();
+            if (bool == ButtonType.YES) {
+                LocationTM selectedItem = tblLocations.getSelectionModel().getSelectedItem();
+                try {
+                    addLocationsBO.deleteItem(selectedItem.getId());
+                    tblLocations.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
 
     @FXML
-    void btnOnAction_Update(ActionEvent event) {
+    void btnOnActionUpdate(ActionEvent event) {
         String building = txtBuildingName.getText();
         String room = txtRoomName.getText();
         String capacity = txtcapacity.getText();
 
-        boolean lab = false, lHall = false;
-
-        if(LabHallRadio.selectedProperty().getValue()){
+        boolean lab = false;
+        boolean lHall = false;
+        boolean a = labHallRadio.selectedProperty().getValue();
+        if (a) {
             lab = true;
-        }
-        else{
+        } else {
             lHall = true;
         }
 
         LocationTM selectedItem = tblLocations.getSelectionModel().getSelectedItem();
-        try{
+        try {
             addLocationsBO.updateLocation(new AddLocationsDTO(
-                   selectedItem.getId(),
-                   building,
-                   room,
-                   lHall,
+                    selectedItem.getId(),
+                    building,
+                    room,
+                    lHall,
                     lab,
                     capacity
 
@@ -188,14 +188,14 @@ public class ManageLocationsController implements Initializable {
             selectedItem.setBuildingName(txtBuildingName.getText());
             selectedItem.setCapacity(txtcapacity.getText());
             selectedItem.setRoomName(txtRoomName.getText());
-            selectedItem.setLaboratory(LabHallRadio.selectedProperty().getValue());
-            selectedItem.setLectureHall(LHallRadio.selectedProperty().getValue());
+            selectedItem.setLaboratory(labHallRadio.selectedProperty().getValue());
+            selectedItem.setLectureHall(lHallRadio.selectedProperty().getValue());
 
             tblLocations.refresh();
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
-        }catch(Exception e){
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-            Logger.getLogger("").log(Level.SEVERE,null,e);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            Logger.getLogger("").log(Level.SEVERE, null, e);
         }
     }
 
@@ -203,30 +203,30 @@ public class ManageLocationsController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -241,11 +241,7 @@ public class ManageLocationsController implements Initializable {
         }
     }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }
 
 

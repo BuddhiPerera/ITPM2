@@ -11,8 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,7 +73,8 @@ public class ManageTagController implements Initializable {
         tblTags.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tagCode"));
         tblTags.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("relatedTag"));
 
-        ObservableList list = cmbRelatedTag.getItems();
+        ObservableList <String> list;
+         list = cmbRelatedTag.getItems();
         list.add("Lecture");
         list.add("Tutorial");
         list.add("Practical");
@@ -93,29 +92,27 @@ public class ManageTagController implements Initializable {
                 ));
             }
         }catch (Exception e){
-
+            new Alert(Alert.AlertType.ERROR,
+                    "Exception");
         }
 
-        tblTags.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TagsTM>() {
-            @Override
-            public void changed(ObservableValue<? extends TagsTM> observable, TagsTM oldValue, TagsTM newValue) {
-                TagsTM selectedItem = tblTags.getSelectionModel().getSelectedItem();
-                if (selectedItem == null) {
-                    btnDelete.setDisable(true);
-                    return;
-                }
-
-                btnDelete.setDisable(false);
-
-                txtTagName.setText(selectedItem.getTagName());
-                txtTagCode.setText(String.valueOf(selectedItem.getTagCode()));
-                cmbRelatedTag.setValue(selectedItem.getRelatedTag());
+        tblTags.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            TagsTM selectedItem = tblTags.getSelectionModel().getSelectedItem();
+            if (selectedItem == null) {
+                btnDelete.setDisable(true);
+                return;
             }
+
+            btnDelete.setDisable(false);
+
+            txtTagName.setText(selectedItem.getTagName());
+            txtTagCode.setText(String.valueOf(selectedItem.getTagCode()));
+            cmbRelatedTag.setValue(selectedItem.getRelatedTag());
         });
     }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionClear(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -127,12 +124,17 @@ public class ManageTagController implements Initializable {
     }
 
     @FXML
-    void btnOnAction_Delete(ActionEvent event) {
+    void btnOnActionDelete(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
+        ButtonType val;
+      boolean aval=  buttonType.isPresent();
+      if(aval) {
+          val = buttonType.get();
+
+        if (val == ButtonType.YES) {
             TagsTM selectedItem = tblTags.getSelectionModel().getSelectedItem();
             try {
                 addTagBO.deleteItem(selectedItem.getId());
@@ -141,11 +143,11 @@ public class ManageTagController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
                 Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE,null,e);
             }
-        }
+        }}
     }
 
     @FXML
-    void btnOnAction_Update(ActionEvent event) {
+    void btnOnActionUpdate(ActionEvent event) {
         String tagName = txtTagName.getText();
         int tagCode = Integer.parseInt(txtTagCode.getText());
         String relatedTag = cmbRelatedTag.getValue();
@@ -177,30 +179,30 @@ public class ManageTagController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -214,9 +216,5 @@ public class ManageTagController implements Initializable {
             }
         }
     }
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }

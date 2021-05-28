@@ -2,13 +2,13 @@ package lk.sliit.itpmproject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,18 +31,39 @@ import lk.sliit.itpmproject.util.TimeTableTM;
 
 public class GenerateTimeTablesController implements Initializable {
 
+    @FXML
     public TableView<TimeTableTM> tblLecture;
+
+    @FXML
     public JFXButton btnLecGenerate;
-    public JFXComboBox comboLec;
+
+    @FXML
+    public JFXComboBox<String> comboLec;
+
+    @FXML
     public Tab tblStd;
-    public JFXComboBox comboGroup;
+
+    @FXML
+    public JFXComboBox<String> comboGroup;
+
+    @FXML
     public JFXButton studentGenerate;
+
+    @FXML
     public TableView<TimeTableTM> tbleLocation;
-    public JFXComboBox comboLocation;
-    public JFXButton GentLocation;
+
+    @FXML
+    public JFXComboBox<String> comboLocation;
+
+    @FXML
+    public JFXButton gentLocation;
+
+    @FXML
     public TableView<TimeTableTM> tbleStdu;
+
     @FXML
     private AnchorPane root;
+
     @FXML
     private ResourceBundle resources;
 
@@ -72,35 +93,42 @@ public class GenerateTimeTablesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String timeSlot = "timeSlot";
+        String monday = "monday";
+        String tuesday = "tuesday";
+        String wednesday = "wednesday";
+        String thursday = "thursday";
+        String friday = "friday";
+        String saturday = "saturday";
+        String sunday = "sunday";
+
+        tblLecture.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>(timeSlot));
+        tblLecture.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>(monday));
+        tblLecture.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>(tuesday));
+        tblLecture.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>(wednesday));
+        tblLecture.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>(thursday));
+        tblLecture.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>(friday));
+        tblLecture.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>(saturday));
+        tblLecture.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>(sunday));
 
 
-        tblLecture.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("timeSlot"));
-        tblLecture.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("monday"));
-        tblLecture.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tblLecture.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        tblLecture.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        tblLecture.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("friday"));
-        tblLecture.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("saturday"));
-        tblLecture.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("sunday"));
+        tbleStdu.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>(timeSlot));
+        tbleStdu.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>(monday));
+        tbleStdu.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>(tuesday));
+        tbleStdu.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>(wednesday));
+        tbleStdu.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>(thursday));
+        tbleStdu.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>(friday));
+        tbleStdu.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>(saturday));
+        tbleStdu.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>(sunday));
 
-
-        tbleStdu.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("timeSlot"));
-        tbleStdu.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("monday"));
-        tbleStdu.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbleStdu.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        tbleStdu.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        tbleStdu.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("friday"));
-        tbleStdu.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("saturday"));
-        tbleStdu.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("sunday"));
-
-        tbleLocation.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("timeSlot"));
-        tbleLocation.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("monday"));
-        tbleLocation.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbleLocation.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        tbleLocation.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        tbleLocation.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("friday"));
-        tbleLocation.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("saturday"));
-        tbleLocation.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("sunday"));
+        tbleLocation.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>(timeSlot));
+        tbleLocation.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>(monday));
+        tbleLocation.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>(tuesday));
+        tbleLocation.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>(wednesday));
+        tbleLocation.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>(thursday));
+        tbleLocation.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>(friday));
+        tbleLocation.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>(saturday));
+        tbleLocation.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>(sunday));
 
         try {
             List<AddLecturerDTO> addLecturerDTOList = addLecturerBO.findAllLecturersName();
@@ -109,22 +137,24 @@ public class GenerateTimeTablesController implements Initializable {
                 lecturerTMS.add(addLecturerDtO.getlName());
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         try {
+            ObservableList<String> selectGroupW1;
             List<AddStudentDTO> addStudentDTOList = addStudentBO.findAllStudent();
-            ObservableList selectGroupW1 = comboGroup.getItems();
+            selectGroupW1 = comboGroup.getItems();
 
             for (AddStudentDTO addSessionDTO : addStudentDTOList) {
                 selectGroupW1.add((addSessionDTO.getGroupId()));
             }
         } catch (Exception e) {
-            System.out.println(e);
+           e.printStackTrace();
         }
 
         try {
             List<AddLocationsDTO> addLocationsDTOList = addLocationsBO.findAllLocations();
-            ObservableList locationTMS = comboLocation.getItems();
+            ObservableList<String> locationTMS = comboLocation.getItems();
             for (AddLocationsDTO addlocationsDTO : addLocationsDTOList) {
 
                 locationTMS.add(addlocationsDTO.getId() +
@@ -133,17 +163,17 @@ public class GenerateTimeTablesController implements Initializable {
 
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
 
-    public void btnLecGenerateOnAction(ActionEvent actionEvent) {
+    public void btnLecGenerateOnAction() throws SQLException {
         tblLecture.getItems().clear();
         if (comboLec.getValue() != null) {
 
 
-            String s = (String) comboLec.getValue();
+            String s = comboLec.getValue();
             TimeTableDTO timeTableDTOS = null;
             try {
                 timeTableDTOS = timeTableBO.loadTimeTable(s);
@@ -151,7 +181,7 @@ public class GenerateTimeTablesController implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            try {
+
                 //Find Sessions available for Lecture
                 List<AddSessionDTO> loadSessionDataDTOList = sessionManageBO.loadSessionLec(timeTableDTOS.getTimeSlot());
                 //Avb Sessions Count
@@ -159,64 +189,54 @@ public class GenerateTimeTablesController implements Initializable {
 
 
                 Set<Integer> set = new HashSet<>();
-                int j = 0;
                 for (int i = 0; i < 60; i++) {
 
                     while (set.size() < sessions) {
+                        int x = random();
+                        boolean getMonday = timeTableDTOS.getMonday();
+                        if (getMonday && (x == 0 || x == 7 || x == 14 || x == 21 || x == 28
+                                || x == 35 || x == 42 || x == 49 || x == 56)) {
+                                set.add(x);
+                                break;
 
-                            int x = (int) (Math.random() * 60);
-                            if (timeTableDTOS.getMonday()) {
-                                if (x == 0 || x == 7 || x == 14 || x == 21 || x == 28
-                                        || x == 35 || x == 42 || x == 49 || x == 56) {
-                                    set.add(x);
-                                    break;
-                                }
-                            }
-                        if (timeTableDTOS.getTuesday()) {
-                                if (x == 1 || x == 8 || x == 15 || x == 22 || x == 29 ||
-                                        x == 36 || x == 43 || x == 50 || x == 57) {
-                                    set.add(x);
-                                    break;
-                            }
                         }
-                        if (timeTableDTOS.getWednesday()) {
-                            if (x == 2 || x == 9 || x == 16 || x == 23 || x == 30 ||
-                                    x == 37 || x == 44 || x == 51 || x == 58) {
+                        if (timeTableDTOS.getTuesday()&& (x == 1 || x == 8 || x == 15 || x == 22 || x == 29 ||
+                                x == 36 || x == 43 || x == 50 || x == 57)) {
                                 set.add(x);
                                 break;
-                            }
                         }
-                        if (timeTableDTOS.getThursday()) {
-                            if (x == 3 || x == 10 || x == 17 || x == 24 || x == 31 ||
-                                    x == 38 || x == 45 || x == 52 || x == 59) {
+                        if (timeTableDTOS.getWednesday() && (x == 2 || x == 9 || x == 16 || x == 23 || x == 30 ||
+                                x == 37 || x == 44 || x == 51 || x == 58) ) {
                                 set.add(x);
                                 break;
-                            }
                         }
-                        if (timeTableDTOS.getFriday()) {
-                            if (x == 4 || x == 11 || x == 18 || x == 25 || x == 32 ||
-                                    x == 39 || x == 46 || x == 53 || x == 60) {
+                        if (timeTableDTOS.getThursday() && (x == 3 || x == 10 || x == 17 || x == 24 || x == 31 ||
+                                x == 38 || x == 45 || x == 52 || x == 59)) {
                                 set.add(x);
                                 break;
-                            }
+
                         }
-                        if (timeTableDTOS.getSaturday()) {
-                            if (x == 5 || x == 12 || x == 19 || x == 26 || x == 33 ||
-                                    x == 40 || x == 47 || x == 54 || x == 61) {
+                        if (timeTableDTOS.getFriday()&& (x == 4 || x == 11 || x == 18 || x == 25 || x == 32 ||
+                                x == 39 || x == 46 || x == 53 || x == 60)) {
+                            set.add(x);
+                                break;
+
+                        }
+                        if (timeTableDTOS.getSaturday() && (x == 5 || x == 12 || x == 19 || x == 26 || x == 33 ||
+                                x == 40 || x == 47 || x == 54 || x == 61)) {
                                 set.add(x);
                                 break;
-                            }
+
                         }
-                        if (timeTableDTOS.getSunday()) {
-                            if (x == 6 || x == 13 || x == 20 || x == 27 || x == 34 ||
-                                    x == 41 || x == 48 || x == 55 || x == 62) {
+                        if (timeTableDTOS.getSunday()&&  (x == 6 || x == 13 || x == 20 || x == 27 || x == 34 ||
+                                x == 41 || x == 48 || x == 55 || x == 62)) {
                                 set.add(x);
                                 break;
-                            }
                         }
                     }
                 }
-                int j1 = 0, x = 0;
+                int j1 = 0;
+                int x = 0;
 
                 String[][] na4me = new String[9][7];
                 for (int i = 0; i < 9; i++) {
@@ -254,9 +274,6 @@ public class GenerateTimeTablesController implements Initializable {
                     load.add(load2);
                 }
 
-//                /////////////////////////////////////////////////////////////////////////////////////
-//                /////////////////////////////////////////////////////////////////////////////////////
-
                 double timer = 8.30;
                 for (TimeTableDTO2 timeTableDTO : load) {
                     timeTableTMS.add(new TimeTableTM(
@@ -272,45 +289,37 @@ public class GenerateTimeTablesController implements Initializable {
                     ));
                 }
 
-            } catch (Exception e) {
-                System.out.println(e + "hhhhhhhhhhhhhhhhhhh");
-            }
-
-
         } else {
             new Alert(Alert.AlertType.ERROR, "Select Value").show();
         }
     }
 
-    public void studentGenerateOnAction(ActionEvent actionEvent) {
+    public void studentGenerateOnAction() throws SQLException {
         tbleStdu.getItems().clear();
         if (comboGroup.getValue() != null) {
 
 
-            String s = (String) comboGroup.getValue();
+            String s = comboGroup.getValue();
 
-            try {
                 //Find Sessions available for Lecture
                 List<AddSessionDTO> loadSessionDataDTOList = sessionManageBO.loadSessionStd(s);
                 //Avb Sessions Count
                 int sessions = loadSessionDataDTOList.size();
 
                 Set<Integer> set = new HashSet<>();
-                int j = 0;
 
-                {
 
-                }
                 for (int i = 0; i < 60; i++) {
 
                     while (set.size() < sessions) {
 
-                        int x = (int) (Math.random() * 60);
+                        int x =random();
 
-                                set.add(x);
+                        set.add(x);
                     }
                 }
-                int j1 = 0, x = 0;
+                int j1 = 0;
+                int x = 0;
 
                 String[][] na4me = new String[9][7];
                 for (int i = 0; i < 9; i++) {
@@ -364,50 +373,45 @@ public class GenerateTimeTablesController implements Initializable {
                     ));
                 }
 
-            } catch (Exception e) {
-            }
-
 
         } else {
-            new Alert(Alert.AlertType.ERROR, "Select Value").show();
+            new Alert(Alert.AlertType.ERROR, "Select Value ").show();
         }
     }
 
 
-    public void GentLocationOnAction(ActionEvent actionEvent) {
+    public void gentLocationOnAction() throws SQLException {
         tbleLocation.getItems().clear();
         if (comboLocation.getValue() != null) {
 
 
-            String s = (String) comboLocation.getValue();
+            String s =comboLocation.getValue();
 
-            try {
                 //Find Sessions available for Lecture
                 List<AddSessionDTO> loadSessionDataDTOList = sessionManageBO.loadSessionLoc(s);
                 //Avb Sessions Count
                 int sessions = loadSessionDataDTOList.size();
 
                 Set<Integer> set = new HashSet<>();
-                int j = 0;
 
-                {
-
-                }
                 for (int i = 0; i < 60; i++) {
 
                     while (set.size() < sessions) {
 
-                        int x = (int) (Math.random() * 60);
+
+                        int x = random();
 
                         set.add(x);
                     }
                 }
-                int j1 = 0, x = 0;
+                int j1 = 0;
+                int x = 0;
 
                 String[][] na4me = new String[9][7];
                 for (int i = 0; i < 9; i++) {
                     for (int k = 0; k < 7; k++) {
                         if (set.contains(x)) {
+
                             String name = addSubjectBO.findSubjectName(loadSessionDataDTOList.get(j1).getSelectSubject());
 
                             na4me[i][k] = loadSessionDataDTOList.get(j1).getSelectLecture() + ",\n"
@@ -456,55 +460,48 @@ public class GenerateTimeTablesController implements Initializable {
                     ));
                 }
 
-            } catch (Exception e) {
-            }
 
 
         } else {
             new Alert(Alert.AlertType.ERROR, "Select Value").show();
         }
     }
-
-    public void comboLecOnAction(ActionEvent actionEvent) {
+    Random r = new Random();
+    int random(){
+        int x ;
+        x = r.nextInt(60);
+        return x;
     }
-
-    public void comboGroupOnaction(ActionEvent actionEvent) {
-    }
-
-
-    public void comboLocationOnAction(ActionEvent actionEvent) {
-    }
-
 
     @FXML
     void navigate(MouseEvent event) throws IOException {
         if (event.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) event.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -518,16 +515,4 @@ public class GenerateTimeTablesController implements Initializable {
             }
         }
     }
-
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
-
-    }
-
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-
 }

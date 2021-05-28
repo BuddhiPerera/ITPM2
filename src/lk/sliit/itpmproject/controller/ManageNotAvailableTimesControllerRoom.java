@@ -2,7 +2,8 @@ package lk.sliit.itpmproject.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -31,40 +32,43 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ManageNotAvailableTimesControllerRoom implements Initializable {
-    public TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
-    public AnchorPane root1;
+    @FXML
+    TableView<ManageNotAvbTimeTM> tblNotAvbTimes;
+
+    @FXML
+    AnchorPane root1;
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.ADD_SESSION);
 
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
 
-    public void btnDelete(ActionEvent actionEvent) {
+    public void btnDelete( ) {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){
-            new Alert(Alert.AlertType.INFORMATION,"Select a  Row").show();
+        if (selectedItem == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Select a  Row").show();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
+        boolean bool = buttonType.isPresent();
+        if(bool){
+            ButtonType btn =buttonType.get();
+
+        if (btn == ButtonType.YES) {
 
             try {
                 sessionManageBO.deleteItemNaLecRoom(selectedItem.getId());
                 tblNotAvbTimes.getItems().remove(selectedItem);
             } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE,null,e);
+                new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                Logger.getLogger("").log(Level.SEVERE, null, e);
             }
         }
-    }
+    }}
 
-    public void btnBackw(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
+    public void btnBackw( ) throws IOException {
+
         Parent root = null;
 
         root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml"));
@@ -81,8 +85,7 @@ public class ManageNotAvailableTimesControllerRoom implements Initializable {
         }
     }
 
-    public void btnRefresh(ActionEvent actionEvent) {
-    }
+
 
     public void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
@@ -104,7 +107,7 @@ public class ManageNotAvailableTimesControllerRoom implements Initializable {
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
@@ -146,7 +149,7 @@ public class ManageNotAvailableTimesControllerRoom implements Initializable {
                 ));
             }
         } catch (Exception e) {
-
+e.printStackTrace();
         }
 
     }

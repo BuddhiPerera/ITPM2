@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -115,64 +113,61 @@ public class ManageSubjectController implements Initializable {
                 ));
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
-        tblSubject.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SubjectTM>() {
-            @Override
-            public void changed(ObservableValue<? extends SubjectTM> observable, SubjectTM oldValue, SubjectTM newValue) {
-                SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
-                if (selectedItem == null) {
-                    btnDelete.setDisable(true);
-                    return;
-                }
-
-                btnDelete.setDisable(false);
-
-                int spinYear = selectedItem.getOfferedYear();
-                int spinLHours = selectedItem.getNoOfLecHrs();
-                int spinTHours = selectedItem.getNoOfTutHrs();
-                int spinLbHours = selectedItem.getNoOfLabHrs();
-                int spinEvalHours = selectedItem.getNoOfEvlHrs();
-                txtSubjectName.setText(selectedItem.getSubName());
-                txtSubCode.setText(selectedItem.getSubCode());
-
-                if (selectedItem.isSemester1()) {
-                    chSem1.setSelected(true);
-                }else {
-                    chSem1.setSelected(false);
-                }
-                if (selectedItem.isSemester2()) {
-                    chSem2.setSelected(true);
-                }else {
-                    chSem2.setSelected(false);
-                }
-
-                SpinnerValueFactory<Integer> valueFactory1 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYear);
-                spinOfferedYear.setValueFactory(valueFactory1);
-
-                SpinnerValueFactory<Integer> valueFactory2 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLHours);
-                spinLecHours.setValueFactory(valueFactory2);
-
-                SpinnerValueFactory<Integer> valueFactory3 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinTHours);
-                spinTuteHours.setValueFactory(valueFactory3);
-
-                SpinnerValueFactory<Integer> valueFactory4 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLbHours);
-                spinLabHours.setValueFactory(valueFactory4);
-
-                SpinnerValueFactory<Integer> valueFactory5 =
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinEvalHours);
-                spinEvaHours.setValueFactory(valueFactory5);
+        tblSubject.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
+            if (selectedItem == null) {
+                btnDelete.setDisable(true);
+                return;
             }
+
+            btnDelete.setDisable(false);
+
+            int spinYear = selectedItem.getOfferedYear();
+            int spinLHours = selectedItem.getNoOfLecHrs();
+            int spinTHours = selectedItem.getNoOfTutHrs();
+            int spinLbHours = selectedItem.getNoOfLabHrs();
+            int spinEvalHours = selectedItem.getNoOfEvlHrs();
+            txtSubjectName.setText(selectedItem.getSubName());
+            txtSubCode.setText(selectedItem.getSubCode());
+
+            if (selectedItem.isSemester1()) {
+                chSem1.setSelected(true);
+            } else {
+                chSem1.setSelected(false);
+            }
+            if (selectedItem.isSemester2()) {
+                chSem2.setSelected(true);
+            } else {
+                chSem2.setSelected(false);
+            }
+
+            SpinnerValueFactory<Integer> valueFactory1 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, spinYear);
+            spinOfferedYear.setValueFactory(valueFactory1);
+
+            SpinnerValueFactory<Integer> valueFactory2 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLHours);
+            spinLecHours.setValueFactory(valueFactory2);
+
+            SpinnerValueFactory<Integer> valueFactory3 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinTHours);
+            spinTuteHours.setValueFactory(valueFactory3);
+
+            SpinnerValueFactory<Integer> valueFactory4 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinLbHours);
+            spinLabHours.setValueFactory(valueFactory4);
+
+            SpinnerValueFactory<Integer> valueFactory5 =
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, spinEvalHours);
+            spinEvaHours.setValueFactory(valueFactory5);
         });
     }
 
     @FXML
-    void btnOnAction_Clear(ActionEvent event) {
+    void btnOnActionClear(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -202,25 +197,29 @@ public class ManageSubjectController implements Initializable {
     }
 
     @FXML
-    void btnOnAction_Delete(ActionEvent event) {
+    void btnOnActionDelete(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
-            try {
-                addSubjectBO.deleteItem(selectedItem.getId());
-                tblSubject.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE, null, e);
+        boolean vaa = buttonType.isPresent();
+        if (vaa) {
+            ButtonType bt = buttonType.get();
+            if (bt == ButtonType.YES) {
+                SubjectTM selectedItem = tblSubject.getSelectionModel().getSelectedItem();
+                try {
+                    addSubjectBO.deleteItem(selectedItem.getId());
+                    tblSubject.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
 
     @FXML
-    void btnOnAction_Update(ActionEvent event) {
+    void btnOnActionUpdate(ActionEvent event) {
         int spinYear = spinOfferedYear.getValue();
         int spinLHours = spinLecHours.getValue();
         int spinTHours = spinTuteHours.getValue();
@@ -267,30 +266,30 @@ public class ManageSubjectController implements Initializable {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -306,10 +305,5 @@ public class ManageSubjectController implements Initializable {
     }
 
 
-    public void playMouseEnterAnimation(MouseEvent mouseEvent) {
-    }
-
-    public void playMouseExitAnimatio(MouseEvent mouseEvent) {
-    }
 }
 

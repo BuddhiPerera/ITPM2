@@ -21,7 +21,6 @@ import lk.sliit.itpmproject.business.custom.SessionManageBO;
 import lk.sliit.itpmproject.dto.ManageNotAvbTimeDTO;
 import lk.sliit.itpmproject.util.ManageNotAvbTimeTM;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +53,7 @@ public class ManageNATimeGroup implements Initializable {
     @FXML
     private ImageView iconLocation;
     private final SessionManageBO sessionManageBO = BOFactory.getInstance().getBO(BOTypes.ADD_SESSION);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tblNotAvbTimes.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -74,54 +74,40 @@ public class ManageNATimeGroup implements Initializable {
                 ));
             }
         } catch (Exception e) {
-
+e.printStackTrace();
         }
     }
 
-    @FXML
-    void btnBackw(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnDelete(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnRefresh(ActionEvent event) {
-
-    }
 
     @FXML
     void navigate(MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) mouseEvent.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -137,28 +123,14 @@ public class ManageNATimeGroup implements Initializable {
     }
 
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
+    public void btnBackw() throws IOException {
 
-    }
+        Parent root1 = null;
 
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml"));
 
-    }
-
-
-    public void btnRefresh(javafx.event.ActionEvent actionEvent) {
-    }
-
-    public void btnBackw(javafx.event.ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
-
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml"));
-
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
@@ -169,34 +141,31 @@ public class ManageNATimeGroup implements Initializable {
         }
     }
 
-    public void btnDelete(javafx.event.ActionEvent actionEvent) {
+    public void btnDelete() {
         ManageNotAvbTimeTM selectedItem = tblNotAvbTimes.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){
-            new Alert(Alert.AlertType.INFORMATION,"Select a  Row").show();
+        if (selectedItem == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Select a  Row").show();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to delete this Detail?",
                 ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
+        boolean bool = buttonType.isPresent();
+        if (bool) {
 
-            try {
-                sessionManageBO.deleteItemNaGroup(selectedItem.getId());
-                tblNotAvbTimes.getItems().remove(selectedItem);
-            } catch (Exception e) {
-                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-                Logger.getLogger("").log(Level.SEVERE,null,e);
+            ButtonType bol = buttonType.get();
+            if (bol == ButtonType.YES) {
+
+                try {
+                    sessionManageBO.deleteItemNaGroup(selectedItem.getId());
+                    tblNotAvbTimes.getItems().remove(selectedItem);
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+                    Logger.getLogger("").log(Level.SEVERE, null, e);
+                }
             }
         }
     }
 
-    public void navigate(javafx.scene.input.MouseEvent mouseEvent) {
-    }
-
-    public void playMouseEnterAnimation(javafx.scene.input.MouseEvent mouseEvent) {
-    }
-
-    public void playMouseExitAnimatio(javafx.scene.input.MouseEvent mouseEvent) {
-    }
 }

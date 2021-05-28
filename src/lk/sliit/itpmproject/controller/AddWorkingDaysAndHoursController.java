@@ -2,7 +2,6 @@ package lk.sliit.itpmproject.controller;
 
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,14 +20,19 @@ import lk.sliit.itpmproject.dto.AddWorkingDaysAndHoursDTO;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddWorkingDaysAndHoursController implements Initializable {
-    public Button btnSessions;
-    public ImageView iconTimeTable;
+    @FXML
+    Button btnSessions;
+
+    @FXML
+    ImageView iconTimeTable;
+
     @FXML
     private Button btnSave;
 
@@ -106,7 +110,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                 btnSave.setText("Update");
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }
@@ -132,7 +136,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                 case "iconLecture":
                     root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
                     root = fxmlLoader.load();
                     break;
@@ -154,71 +158,79 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
 
-    }
-
-    @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-
-    public void btnClear_OnAction(ActionEvent actionEvent) {
+    public void btnClearOnAction() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
 
         Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-            mondayCB.setSelected(false);
-            tuesdayCB.setSelected(false);
-            wednesdayCB.setSelected(false);
-            thursdayCB.setSelected(false);
-            fridayCB.setSelected(false);
-            saturdayCB.setSelected(false);
-            sundayCB.setSelected(false);
-            SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5);
-            SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 8);
-            SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 30);
-            this.noOfWorkSpinner.setValueFactory(spinnerValueFactory1);
-            this.hoursSpinner.setValueFactory(spinnerValueFactory2);
-            this.minutesSpinner.setValueFactory(spinnerValueFactory3);
+        boolean checkButton = buttonType.isPresent();
+        if(checkButton) {
+            ButtonType buttonType1 = buttonType.get();
 
+            if (buttonType1 == ButtonType.YES) {
+                mondayCB.setSelected(false);
+                tuesdayCB.setSelected(false);
+                wednesdayCB.setSelected(false);
+                thursdayCB.setSelected(false);
+                fridayCB.setSelected(false);
+                saturdayCB.setSelected(false);
+                sundayCB.setSelected(false);
+                SpinnerValueFactory<Integer> spinnerValueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5);
+                SpinnerValueFactory<Integer> spinnerValueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 8);
+                SpinnerValueFactory<Integer> spinnerValueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 30);
+                this.noOfWorkSpinner.setValueFactory(spinnerValueFactory1);
+                this.hoursSpinner.setValueFactory(spinnerValueFactory2);
+                this.minutesSpinner.setValueFactory(spinnerValueFactory3);
+
+            }
         }
     }
 
 
-    public void btnSave_OnAction(ActionEvent event) throws Exception {
+    public void btnSaveOnAction() throws SQLException {
         int i = 0;
-        boolean sunday = false, monday = false, tuesday = false, wednesday = false, thursday = false, friday = false, saturday = false;
+        boolean sunday = false;
+        boolean monday = false;
+        boolean tuesday = false;
+        boolean wednesday = false;
+        boolean thursday = false;
+        boolean friday = false;
+        boolean saturday = false;
 
-        if (mondayCB.selectedProperty().getValue()) {
+        boolean checkMonday = mondayCB.selectedProperty().getValue();
+        if (checkMonday) {
             monday = true;
             i++;
         }
-        if (tuesdayCB.selectedProperty().getValue()) {
+        boolean checkTuesday = tuesdayCB.selectedProperty().getValue();
+        if (checkTuesday) {
             tuesday = true;
             i++;
         }
-        if (wednesdayCB.selectedProperty().getValue()) {
+        boolean checkWednesday = wednesdayCB.selectedProperty().getValue();
+        if (checkWednesday) {
             wednesday = true;
             i++;
         }
-        if (thursdayCB.selectedProperty().getValue()) {
+        boolean checkThursday = thursdayCB.selectedProperty().getValue();
+        if (checkThursday) {
             thursday = true;
             i++;
         }
-        if (fridayCB.selectedProperty().getValue()) {
+        boolean checkFriday = fridayCB.selectedProperty().getValue();
+        if (checkFriday) {
             friday = true;
             i++;
         }
-        if (saturdayCB.selectedProperty().getValue()) {
+        boolean checkSaturday = saturdayCB.selectedProperty().getValue();
+        if (checkSaturday) {
             saturday = true;
             i++;
         }
-        if (sundayCB.selectedProperty().getValue()) {
+        boolean checkSunday = sundayCB.selectedProperty().getValue();
+        if (checkSunday) {
             sunday = true;
             i++;
         }
@@ -251,7 +263,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
                     new Alert(Alert.AlertType.INFORMATION, "WorkingDays Added Successfully").show();
                     btnSave.setText("Update");
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
             } else {
@@ -286,8 +298,7 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         this.minutesSpinner.setValueFactory(spinnerValueFactory3);
     }
 
-    public void btnSession_OnAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
+    public void btnSessionOnAction() throws IOException {
         Parent root = null;
 
         root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmproject/view/Sessions.fxml")));
@@ -304,35 +315,35 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         }
     }
 
-    public void onActionthursdayCB(ActionEvent actionEvent) {
-        SetWeekDAY();
+    public void onActionthursdayCB() {
+        setWeekDAY();
     }
 
-    public void OnActionwednesdayCB(ActionEvent actionEvent) {
-        SetWeekDAY();
+    public void onActionWednesdayCB() {
+        setWeekDAY();
     }
 
-    public void OnActiontuesdayCB(ActionEvent actionEvent) {
-        SetWeekDAY();
+    public void onActionTuesdayCB() {
+        setWeekDAY();
     }
 
-    public void onActionMonday(ActionEvent actionEvent) {
-        SetWeekDAY();
+    public void onActionMonday() {
+        setWeekDAY();
     }
 
-    public void onActionSunday(ActionEvent actionEvent) {
-        SetWeekEnd();
+    public void onActionSunday() {
+        setWeekEnd();
     }
 
-    public void onActionSaturday(ActionEvent actionEvent) {
-        SetWeekEnd();
+    public void onActionSaturday() {
+        setWeekEnd();
 
     }
-    public void SetWeekDAY() {
+    public void setWeekDAY() {
         saturdayCB.setSelected(false);
         sundayCB.setSelected(false);
     }
-    public void SetWeekEnd() {
+    public void setWeekEnd() {
         mondayCB.setSelected(false);
         thursdayCB.setSelected(false);
         wednesdayCB.setSelected(false);
@@ -340,12 +351,11 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         fridayCB.setSelected(false);
     }
 
-    public void onActionfridayCB(ActionEvent actionEvent) {
-        SetWeekDAY();
+    public void onActionfridayCB() {
+        setWeekDAY();
     }
 
-    public void timeTableOnActon(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
+    public void timeTableOnActon() throws IOException {
         Parent root = null;
 
         root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/sliit/itpmproject/view/GenerateTimeTables.fxml")));
@@ -362,21 +372,3 @@ public class AddWorkingDaysAndHoursController implements Initializable {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

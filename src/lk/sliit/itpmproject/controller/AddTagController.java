@@ -3,7 +3,6 @@ package lk.sliit.itpmproject.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,9 +48,9 @@ public class AddTagController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        ObservableList<String> list;
         cmbAddTag.setValue("Lecture");
-        ObservableList list = cmbAddTag.getItems();
+        list = cmbAddTag.getItems();
         list.add("Lecture");
         list.add("Tutorial");
         list.add("Practical");
@@ -63,30 +62,30 @@ public class AddTagController implements Initializable {
         if (event.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) event.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconStudent":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddStudent.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -101,66 +100,55 @@ public class AddTagController implements Initializable {
         }
     }
 
-    @FXML
-    public void playMouseEnterAnimation(MouseEvent event) {
-
-    }
-
-    @FXML
-    public void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-    public void btnSaveTag_onAction(ActionEvent actionEvent) {
+    public void btnSaveTagOnAction() {
         String tagCode1 = (txtAddTagCode.getText());
-int tagCode;
+        int tagCode;
         boolean val = Pattern.matches("\\d+", tagCode1);
         if(val){
             tagCode = Integer.parseInt(tagCode1);
 
-        int maxCode = 0;
-        try {
-            int lastItemCode = addTagBO.getLastItemCode();
-            if (lastItemCode == 0) {
-                maxCode = 1;
-            } else {
-                maxCode = lastItemCode + 1;
+            int maxCode = 0;
+            try {
+                int lastItemCode = addTagBO.getLastItemCode();
+                if (lastItemCode == 0) {
+                    maxCode = 1;
+                } else {
+                    maxCode = lastItemCode + 1;
+                }
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
             }
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION,"Something went wrong").show();
-        }
 
-        String tagName = txtAddTag.getText();
+            String tagName = txtAddTag.getText();
 
-        String addTag = cmbAddTag.getValue();
+            String addTag = cmbAddTag.getValue();
 
-        AddTagDTO addTagDTO = new AddTagDTO(
-                maxCode,
-                tagName,
-                tagCode,
-                addTag
-        );
-        try{
-            addTagBO.saveTag(addTagDTO);
-            new Alert(Alert.AlertType.INFORMATION, "Tag Added Successfully").show();
-        }catch (Exception e){
-            System.out.println(e);
-        }
+            AddTagDTO addTagDTO = new AddTagDTO(
+                    maxCode,
+                    tagName,
+                    tagCode,
+                    addTag
+            );
+            try{
+                addTagBO.saveTag(addTagDTO);
+                new Alert(Alert.AlertType.INFORMATION, "Tag Added Successfully").show();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
-    }else {
+        }else {
             new Alert(Alert.AlertType.ERROR, "Invalid Tag Code").show();
         }
 
     }
 
-    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
+    public void btnOnActionManage() throws IOException {
+        Parent root1 = null;
 
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageTag.fxml"));
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageTag.fxml"));
 
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
@@ -171,7 +159,7 @@ int tagCode;
         }
     }
 
-    public void btnOnAction_Clear(ActionEvent actionEvent) {
+    public void btnOnActionClear() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
