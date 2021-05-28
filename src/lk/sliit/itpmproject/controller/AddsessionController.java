@@ -153,7 +153,6 @@ public class AddsessionController implements Initializable {
                     AddSessionDemo.setId((maxId));
                 }
             }
-
         } else {
             AddSessionDemo.setId(1);
         }

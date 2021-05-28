@@ -30,6 +30,7 @@ public class AddStudentController implements Initializable {
 
     @FXML
     public Button btnAddSave;
+    @FXML
     public Button btnGoAddTag;
 
     @FXML
@@ -80,6 +81,7 @@ public class AddStudentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<String> list1;
         FadeTransition fadeIn = new FadeTransition(Duration.millis(2500), root);
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
@@ -100,7 +102,7 @@ public class AddStudentController implements Initializable {
         spinStdYear.setEditable(false);
 
         programmeCombo.setValue("IT");
-        ObservableList list1 = programmeCombo.getItems();
+        list1 = programmeCombo.getItems();
         list1.add("IT");
         list1.add("CSSE");
         list1.add("CSE");
@@ -113,27 +115,27 @@ public class AddStudentController implements Initializable {
         if (event.getSource() instanceof ImageView) {
             ImageView icon = (ImageView) event.getSource();
 
-            Parent root = null;
+            Parent root1 = null;
 
             FXMLLoader fxmlLoader = null;
             switch (icon.getId()) {
                 case "iconHome":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/MainForm.fxml"));
                     break;
                 case "iconLocation":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddRBLocation.fxml"));
                     break;
                 case "iconLecture":
-                    root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
+                    root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddLecturer.fxml"));
                     break;
-                case "iconTimeTable":
+                default:
                     fxmlLoader = new FXMLLoader(this.getClass().getResource("/lk/sliit/itpmproject/view/AddWorkingDaysAndHours.fxml"));
-                    root = fxmlLoader.load();
+                    root1 = fxmlLoader.load();
                     break;
             }
 
-            if (root != null) {
-                Scene subScene = new Scene(root);
+            if (root1 != null) {
+                Scene subScene = new Scene(root1);
                 Stage primaryStage = (Stage) this.root.getScene().getWindow();
 
                 primaryStage.setScene(subScene);
@@ -148,18 +150,9 @@ public class AddStudentController implements Initializable {
         }
     }
 
-    @FXML
-    void playMouseEnterAnimation(MouseEvent event) {
-
-    }
 
     @FXML
-    void playMouseExitAnimatio(MouseEvent event) {
-
-    }
-
-    @FXML
-    void btnGenerateId_OnAction(ActionEvent event) {
+    void btnGenerateIdOnAction(ActionEvent event) {
         int year = spinStdYear.getValue();
         int semester = semesterSpinner.getValue();
         String programme = programmeCombo.getValue();
@@ -172,7 +165,7 @@ public class AddStudentController implements Initializable {
     }
 
     @FXML
-    void btnSave_onAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) {
         int maxCode = 0;
         try {
             int lastItemCode = addStudentBO.getLastItemCode();
@@ -209,12 +202,12 @@ public class AddStudentController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION, "User Added Successfully").show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            new Alert(Alert.AlertType.INFORMATION, "Error Save").show();
         }
     }
 
     @FXML
-    public void btnClear_onAction(ActionEvent event) {
+    public void btnClearOnAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Are you sure whether you want to clear?",
                 ButtonType.YES, ButtonType.NO);
@@ -240,14 +233,14 @@ public class AddStudentController implements Initializable {
     }
 
     @FXML
-    public void btnAddTag_onAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
+    public void btnAddTagOnAction(ActionEvent actionEvent) throws IOException {
 
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddTag.fxml"));
+        Parent root1 = null;
 
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/AddTag.fxml"));
+
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();
@@ -258,14 +251,14 @@ public class AddStudentController implements Initializable {
         }
     }
 
-    public void btnOnAction_Manage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader;
-        Parent root = null;
+    public void btnOnActionManage() throws IOException {
 
-        root = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageStudentGroups.fxml"));
+        Parent root1 = null;
 
-        if (root != null) {
-            Scene subScene = new Scene(root);
+        root1 = FXMLLoader.load(this.getClass().getResource("/lk/sliit/itpmproject/view/ManageStudentGroups.fxml"));
+
+        if (root1 != null) {
+            Scene subScene = new Scene(root1);
             Stage primaryStage = (Stage) this.root.getScene().getWindow();
             primaryStage.setScene(subScene);
             primaryStage.centerOnScreen();

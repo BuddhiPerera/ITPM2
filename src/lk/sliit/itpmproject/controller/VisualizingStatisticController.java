@@ -112,7 +112,7 @@ public class VisualizingStatisticController implements Initializable {
             lblRStudent.setText(String.valueOf(studentCount));
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.INFORMATION, "Something went wrong").show();
+            new Alert(Alert.AlertType.INFORMATION, "Something went").show();
             Logger.getLogger("").log(Level.SEVERE, null, e);
         }
         try {
