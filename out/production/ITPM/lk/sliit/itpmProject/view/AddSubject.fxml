@@ -74,40 +74,40 @@
       <Spinner id="AdSNOTH" fx:id="spinNoOfTuteHours" layoutX="523.0" layoutY="315.0" />
       <Spinner id="AdSNOLH" fx:id="spinNoOfLabHours" layoutX="1063.0" layoutY="314.0" />
       <Spinner id="AdSNOEH" fx:id="spinNoOfEvHours" layoutX="1063.0" layoutY="398.0" />
-      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="113.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="113.0" onMouseClicked="#navigate"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/home-icon.png" />
          </image></ImageView>
-      <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="256.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="256.0" onMouseClicked="#navigate"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/lecture-1-300x300.png" />
          </image></ImageView>
-      <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="388.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="388.0" onMouseClicked="#navigate"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/clipart1593805.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="527.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="527.0" onMouseClicked="#navigate"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/timetable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="664.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="75.0" layoutY="664.0" onMouseClicked="#navigate"  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/google-maps-location-icon-14.jpg" />
          </image>
       </ImageView>
 
-      <Button id="AdSClear" fx:id="btnClear" layoutX="751.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Clear" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE">
+      <Button id="AdSClear" fx:id="btnClear" layoutX="751.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnActionclear" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #980606;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button id="AdSSave" fx:id="btnSave" layoutX="516.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Save" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Save" textFill="WHITE">
+      <Button id="AdSSave" fx:id="btnSave" layoutX="516.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnActionSave" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #064E98;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
       <Spinner id="AdSNOLH" fx:id="spinOfferedYear" layoutX="523.0" layoutY="171.0" />
-      <Button fx:id="btnManage" layoutX="1082.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnAction_Manage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
+      <Button fx:id="btnManage" layoutX="1082.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnOnActionManage" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #649292;" text="Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

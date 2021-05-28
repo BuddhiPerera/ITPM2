@@ -47,7 +47,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXButton>
-                        <JFXComboBox fx:id="comboLec" layoutX="273.0" layoutY="50.0" onAction="#comboLecOnAction" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboLec" layoutX="273.0" layoutY="50.0"  prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="180.0" layoutY="52.0" text="Lecture">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -73,7 +73,7 @@
                               <TableColumn prefWidth="167.0" text="Sunday" />
                            </columns>
                         </TableView>
-                        <JFXComboBox fx:id="comboGroup" layoutX="264.0" layoutY="43.0" onAction="#comboGroupOnaction" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboGroup" layoutX="264.0" layoutY="43.0" prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="171.0" layoutY="45.0" text="Group">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -109,7 +109,7 @@
                               <TableColumn prefWidth="154.0" text="Sunday" />
                            </columns>
                         </TableView>
-                        <JFXComboBox fx:id="comboLocation" layoutX="264.0" layoutY="43.0" onAction="#comboLocationOnAction" prefHeight="31.0" prefWidth="284.0" />
+                        <JFXComboBox fx:id="comboLocation" layoutX="264.0" layoutY="43.0" prefHeight="31.0" prefWidth="284.0" />
                         <Label layoutX="171.0" layoutY="45.0" text="Location">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -120,7 +120,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="GentLocation" layoutX="579.0" layoutY="37.0" onAction="#GentLocationOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
+                        <JFXButton fx:id="GentLocation" layoutX="579.0" layoutY="37.0" onAction="#gentLocationOnAction" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #649292;" text="Generate" textFill="#fffbfb">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
@@ -131,25 +131,25 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="135.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconHome" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="135.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/home-icon.png" />
          </image></ImageView>
-      <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="270.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLecture" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="270.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/lecture-1-300x300.png" />
          </image></ImageView>
-      <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="403.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconStudent" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="403.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/clipart1593805.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="541.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconTimeTable" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="541.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/timetable.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="674.0" onMouseClicked="#navigate" onMouseEntered="#playMouseEnterAnimation" onMouseExited="#playMouseExitAnimatio" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconLocation" fitHeight="109.0" fitWidth="125.0" layoutX="73.0" layoutY="674.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assert/google-maps-location-icon-14.jpg" />
          </image>
