@@ -38,4 +38,6 @@ public interface SessionManageDAO extends CrudDAO<AddSession,String> {
     List<AddSession> loadSessionStd(String s)throws SQLException;
 
     List<AddSession> loadSessionLoc(String s)throws SQLException;
+
+    int getLastNASession()throws SQLException;
 }

@@ -445,6 +445,20 @@ public class SessionManageBOImpl  implements SessionManageBO {
         return addTagDTOList;
     }
 
+    @Override
+    public void saveNASessionNa(AddSessionNALectureDTO addSessionNALectureDTO) throws SQLException {
+        sessionManageNALecDAO.saveNASession(new SessionManageNALec(
+                addSessionNALectureDTO.getMaxCode(),
+                addSessionNALectureDTO.getLectureComboValue(),
+                addSessionNALectureDTO.getNaTimeLectureTxtText()
+        ));
+    }
+
+    @Override
+    public int getLastNASessions() throws SQLException {
+        return sessionManageDAO.getLastNASession();
+
+    }
 
     @Override
     public List<AddSessionDTO> findAllSessions() throws SQLException {

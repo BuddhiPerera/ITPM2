@@ -26,4 +26,6 @@ public interface SessionManageNALecDAO extends CrudDAO<SessionManageNALec, Strin
     List<SessionManageNALec> findAllDataRoom()throws SQLException;
 
     void deleteRoomNa(String valueOf)throws SQLException;
+
+    void saveNASession(SessionManageNALec sessionManageNALec)throws SQLException;
 }

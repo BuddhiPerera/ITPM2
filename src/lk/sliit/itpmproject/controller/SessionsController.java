@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,6 +46,8 @@ public class SessionsController implements Initializable {
     public JFXButton btnViewTeacher;
     @FXML
     public JFXComboBox<String> naTimeLectureSessionIdTxt;
+    @FXML
+    public JFXTextField naTimeSession;
     @FXML
     JFXComboBox<String> naTimeLectureSubGroupTxt;
     @FXML
@@ -177,6 +180,19 @@ String tagName ="tagName";
             }
         } catch (Exception e) {
             new Alert(Alert.AlertType.INFORMATION, " wrong").show();
+
+        }
+
+        try {
+            List<AddSessionDTO> addLocationsDTOList = sessionManageBO.findAllSessions();
+
+            ObservableList<String> lecturerTMS = naTimeLectureSessionIdTxt.getItems();
+
+            for (AddSessionDTO addLecturerDtO : addLocationsDTOList) {
+                lecturerTMS.add(String.valueOf(addLecturerDtO.getId()));
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, " wrong ").show();
 
         }
         ObservableList<String> studentTMS;
@@ -592,4 +608,45 @@ String tagName ="tagName";
 
     public void btnClarRoom( ) {timeTxtRoom.setText("");
     }
+
+    public void submitSessionsAdd( ) {
+        String lectureComboValu = String.valueOf(naTimeLectureSessionIdTxt.getValue());
+        String naTimeLectureTxtText = naTimeSession.getText();
+
+        if (lectureComboValu.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Select a Room").show();
+            return;
+        }
+        if (naTimeLectureTxtText.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Add a Time").show();
+            return;
+        }
+        int maxCode = 0;
+        try {
+            int lastItemCode = sessionManageBO.getLastNASessions();
+            if (lastItemCode == 0) {
+                maxCode = 1;
+            } else {
+                maxCode = lastItemCode + 1;
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "went wrong").show();
+        }
+
+
+        AddSessionNALectureDTO addSessionNALectureDTO = new AddSessionNALectureDTO(
+                maxCode,
+                lectureComboValu,
+                naTimeLectureTxtText
+        );
+        try {
+            sessionManageBO.saveNASessionNa(addSessionNALectureDTO);
+            new Alert(Alert.AlertType.INFORMATION, "Session Added Successfully").show();
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.INFORMATION, "Error In Adding Sessions").show();
+
+        }
+    }
+
 }

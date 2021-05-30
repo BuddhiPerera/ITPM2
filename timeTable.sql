@@ -133,6 +133,15 @@ CREATE TABLE NotAvbSessionLec
 
 );
 
+CREATE TABLE NotAvbSessionD
+(
+    id              int          NOT NULL,
+    selectSession  varchar(70)  NOT NULL,
+    selectTime      varchar(405) NOT NULL,
+    PRIMARY KEY (id)
+
+);
+
 
 create table consecutive
 (

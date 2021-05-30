@@ -87,4 +87,8 @@ public interface SessionManageBO extends SuperBO {
     void deleteItemNaLecRoom(int id)throws SQLException;
 
     List<ManageNotAvbTimeDTO> findAllDataRom()throws SQLException;
+
+    void saveNASessionNa(AddSessionNALectureDTO addSessionNALectureDTO)throws SQLException;
+
+    int getLastNASessions()throws SQLException;
 }

@@ -148,4 +148,13 @@ public class SessionManageNALecDAOImpl implements SessionManageNALecDAO {
     public void deleteRoomNa(String valueOf) throws SQLException {
         CrudUtil.execute("DELETE FROM MFkwg22AgC.NotAvbSessionRooms WHERE id = ?", valueOf);
     }
+
+    @Override
+    public void saveNASession(SessionManageNALec sessionManageNALec) throws SQLException {
+        CrudUtil.execute("INSERT INTO NotAvbSessionD VALUES (?,?,?)",
+                sessionManageNALec.getMaxCode(),
+                sessionManageNALec.getLectureComboValue(),
+                sessionManageNALec.getNaTimeLectureTxtText()
+        );
+    }
 }
