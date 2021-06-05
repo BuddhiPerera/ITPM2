@@ -1,11 +1,11 @@
 plugins {
-    id "org.sonarqube" version "3.2.0"
+  id "org.sonarqube" version "3.2.0"
 }
 
 sonarqube {
-    properties {
-        property "sonar.projectKey", "rivinduchamath_ITPM2"
-        property "sonar.organization", "rivinduchamath"
-        property "sonar.host.url", "https://sonarcloud.io"
-    }
+  properties {
+    property "sonar.projectKey", "BuddhiPerera_ITPM2"
+    property "sonar.organization", "itpmgroupproject"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
