@@ -2,6 +2,7 @@ plugins {
     id "org.sonarqube" version "3.2.0"
 }
 
+
 sonarqube {
     properties {
         property "sonar.projectKey", "rivinduchamath_ITPM2"
