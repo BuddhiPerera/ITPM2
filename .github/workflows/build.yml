@@ -35,5 +35,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
        run: ./gradlew build sonarqube --info
 
-        - - name: Make gradlew executable
-#              run: chmod +x ./gradlew
+   #     - - name: Make gradlew executable
+         run: chmod +x ./gradlew
