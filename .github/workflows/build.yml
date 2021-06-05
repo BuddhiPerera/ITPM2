@@ -33,5 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.a73de6df229f12872b639e56d2b47e4eb06de58f }}
-
+        run: ./gradle build
+               - name: Make gradle executable
+               run: chmod +x ./gradle
 
